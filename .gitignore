@@ -38,3 +38,6 @@ jspm_packages
 
 # IDE (WebStorm) settings
 .idea
+
+# Client side libraries
+client/libs
