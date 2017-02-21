@@ -1,0 +1,30 @@
+{
+  "name": "collaball",
+  "description": "Group Meeting Collaboration Application",
+  "main": "index.js",
+  "authors": [
+    "axp6201@rit.edu"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "accessibility;deaf;collaboration"
+  ],
+  "homepage": "https://github.com/shehan/CollabAll",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.1",
+    "moment": "^2.17.1",
+    "font-awesome": "Font-Awesome#^4.7.0",
+    "bootstrap-sass": "^3.3.7",
+    "bootstrap-datepicker": "^1.6.4",
+    "angular": "^1.6.2",
+    "angular-bootstrap": "^2.5.0",
+    "bootstrap": "^3.3.7"
+  }
+}
