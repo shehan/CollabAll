@@ -1,0 +1,44 @@
+
+<div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 0;">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" ui-sref="inside.home">{{title}}</a>
+            </div>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a ng-click="logout()" href="#">Logout ({{contactAuthor}})</a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+
+
+    <div class="wrapper">
+        <div class="sidebar">
+            <ul class="list-group">
+                <button type="button" class="list-group-item" ng-class="{active: isCurrentState(link.stateName)}" ng-repeat="link in links" ui-sref="{{link.stateName}}">{{link.name}}</button>
+            </ul>
+        </div>
+
+        <div class="container">
+            <!-- Loading Screen Overlay -->
+            <div class="overlay" id="overlayScreen">
+                <div class="overlay-content">Processing...Please Wait...<br/><br/><img src="img/loading.gif"/></div>
+            </div>
+
+            <div ui-view></div>
+        </div>
+    </div>
+</div>
+

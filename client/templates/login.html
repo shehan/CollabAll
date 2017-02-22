@@ -1,0 +1,44 @@
+<!-- Loading Screen Overlay -->
+<div class="overlay" id="overlayScreen">
+    <div class="overlay-content">Processing...Please Wait...<br/><br/><img src="../img/loading.gif"/></div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <form ng-submit="login()" class="form-horizontal">
+            <fieldset>
+                <legend>Login</legend>
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Email: *</label>
+                    <div class="col-md-4">
+                        <input class="form-control" type="email" placeholder="Email" ng-model="user.email" required/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Password: *</label>
+                    <div class="col-md-4">
+                        <input class="form-control" type="password" placeholder="Password" ng-model="user.password" required/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label"></label>
+                    <div class="col-md-8">
+                        <button class="btn btn-primary" type="submit">Login</button>
+                        <a ui-sref="signup">Sign Up</a>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label"></label>
+                    <div class="col-md-9">
+                        <label class="control-label">{{authenticationStatus}}</label>
+                    </div>
+                </div>
+
+
+
+            </fieldset>
+        </form>
+    </div>
+</div>
