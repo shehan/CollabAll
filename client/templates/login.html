@@ -9,23 +9,15 @@
             <fieldset>
                 <legend>Login</legend>
                 <div class="form-group">
-                    <label class="col-md-4 control-label">Email: *</label>
+                    <label class="col-md-4 control-label" for="email">Email: *</label>
                     <div class="col-md-4">
-                        <input class="form-control" type="email" placeholder="Email" ng-model="user.email" required/>
+                        <input id="email" name="email" class="form-control" type="email" placeholder="Email" ng-model="user.email" required/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-4 control-label">Password: *</label>
+                    <label class="col-md-4 control-label" for="password">Password: *</label>
                     <div class="col-md-4">
-                        <input class="form-control" type="password" placeholder="Password" ng-model="user.password" required/>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-md-4 control-label"></label>
-                    <div class="col-md-8">
-                        <button class="btn btn-primary" type="submit">Login</button>
-                        <a ui-sref="signup">Sign Up</a>
+                        <input id="password" name="password" class="form-control" type="password" placeholder="Password" ng-model="user.password" required/>
                     </div>
                 </div>
 
@@ -36,6 +28,13 @@
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <label class="col-md-4 control-label"></label>
+                    <div class="col-md-8">
+                        <button class="btn btn-primary" type="submit">Login</button>
+                        <a ui-sref="signup">Sign Up</a>
+                    </div>
+                </div>
 
 
             </fieldset>
