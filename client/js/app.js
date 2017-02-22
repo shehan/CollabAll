@@ -10,6 +10,7 @@
         'FileReadDirective',
         'LoginControllerModule',
         'InsideControllerModule',
-        'HomeControllerModule'
+        'HomeControllerModule',
+        'UserCreateControllerModule'
     ]);
 }());

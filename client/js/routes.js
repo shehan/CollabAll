@@ -24,6 +24,11 @@
                         url: '/', //The url for the state
                         templateUrl: 'templates/home.html', //The path to the html template
                         controller: 'homeController' //The path to the angular controller
+                    })
+                    .state('signup', {
+                        url: '/signup',
+                        templateUrl: 'templates/user-create.html',
+                        controller: 'userCreateController'
                     });
             }])
 
