@@ -87,17 +87,14 @@
             },
 
             authenticate: function(request, res) {
-                var email = request.query['userEmail'];
-                var password = request.query['userPassword'];
+                var email = request.body.email;
+                var password = request.body.password;
 
                 UserModel.findOne({
                     where: {
                         Email: email
                     }
                 }).then(function(user) {
-
-                    console.log(user.Email);
-                    console.log(user.Password);
 
                     if(!user){
                         var msg = 'Authentication failed. User not found.';
