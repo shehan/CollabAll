@@ -14,7 +14,7 @@
             router.get('/get-all-users', endpoints.getAllUsers);
             router.get('/get-user-by-id/:userId', endpoints.getUserById);
             router.get('/get-user-by-email/:userEmail', endpoints.getUserByEmail);
-            router.post('/insert-user', endpoints.insertUser);
+            router.post('/create', endpoints.create);
             router.post('/authenticate', endpoints.authenticate);
         };
 
@@ -59,19 +59,14 @@
                 });
             },
 
-            insertUser: function (request, response) {
-                /*
-                var firstName = request.body.userFirstName;
-                var lastName = request.body.cls;
-                var email = request.body.userEmail;
-                var password = UserModel.hashPassword(request.body.userPassword);
-                var roleId = request.body.userRoleId;
-                */
-                var firstName = request.query['userFirstName'];
-                var lastName = request.query['userLastName'];
-                var email = request.query['userEmail'];
-                var password = UserModel.hashPassword(request.query['userPassword']);
-                var roleId = request.query['userRoleId'];
+            create: function (request, response) {
+
+                var firstName = request.body.firstName;
+                var lastName = request.body.lastName;
+                var email = request.body.email;
+                var password = UserModel.hashPassword(request.body.password);
+                var roleId = 3;
+
                 console.log(firstName);
                 return UserModel.create({
                         FirstName: firstName,
@@ -83,6 +78,10 @@
                 }).then(function (data) {
                     data.Password = "";
                     response.send({success: true, user: data});
+                }).catch(function(error){
+                    var msg = 'The email address is already registered';
+                    response.send({success: false, msg: msg});
+                    console.log(error);
                 });
             },
 
