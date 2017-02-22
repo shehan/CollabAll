@@ -21,7 +21,11 @@
         var endpoints = {
 
             getAllUsers: function (request, response) {
-                return UserModel.findAll()
+                return UserModel.findAll({
+                    attributes: {
+                        exclude: ['Password']
+                    }
+                })
                     .then(function (data) {
                         response.send({success: true, users: data});
                     });
@@ -32,6 +36,9 @@
                 return UserModel.findOne({
                     where: {
                         id: userId
+                    },
+                    attributes: {
+                        exclude: ['Password']
                     }
                 }).then(function (data) {
                     response.send({success: true, user: data});
@@ -43,6 +50,9 @@
                 return UserModel.findOne({
                     where: {
                         Email: userEmail
+                    },
+                    attributes: {
+                        exclude: ['Password']
                     }
                 }).then(function (data) {
                     response.send({success: true, user: data});
@@ -71,7 +81,8 @@
                         IsActive: true,
                         roleID: roleId
                 }).then(function (data) {
-                    response.send({success: true, role: data});
+                    data.Password = "";
+                    response.send({success: true, user: data});
                 });
             },
 
