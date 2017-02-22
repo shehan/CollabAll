@@ -36,13 +36,6 @@
                         return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
                     },
 
-                    instanceMethods: {
-
-                        comparePassword: function (password, callback) {
-                            return bcrypt.compare(password, this.Password, callback);
-                        }
-                    },
-
                     associate: function (models) {
                         user.hasMany(models.user_group, {
                             as: 'User',
@@ -58,6 +51,11 @@
                             constraints: true,
                             foreignKeyConstraint: true
                         });
+                    }
+                },
+                instanceMethods: {
+                    comparePassword: function (password, callback) {
+                        return bcrypt.compare(password, this.Password, callback);
                     }
                 }
             }
