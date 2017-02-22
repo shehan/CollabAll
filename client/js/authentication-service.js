@@ -45,7 +45,7 @@
 
             var register = function(user) {
                 return $q(function(resolve, reject) {
-                    $http.post('services/user/insertUser', user).then(function(result) {
+                    $http.post('services/user/create', user).then(function(result) {
                         if (result.data.success) {
                             resolve(result.data.msg);
                         } else {
