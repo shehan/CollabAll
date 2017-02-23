@@ -47,6 +47,10 @@ require(__dirname + '/server/services/index').init(express, app);
 // --- Sequelize ---
 require(__dirname + '/server/models/index');
 
+app.get('*', function(req, res) {
+    res.sendfile(__dirname + '/client/index.html');
+});
+
 
 // start app ===============================================
 // startup our app at http://localhost:8080
