@@ -11,6 +11,7 @@
         'LoginControllerModule',
         'InsideControllerModule',
         'HomeControllerModule',
-        'UserCreateControllerModule'
+        'UserCreateControllerModule',
+        'GroupCreateControllerModule'
     ]);
 }());

@@ -25,6 +25,11 @@
                         templateUrl: 'templates/home.html', //The path to the html template
                         controller: 'homeController' //The path to the angular controller
                     })
+                    .state('inside.group-create', {
+                        url: '/',
+                        templateUrl: 'templates/group-create.html',
+                        controller: 'groupCreateController'
+                    })
                     .state('signup', {
                         url: '/signup',
                         templateUrl: 'templates/user-create.html',

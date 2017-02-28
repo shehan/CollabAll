@@ -1,0 +1,108 @@
+<!-- Loading Screen Overlay -->
+<div class="overlay" id="overlayScreen">
+    <div class="overlay-content">Processing...Please Wait...<br/><br/><img src="../img/loading.gif"/></div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <form ng-submit="createGroup()" class="form-horizontal">
+            <fieldset>
+
+                <!-- Form Name -->
+                <legend>Create Group</legend>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="groupname">Group Name *</label>
+                    <div class="col-md-4">
+                        <input id="groupname" name="groupname" ng-model="groupName" type="text" placeholder="Group Name"
+                               class="form-control input-md" required="">
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="userId">User Id *</label>
+                    <div class="col-md-4">
+                        <input id="userId" name="userId" ng-model="userId" type="text" placeholder="User Id"
+                               class="form-control input-md" required="">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-5">
+                        <select name="selectAllUsers" multiple size='10' style="width:100%" ng-model="selectedAllUsers"
+                                ng-options="user.Email for user in allUsers "></select>
+                    </div>
+                    <div class="col-md-2" style="text-align: center;">
+                        <button class="btn btn-default btn-sm" type="button" id='btn-AddToGroup'
+                                ng-click='addToGroup();'><span class="glyphicon glyphicon-arrow-right"></span></button>
+                        <br/>
+                        <button class="btn btn-default btn-sm" type="button" id='btn-RemoveFromGroup'
+                                ng-click='removeFromGroup();'><span class="glyphicon glyphicon-arrow-left"></span>
+                        </button>
+                    </div>
+                    <div class="col-md-5">
+                        <select id='selectGroupUsers' multiple size='10' style="width:100%"
+                                ng-model="selectedGroupUsers"
+                                ng-options="user.Email for user in groupUsers"></select>
+                    </div>
+                </div>
+                <div class="form-group" ng-repeat="error in validation">
+                    <label class="col-md-3 control-label"></label>
+                    <div class="col-md-9">
+                        <label class="control-label">{{error}}</label>
+                    </div>
+                </div>
+
+                <!-- Button -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="create"></label>
+                    <div class="col-md-4">
+                        <button id="create" name="create" type="submit" class="btn btn-primary">Submit</button>
+                        <button id="cancel" name="cancel" type="button" onclick="window.location.href='/'"
+                                class="btn btn-default">Cancel
+                        </button>
+                    </div>
+                </div>
+
+            </fieldset>
+        </form>
+        <div>{{ status }}</div>
+    </div>
+</div>
+
+
+<script>
+    function AddToGroup() {
+        var selectedItems = $("#selectAllUsers > option:selected");
+        if (selectedItems.length >= 1) {
+            selectedItems.each(function () {
+                $(this).remove();
+                $(this).appendTo("#selectGroupUsers");
+            })
+        }
+        else {
+            alert('Please select a user');
+        }
+    }
+
+    function RemoveFromGroup() {
+        if ($("#selectGroupUsers option").length == $("#selectGroupUsers > option:selected").length) {
+            alert("There should be at least 1 user in the group");
+            return;
+        }
+        var selectedItems = $("#selectGroupUsers > option:selected");
+        if (selectedItems.length >= 1) {
+            selectedItems.each(function () {
+                $(this).remove();
+                $(this).appendTo("#selectAllUsers");
+            })
+        }
+        else {
+            alert('Please select a user');
+        }
+    }
+
+
+</script>
