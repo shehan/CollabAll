@@ -12,6 +12,7 @@
         var init = function (router) {
             // router.post('/update-role-by-id', endpoints.updateRoleById);
             router.get('/get-all-users', endpoints.getAllUsers);
+            router.get('/get-all-active-users', endpoints.getAllActiveUsers);
             router.get('/get-user-by-id/:userId', endpoints.getUserById);
             router.get('/get-user-by-email/:userEmail', endpoints.getUserByEmail);
             router.post('/create', endpoints.create);
@@ -19,6 +20,20 @@
         };
 
         var endpoints = {
+
+            getAllActiveUsers: function (request, response) {
+                return UserModel.findAll({
+                    where: {
+                        IsActive: true
+                    },
+                    attributes: {
+                        exclude: ['Password']
+                    }
+                })
+                    .then(function (data) {
+                        response.send({success: true, users: data});
+                    });
+            },
 
             getAllUsers: function (request, response) {
                 return UserModel.findAll({
