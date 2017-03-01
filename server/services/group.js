@@ -14,7 +14,7 @@
             router.get('/get-group-by-id', endpoints.getGroupById);
             router.post('/create-group', endpoints.createGroup);
             router.post('/add-user', endpoints.addUser);
-          //  router.post('/remove-user', endpoints.removeUser);
+            //  router.post('/remove-user', endpoints.removeUser);
         };
 
         var endpoints = {
@@ -32,10 +32,10 @@
                     where: {
                         groupID: groupId
                     },
-                    include:[UserModel]
+                    include: [UserModel]
                 }).then(function (data) {
                     var userList = [];
-                    for(var i=0;i<data.length;i++){
+                    for (var i = 0; i < data.length; i++) {
                         userList.push(data[i].user)
                     }
                     response.send({success: true, users: userList});
@@ -64,17 +64,26 @@
             },
 
             addUser: function (request, response) {
-                var groupId = request.body.groupId;
-                var userId = request.body.userId;
+                var groupId = request.body.GroupId;
+                var userIds = request.body.UserIds;
                 var usergroupId = request.body.usergroupId;
-                return UserGroupModel.upsert({
-                    ID:usergroupId,
-                    GroupID: groupId,
-                    UserID: userId,
-                    IsActive: true
+
+                UserGroupModel.destroy({
+                    where: {
+                        groupID: groupId,
+                    }
                 }).then(function (data) {
-                    response.send({success: true, group: data});
+                    userIds.forEach(function (userId) {
+                        UserGroupModel.upsert({
+                            ID: usergroupId,
+                            userID: userId.ID,
+                            groupID: groupId,
+                            IsActive: true
+                        });
+                    });
                 });
+
+                response.send({success: true});
             }
         };
 
