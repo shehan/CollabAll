@@ -55,12 +55,17 @@
                             {
                                 GroupName: $scope.groupName
                             })
-                            .then(function () {
+                            .then(function (response) {
+                                $http.post('services/group/add-user',
+                                    {
+                                        GroupId: response.data.group.ID,
+                                        UserIds:$scope.groupUsers
+                                    }).then(function (response) {
+                                    document.getElementById("overlayScreen").style.width = "0%";
+                                    document.getElementById("overlayScreen").style.height = "0%";
 
-                                document.getElementById("overlayScreen").style.width = "0%";
-                                document.getElementById("overlayScreen").style.height = "0%";
-
-                                // $state.go('inside.view-papers');
+                                    // $state.go('inside.view-papers');
+                                });
                             });
                     }
                 };
