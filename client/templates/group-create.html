@@ -20,15 +20,6 @@
                     </div>
                 </div>
 
-                <!-- Text input-->
-                <div class="form-group">
-                    <label class="col-md-4 control-label" for="userId">User Id *</label>
-                    <div class="col-md-4">
-                        <input id="userId" name="userId" ng-model="userId" type="text" placeholder="User Id"
-                               class="form-control input-md" required="">
-                    </div>
-                </div>
-
                 <div class="form-group">
                     <div class="col-md-5">
                         <select name="selectAllUsers" multiple size='10' style="width:100%" ng-model="selectedAllUsers"
@@ -72,37 +63,3 @@
     </div>
 </div>
 
-
-<script>
-    function AddToGroup() {
-        var selectedItems = $("#selectAllUsers > option:selected");
-        if (selectedItems.length >= 1) {
-            selectedItems.each(function () {
-                $(this).remove();
-                $(this).appendTo("#selectGroupUsers");
-            })
-        }
-        else {
-            alert('Please select a user');
-        }
-    }
-
-    function RemoveFromGroup() {
-        if ($("#selectGroupUsers option").length == $("#selectGroupUsers > option:selected").length) {
-            alert("There should be at least 1 user in the group");
-            return;
-        }
-        var selectedItems = $("#selectGroupUsers > option:selected");
-        if (selectedItems.length >= 1) {
-            selectedItems.each(function () {
-                $(this).remove();
-                $(this).appendTo("#selectAllUsers");
-            })
-        }
-        else {
-            alert('Please select a user');
-        }
-    }
-
-
-</script>
