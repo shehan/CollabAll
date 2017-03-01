@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall":"bower install"
+    "postinstall": "bower install"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,7 @@
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.16.1",
+    "bower": "^1.8.0",
     "express": "^4.14.1",
     "jwt-simple": "^0.5.1",
     "method-override": "^2.3.7",
