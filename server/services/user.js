@@ -80,7 +80,7 @@
                 var lastName = request.body.lastName;
                 var email = request.body.email;
                 var password = UserModel.hashPassword(request.body.password);
-                var roleId = 3;
+                var roleId = 1;
 
                 console.log(firstName);
                 return UserModel.create({
