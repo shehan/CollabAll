@@ -17,6 +17,24 @@
             $scope.title = "CollabAll";
             $scope.user =  AuthService.authenticatedUser();
 
+            $scope.motion='...';
+
+
+            if (window.DeviceOrientationEvent) {
+                alert("DeviceOrientation is supported");
+                window.addEventListener("devicemotion", motion, false);
+            }
+            else{
+                alert("DeviceOrientation NOT supported");
+            }
+
+            function motion(event){
+                $scope.motion = "Accelerometer: "
+                    + event.accelerationIncludingGravity.x + ", "
+                    + event.accelerationIncludingGravity.y + ", "
+                    + event.accelerationIncludingGravity.z;
+            }
+
             $scope.logout = function() {
                 AuthService.logout();
                 $state.go('login');
