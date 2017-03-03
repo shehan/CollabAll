@@ -40,8 +40,8 @@ db.sequelize
     .then(function () {
         console.log('Connection successful');
         db.sequelize
-        //.sync()
-            .sync({force: true})
+        .sync()
+            //.sync({force: true})
             .then(function () {
                 console.log('Tables Created');
                 var RoleModel = db.role;
