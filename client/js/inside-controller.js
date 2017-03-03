@@ -15,6 +15,11 @@
                 socket.emit('join',user);
                 console.log("client joining server");
             });
+
+            socket.emit("subscribe", { group: "1" });
+
+       //     socket.emit("unsubscribe", { group: "1" });
+
             socket.on("disconnect", function(){
                 console.log("client disconnected from server");
             });
