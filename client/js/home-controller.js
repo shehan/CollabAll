@@ -52,6 +52,7 @@
                     + event.gamma;
                 alert(mag_text);
                 $scope.magnetometer = mag_text;
+                alert($scope.magnetometer);
             }
 
             $scope.logout = function() {
