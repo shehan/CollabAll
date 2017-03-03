@@ -5,8 +5,9 @@
     <p>Welcome! This is the homepage!</p>
 
     <a ui-sref="inside.group-create">Create a Group</a>
-    <input id="mo" name="mo" ng-model="motion" type="text" placeholder="" class="form-control input-md" >
-    <input id="ma" name="ma" ng-model="magnetometer" type="text" placeholder="" class="form-control input-md" >
+    <input id="mo" name="mo" ng-model="deviceMotion" type="text" placeholder="" class="form-control input-md" >
+    <input id="ma" name="ma" ng-model="deviceOrientation" type="text" placeholder="" class="form-control input-md" >
 
+    <button ng-click="dowork()">Do Work</button>
 
 </div>

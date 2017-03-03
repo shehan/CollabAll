@@ -3,7 +3,7 @@
 
     angular.module('HomeControllerModule', ['AuthModule'])
 
-        .controller('homeController', ['$scope', '$state', 'AuthService','$window', function($scope, $state, AuthService,$window) {
+        .controller('homeController', ['$scope', '$state', '$http','AuthService','$window', function($scope, $state, $http, AuthService,$window) {
 
             var user = 'userid=' + $scope.userID;
             var socket = io.connect({query: user});
@@ -18,27 +18,23 @@
             $scope.user =  AuthService.authenticatedUser();
 
             if ($window.DeviceMotionEvent) {
-                $window.addEventListener("ondevicemotion", motion, false);
-
-                $scope.motion = "Accelerometer: ";
-                alert("DeviceMotionEvent is supported");
+                $window.addEventListener("devicemotion", motion, false);
+                $scope.deviceMotion = "[devicemotion] Accelerometer: ";
             }
             else{
                 alert("DeviceMotionEvent NOT supported");
             }
 
             if ($window.DeviceOrientationEvent) {
-                $window.addEventListener("deviceorientation", orientation, true);
-                $scope.motion = "Magnetometer: ";
-                alert("DeviceOrientation is supported");
+                $window.addEventListener("deviceorientation", orientation, false);
+                $scope.deviceOrientation = "[deviceorientation] Magnetometer: ";
             }
             else{
                 alert("DeviceOrientation NOT supported");
             }
 
             function motion(event){
-               // alert(event.accelerationIncludingGravity.x);
-                $scope.motion = "Accelerometer: "
+                $scope.deviceMotion = "Accelerometer: "
                     + event.accelerationIncludingGravity.x + ", "
                     + event.accelerationIncludingGravity.y + ", "
                     + event.accelerationIncludingGravity.z
@@ -49,15 +45,15 @@
                     + event.alpha + ", "
                     + event.beta + ", "
                     + event.gamma;
-                $scope.magnetometer = mag_text;
+                $scope.deviceOrientation = mag_text;
                 alert(mag_text);
-                alert('scp: ' + $scope.magnetometer);
+                alert('scp: ' + $scope.deviceOrientation);
             }
 
-            $scope.logout = function() {
-                AuthService.logout();
-                $state.go('login');
+            $scope.dowork = function () {
+                $scope.deviceOrientation = "Hello "+ Date.now();
             };
+
 
         }]);
 
