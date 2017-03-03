@@ -12,7 +12,7 @@
             var socket = io.connect({query: $scope.userID});
 
             socket.on('connect', function(msg){
-                socket.emit('join',user);
+                socket.emit('join',$scope.userID);
                 console.log("client joining server");
             });
 
@@ -24,11 +24,11 @@
                 console.log("client disconnected from server");
             });
 
-            socket.on('notification message', function (msg) {
-                alert(msg);
-                $scope.hasNotifications = true;
-                $scope.$apply();
+
+            socket.on('interjection', function(data) {
+                console.log('Incoming interjection:', data);
             });
+
             console.log(socket);
 
 
