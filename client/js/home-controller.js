@@ -38,6 +38,7 @@
                     + event.accelerationIncludingGravity.x + ", "
                     + event.accelerationIncludingGravity.y + ", "
                     + event.accelerationIncludingGravity.z
+                $scope.$apply();
             }
 
             function orientation(event){
@@ -48,6 +49,7 @@
                 $scope.deviceOrientation = mag_text;
                 alert(mag_text);
                 alert('scp: ' + $scope.deviceOrientation);
+                $scope.$apply();
             }
 
             $scope.dowork = function () {
