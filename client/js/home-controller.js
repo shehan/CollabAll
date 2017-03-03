@@ -40,6 +40,17 @@
             }
 
 
+            $scope.dowork = function () {
+                $http.post('services/interjection/send-interjection',
+                    {
+                        GroupId: "1",
+                        UserId: $scope.user.ID,
+                        InterjectionId: "1"
+
+                    })
+            };
+
+
         }]);
 
 }());
