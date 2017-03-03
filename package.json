@@ -32,7 +32,7 @@
     "passport-jwt": "^2.2.1",
     "sequelize": "^3.30.2",
     "sequelize-cli": "^2.5.1",
-    "socket.io": "^1.7.2",
+    "socket.io": "^1.7.3",
     "sqlite3": "^3.1.8"
   }
 }
