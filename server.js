@@ -65,6 +65,16 @@ io.on('connection', function(socket){
         clients[id] = socket;
     });
 
+    socket.on('subscribe', function (group) {
+        console.log(socket.name + ' subscribed to group: '+ group.group);
+        socket.join(group);
+    });
+
+    socket.on('unsubscribe', function (group) {
+        console.log(socket.name + ' unsubscribe from group: '+ group.group);
+        socket.leave(group);
+    });
+
     socket.on('disconnect', function(){
         console.log( socket.name + ' has disconnected from the chat.' + socket.id);
     });
