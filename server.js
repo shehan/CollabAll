@@ -56,13 +56,17 @@ app.get('*', function(req, res) {
 
 global.clients = {};
 io.on('connection', function(socket){
+
     console.log('socket: a user connected ->'+socket.handshake.query.userid);
 
-
-    clients[socket.handshake.query.userid] = socket;
+    socket.on('join', function (id) {
+        socket.name = id;
+        console.log(socket.name + ' joined!');
+        clients[id] = socket;
+    });
 
     socket.on('disconnect', function(){
-        console.log('user disconnected');
+        console.log( socket.name + ' has disconnected from the chat.' + socket.id);
     });
 });
 
