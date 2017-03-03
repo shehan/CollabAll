@@ -19,7 +19,6 @@
 
             if ($window.DeviceMotionEvent) {
                 $window.addEventListener("devicemotion", motion, true);
-                $scope.deviceMotion = "[devicemotion] Accelerometer: ";
             }
             else{
                 alert("DeviceMotionEvent NOT supported");
@@ -27,7 +26,6 @@
 
             if ($window.DeviceOrientationEvent) {
                 $window.addEventListener("deviceorientation", orientation, true);
-                $scope.deviceOrientation = "[deviceorientation] Magnetometer: ";
             }
             else{
                 alert("DeviceOrientation NOT supported");
@@ -42,19 +40,12 @@
             }
 
             function orientation(event){
-                var mag_text = "Magnetometer: "
+                $scope.deviceOrientation = "Magnetometer: "
                     + event.alpha + ", "
                     + event.beta + ", "
                     + event.gamma;
-                $scope.deviceOrientation = mag_text;
-                alert(mag_text);
-                alert('scp: ' + $scope.deviceOrientation);
                 $scope.$apply();
             }
-
-            $scope.dowork = function () {
-                $scope.deviceMotion = "Hello "+ Date.now();
-            };
 
 
         }]);
