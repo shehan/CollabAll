@@ -17,12 +17,10 @@
             $scope.title = "CollabAll";
             $scope.user =  AuthService.authenticatedUser();
 
-            $scope.motion='...';
-            $scope.magnetometer='###';
-
-
             if ($window.DeviceMotionEvent) {
                 $window.addEventListener("ondevicemotion", motion, false);
+
+                $scope.motion = "Accelerometer: ";
                 alert("DeviceMotionEvent is supported");
             }
             else{
@@ -31,6 +29,7 @@
 
             if ($window.DeviceOrientationEvent) {
                 $window.addEventListener("deviceorientation", orientation, true);
+                $scope.motion = "Magnetometer: ";
                 alert("DeviceOrientation is supported");
             }
             else{
@@ -50,9 +49,9 @@
                     + event.alpha + ", "
                     + event.beta + ", "
                     + event.gamma;
-                alert(mag_text);
                 $scope.magnetometer = mag_text;
-                alert($scope.magnetometer);
+                alert(mag_text);
+                alert('scp: ' + $scope.magnetometer);
             }
 
             $scope.logout = function() {
