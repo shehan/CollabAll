@@ -57,8 +57,6 @@ app.get('*', function(req, res) {
 global.clients = {};
 io.on('connection', function(socket){
 
-    console.log('socket: a user connected ->'+socket.handshake.query.userid);
-
     socket.on('join', function (id) {
         socket.name = id;
         console.log(socket.name + ' joined!');
@@ -67,12 +65,12 @@ io.on('connection', function(socket){
 
     socket.on('subscribe', function (group) {
         console.log(socket.name + ' subscribed to group: '+ group.group);
-        socket.join(group);
+        socket.join(group.group);
     });
 
     socket.on('unsubscribe', function (group) {
         console.log(socket.name + ' unsubscribe from group: '+ group.group);
-        socket.leave(group);
+        socket.leave(group.group);
     });
 
     socket.on('disconnect', function(){
