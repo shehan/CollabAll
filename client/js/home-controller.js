@@ -18,11 +18,20 @@
             $scope.user =  AuthService.authenticatedUser();
 
             $scope.motion='...';
+            $scope.magnetometer='###';
 
+
+            if (window.DeviceMotionEvent) {
+                window.addEventListener("devicemotion", motion, false);
+                alert("DeviceMotionEvent is supported");
+            }
+            else{
+                alert("DeviceMotionEvent NOT supported");
+            }
 
             if (window.DeviceOrientationEvent) {
+                window.addEventListener("deviceorientation", orientation, false);
                 alert("DeviceOrientation is supported");
-                window.addEventListener("devicemotion", motion, false);
             }
             else{
                 alert("DeviceOrientation NOT supported");
@@ -33,6 +42,13 @@
                     + event.accelerationIncludingGravity.x + ", "
                     + event.accelerationIncludingGravity.y + ", "
                     + event.accelerationIncludingGravity.z;
+            }
+
+            function orientation(event){
+                $scope.magnetometer = "Magnetometer: "
+                    + event.alpha + ", "
+                    + event.beta + ", "
+                    + event.gamma;
             }
 
             $scope.logout = function() {
