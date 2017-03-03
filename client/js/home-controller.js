@@ -30,7 +30,7 @@
             }
 
             if ($window.DeviceOrientationEvent) {
-                $window.addEventListener("ondeviceorientation", orientation, false);
+                $window.addEventListener("deviceorientation", orientation, true);
                 alert("DeviceOrientation is supported");
             }
             else{
@@ -38,6 +38,7 @@
             }
 
             function motion(event){
+                alert("DeviceMotion");
                 $scope.motion = "Accelerometer: "
                     + event.accelerationIncludingGravity.x + ", "
                     + event.accelerationIncludingGravity.y + ", "
@@ -45,6 +46,7 @@
             }
 
             function orientation(event){
+                alert("DeviceOrientation");
                 $scope.magnetometer = "Magnetometer: "
                     + event.alpha + ", "
                     + event.beta + ", "
