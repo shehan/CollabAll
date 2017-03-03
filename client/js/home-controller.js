@@ -38,7 +38,7 @@
             }
 
             function motion(event){
-                alert(event.accelerationIncludingGravity.x);
+               // alert(event.accelerationIncludingGravity.x);
                 $scope.motion = "Accelerometer: "
                     + event.accelerationIncludingGravity.x + ", "
                     + event.accelerationIncludingGravity.y + ", "
@@ -46,11 +46,12 @@
             }
 
             function orientation(event){
-                alert(event.alpha);
-                $scope.magnetometer = "Magnetometer: "
+                var mag_text = "Magnetometer: "
                     + event.alpha + ", "
                     + event.beta + ", "
                     + event.gamma;
+                alert(mag_text);
+                $scope.magnetometer = mag_text;
             }
 
             $scope.logout = function() {
