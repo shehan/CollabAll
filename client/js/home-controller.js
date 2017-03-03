@@ -22,7 +22,7 @@
 
 
             if ($window.DeviceMotionEvent) {
-                $window.addEventListener("devicemotion", motion, false);
+                $window.addEventListener("ondevicemotion", motion, false);
                 alert("DeviceMotionEvent is supported");
             }
             else{
@@ -30,7 +30,7 @@
             }
 
             if ($window.DeviceOrientationEvent) {
-                $window.addEventListener("deviceorientation", orientation, false);
+                $window.addEventListener("ondeviceorientation", orientation, false);
                 alert("DeviceOrientation is supported");
             }
             else{
