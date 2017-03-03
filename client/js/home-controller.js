@@ -18,7 +18,7 @@
             $scope.user =  AuthService.authenticatedUser();
 
             if ($window.DeviceMotionEvent) {
-                $window.addEventListener("devicemotion", motion, false);
+                $window.addEventListener("devicemotion", motion, true);
                 $scope.deviceMotion = "[devicemotion] Accelerometer: ";
             }
             else{
@@ -26,7 +26,7 @@
             }
 
             if ($window.DeviceOrientationEvent) {
-                $window.addEventListener("deviceorientation", orientation, false);
+                $window.addEventListener("deviceorientation", orientation, true);
                 $scope.deviceOrientation = "[deviceorientation] Magnetometer: ";
             }
             else{
@@ -51,7 +51,7 @@
             }
 
             $scope.dowork = function () {
-                $scope.deviceOrientation = "Hello "+ Date.now();
+                $scope.deviceMotion = "Hello "+ Date.now();
             };
 
 
