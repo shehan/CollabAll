@@ -9,11 +9,28 @@
 
 
             var user = 'userid=' + $scope.userID;
+            var socket = io.connect({query: $scope.userID});
+
+            socket.on('connect', function(msg){
+                socket.emit('join',user);
+                console.log("client joining server");
+            });
+            socket.on("disconnect", function(){
+                console.log("client disconnected from server");
+            });
+
+            socket.on('notification message', function (msg) {
+                alert(msg);
+                $scope.hasNotifications = true;
+                $scope.$apply();
+            });
+            console.log(socket);
 
 
             $scope.title = "CollabAll";
 
             $scope.logout = function () {
+                socket.disconnect();
                 AuthService.logout();
                 $state.go('login');
             };
