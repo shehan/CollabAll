@@ -3,7 +3,7 @@
 
     angular.module('HomeControllerModule', ['AuthModule'])
 
-        .controller('homeController', ['$scope', '$state', 'AuthService', function($scope, $state, AuthService) {
+        .controller('homeController', ['$scope', '$state', 'AuthService','$window', function($scope, $state, AuthService,$window) {
 
             var user = 'userid=' + $scope.userID;
             var socket = io.connect({query: user});
@@ -21,16 +21,16 @@
             $scope.magnetometer='###';
 
 
-            if (window.DeviceMotionEvent) {
-                window.addEventListener("devicemotion", motion, false);
+            if ($window.DeviceMotionEvent) {
+                $window.addEventListener("devicemotion", motion, false);
                 alert("DeviceMotionEvent is supported");
             }
             else{
                 alert("DeviceMotionEvent NOT supported");
             }
 
-            if (window.DeviceOrientationEvent) {
-                window.addEventListener("deviceorientation", orientation, false);
+            if ($window.DeviceOrientationEvent) {
+                $window.addEventListener("deviceorientation", orientation, false);
                 alert("DeviceOrientation is supported");
             }
             else{
