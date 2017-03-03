@@ -38,6 +38,7 @@
             }
 
             function motion(event){
+                alert(event.accelerationIncludingGravity.x);
                 $scope.motion = "Accelerometer: "
                     + event.accelerationIncludingGravity.x + ", "
                     + event.accelerationIncludingGravity.y + ", "
@@ -45,6 +46,7 @@
             }
 
             function orientation(event){
+                alert(event.alpha);
                 $scope.magnetometer = "Magnetometer: "
                     + event.alpha + ", "
                     + event.beta + ", "
