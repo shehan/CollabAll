@@ -6,15 +6,14 @@ var app = express();
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var passport = require('passport');
+var http = require('http').Server(app);
+var io  = require('socket.io')(http);
 // configuration ===========================================
-
+global.io = io;
 
 // set our port
 var port = process.env.PORT || 8080;
 
-// connect to our mongoDB database 
-// (uncomment after you enter in your own credentials in config/db.js)
-// mongoose.connect(db.url); 
 
 // get all data/stuff of the body (POST) parameters
 // parse application/json 
@@ -36,6 +35,9 @@ app.use(express.static(__dirname + '/client'));
 //require('./app/routes')(app); // configure our routes
 
 
+// set the static files location /public/img will be /img for users
+app.use(express.static(__dirname + '/client'));
+
 // Use the passport package in our application
 require(__dirname + '/server/config/passport')(passport);
 app.use(passport.initialize());
@@ -52,12 +54,24 @@ app.get('*', function(req, res) {
 });
 
 
+global.clients = {};
+io.on('connection', function(socket){
+    console.log('socket: a user connected ->'+socket.handshake.query.userid);
+
+
+    clients[socket.handshake.query.userid] = socket;
+
+    socket.on('disconnect', function(){
+        console.log('user disconnected');
+    });
+});
+
 // start app ===============================================
 // startup our app at http://localhost:8080
-app.listen(port);
+http.listen(port);
 
 // shoutout to the user                     
 console.log('Magic happens on port ' + port);
 
 // expose app           
-exports = module.exports = app; 
+exports = module.exports = http;
