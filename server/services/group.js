@@ -45,7 +45,7 @@
                     where: {
                         groupID: groupId
                     },
-                    include: [UserModel]
+                    include: [UserModel, GroupModel]
                 }).then(function (data) {
                     var userList = [];
                     for (var i = 0; i < data.length; i++) {
@@ -56,7 +56,7 @@
             },
 
             getGroupById: function (request, response) {
-                var groupId = request.body.groupId;
+                var groupId = request.query.GroupId;
                 return GroupModel.findOne({
                     where: {
                         id: groupId
