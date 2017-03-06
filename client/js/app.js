@@ -13,6 +13,6 @@
         'HomeControllerModule',
         'UserCreateControllerModule',
         'GroupCreateControllerModule',
-        'GroupManageControllerModule'
+        'GroupMyControllerModule'
     ]);
 }());

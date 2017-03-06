@@ -1,12 +1,12 @@
 (function () {
     'use strict';
 
-    angular.module('GroupManageControllerModule', [])
+    angular.module('GroupMyControllerModule', [])
 
-        .controller('groupManageController', ['$scope', 'AuthService', '$state', '$http',
+        .controller('groupMyController', ['$scope', 'AuthService', '$state', '$http',
             function ($scope, AuthService, $state, $http) {
 
-                $scope.title = "CollabAll - Manage Group";
+                $scope.title = "CollabAll - My Group";
                 $scope.contactAuthor = AuthService.authenticatedUser().FirstName + " " + AuthService.authenticatedUser().LastName;
                 $scope.userID = AuthService.authenticatedUser().ID;
                 $scope.myGroups = [];
