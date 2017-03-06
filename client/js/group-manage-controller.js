@@ -3,11 +3,14 @@
 
     angular.module('GroupManageControllerModule', [])
 
-        .controller('groupManageController', ['$scope', 'AuthService', '$state', '$http',
-            function ($scope, AuthService, $state, $http) {
+        .controller('groupManageController', ['$scope', 'AuthService', '$state', '$http', '$stateParams',
+            function ($scope, AuthService, $state, $http, $stateParams) {
 
                 $scope.title = "CollabAll - Create Group";
                 $scope.validation = [];
+                $scope.groupID = $stateParams.groupID;
+                $scope.groupName = '';
+
                 $scope.allUsers = [];
                 $scope.groupUsers = [];
 
@@ -18,13 +21,20 @@
                 document.getElementById("overlayScreen").style.width = "100%";
                 document.getElementById("overlayScreen").style.height = "100%";
 
+                if ($scope.groupID != "") {
+                    $http.get('services/group/get-group-by-id', {params: {GroupId: $scope.groupID}})
+                        .then(function (response) {
+                            $scope.groupName = response.data.group.Name;
+                        });
+                }
+
                 $http.get('services/user/get-all-active-users')
                     .then(function (response) {
                         $scope.allUsers = response.data.users;
                         $scope.allUsers.sort(compare);
 
                     }).then(function () {
-                    $http.get('services/group/get-group-members', {params: {GroupId: '3'}})
+                    $http.get('services/group/get-group-members', {params: {GroupId: $scope.groupID}})
                         .then(function (response) {
                             $scope.groupUsers = response.data.users;
                             $scope.groupUsers.sort(compare);
@@ -43,7 +53,6 @@
                         });
                 });
 
-
                 $scope.createGroup = function () {
                     if (isFormValid()) {
                         document.getElementById("overlayScreen").style.width = "100%";
@@ -59,7 +68,7 @@
                                 $http.post('services/group/add-user',
                                     {
                                         GroupId: response.data.group.ID,
-                                        UserIds:$scope.groupUsers
+                                        UserIds: $scope.groupUsers
                                     }).then(function (response) {
                                     document.getElementById("overlayScreen").style.width = "0%";
                                     document.getElementById("overlayScreen").style.height = "0%";
