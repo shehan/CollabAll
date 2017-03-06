@@ -9,6 +9,7 @@
 
         var init = function (router) {
             // router.post('/update-role-by-id', endpoints.updateRoleById);
+            router.get('/get-my-groups', endpoints.getMyGroups);
             router.get('/get-all-groups', endpoints.getAllGroups);
             router.get('/get-group-members', endpoints.getGroupMembers);
             router.get('/get-group-by-id', endpoints.getGroupById);
@@ -22,6 +23,18 @@
             getAllGroups: function (request, response) {
                 return GroupModel.findAll()
                     .then(function (data) {
+                        response.send({success: true, groups: data});
+                    });
+            },
+
+            getMyGroups: function (request, response) {
+                var userId = request.query.UserId;
+                return UserGroupModel.findAll({
+                    where: {
+                        userID: userId
+                    },
+                    include: [GroupModel]
+                }).then(function (data) {
                         response.send({success: true, groups: data});
                     });
             },
