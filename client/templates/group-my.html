@@ -25,7 +25,7 @@
         <div class="col-sm-3">{{group.group.createdAt | date:'medium'}}</div>
 
         <div class="col-sm-3">
-                <a href="/" class="btn btn-sm btn-default">Update Members</a>
+                <a href="/manage-group/{{group.group.ID}}" class="btn btn-sm btn-default">Update Members</a>
                 <a href="/" class="btn btn-sm btn-default">Update Cards</a>
         </div>
     </div>
@@ -36,5 +36,5 @@
 </span>
 <br/>
 
-<a class="btn btn-primary" ui-sref="inside.group-create">Create Group</a>
+<a class="btn btn-primary" ui-sref="inside.group-manage">Create Group</a>
 

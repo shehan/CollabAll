@@ -1,9 +1,9 @@
 (function () {
     'use strict';
 
-    angular.module('GroupCreateControllerModule', [])
+    angular.module('GroupManageControllerModule', [])
 
-        .controller('groupCreateController', ['$scope', 'AuthService', '$state', '$http',
+        .controller('groupManageController', ['$scope', 'AuthService', '$state', '$http',
             function ($scope, AuthService, $state, $http) {
 
                 $scope.title = "CollabAll - Create Group";

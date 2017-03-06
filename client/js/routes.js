@@ -25,10 +25,10 @@
                         templateUrl: 'templates/home.html', //The path to the html template
                         controller: 'homeController' //The path to the angular controller
                     })
-                    .state('inside.group-create', {
-                        url: '/',
-                        templateUrl: 'templates/group-create.html',
-                        controller: 'groupCreateController'
+                    .state('inside.group-manage', {
+                        url: '/manage-group/:groupID',
+                        templateUrl: 'templates/group-manage.html',
+                        controller: 'groupManageController'
                     })
                     .state('inside.group-my', {
                         url: '/my-groups',
