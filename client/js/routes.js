@@ -30,6 +30,11 @@
                         templateUrl: 'templates/group-create.html',
                         controller: 'groupCreateController'
                     })
+                    .state('inside.group-manage', {
+                        url: '/',
+                        templateUrl: 'templates/group-manage.html',
+                        controller: 'groupManageController'
+                    })
                     .state('signup', {
                         url: '/signup',
                         templateUrl: 'templates/user-create.html',

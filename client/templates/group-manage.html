@@ -1,0 +1,39 @@
+<style>
+    .row.grid:nth-child(1) {
+        background: lavenderblush;
+    }
+
+    .row.grid:nth-child(even) {
+        background: lavender;
+    }
+</style>
+
+<p ng-if="loadingGroups">Loading Groups...</p>
+
+<legend>My Groups</legend>
+<span ng-if="myGroups.length >= 1">
+    <div class="row grid table-bordered">
+        <div class="col-sm-3" style="background: burlywood">ID</div>
+        <div class="col-sm-3" style="background: burlywood">Name</div>
+        <div class="col-sm-3" style="background: burlywood">Created On</div>
+        <div class="col-sm-3" style="background: burlywood">Action</div>
+    </div>
+
+    <div class="row grid table-bordered" ng-repeat="group in myGroups">
+        <div class="col-sm-3">{{group.group.ID}}</div>
+        <div class="col-sm-3">{{group.group.Name}}</div>
+        <div class="col-sm-3">{{group.group.createdAt | date:'medium'}}</div>
+
+        <div class="col-sm-3">
+                <a href="/" class="btn btn-sm btn-default">Update Members</a>
+                <a href="/" class="btn btn-sm btn-default">Update Cards</a>
+        </div>
+    </div>
+</span>
+
+<span ng-if="myGroups.length == 0">
+    No Groups Available for {{contactAuthor}}.<br>
+</span>
+
+<br/>
+<button class="btn btn-primary" type="button" onclick="window.location.href='/home.html'">Back</button>
