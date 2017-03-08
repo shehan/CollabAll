@@ -14,6 +14,14 @@
             },
             Description: DataTypes.STRING(500),
             IsActive: DataTypes.BOOLEAN
+        },
+            {
+                classMethods: {
+                    associate: function (models) {
+                        card.belongsTo(models.user);
+                        card.belongsTo(models.group);
+                    }
+                }
         });
         return card;
     };

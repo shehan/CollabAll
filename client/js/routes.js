@@ -40,6 +40,12 @@
                         controller: 'groupMyController',
                         displayName:'My Groups'
                     })
+                    .state('inside.group-cards', {
+                        url: '/group/:groupID/cards',
+                        templateUrl: 'templates/group-cards.html',
+                        controller: 'groupCardsController',
+                        displayName:'Group Cards'
+                    })
                     .state('signup', {
                         url: '/signup',
                         templateUrl: 'templates/user-create.html',

@@ -10,13 +10,15 @@
 
 <p ng-if="loadingGroups">Loading Groups...</p>
 
-<legend>My Groups</legend>
+<legend>Group Cards</legend>
 <span ng-if="myGroups.length >= 1">
     <div class="row grid table-bordered">
-        <div class="col-sm-3" style="background: burlywood">ID</div>
-        <div class="col-sm-3" style="background: burlywood">Name</div>
-        <div class="col-sm-3" style="background: burlywood">Created On</div>
-        <div class="col-sm-3" style="background: burlywood">Action</div>
+        <div class="col-sm-2" style="background: burlywood">ID</div>
+        <div class="col-sm-2" style="background: burlywood">Title</div>
+        <div class="col-sm-2" style="background: burlywood">Description</div>
+        <div class="col-sm-2" style="background: burlywood">Created By</div>
+        <div class="col-sm-2" style="background: burlywood">Created On</div>
+        <div class="col-sm-2" style="background: burlywood">Action</div>
     </div>
 
     <div class="row grid table-bordered" ng-repeat="group in myGroups">
@@ -26,13 +28,13 @@
 
         <div class="col-sm-3">
                 <a href="/manage-group/{{group.group.ID}}" class="btn btn-sm btn-default">Update Members</a>
-                <a href="/group/{{group.group.ID}}/cards" class="btn btn-sm btn-default">Update Cards</a>
+                <a href="/" class="btn btn-sm btn-default">Update Cards</a>
         </div>
     </div>
 </span>
 
 <span ng-if="myGroups.length == 0">
-    No Groups Available for {{contactAuthor}}.<br>
+    No Cards Available.<br>
 </span>
 <br/>
 
