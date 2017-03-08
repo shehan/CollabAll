@@ -27,8 +27,8 @@
         <div class="col-sm-3">{{group.group.createdAt | date:'medium'}}</div>
 
         <div class="col-sm-3">
-                <a href="/manage-group/{{group.group.ID}}" class="btn btn-sm btn-default">Update Members</a>
-                <a href="/" class="btn btn-sm btn-default">Update Cards</a>
+                <a href="/manage-group/{{group.group.ID}}" class="btn btn-sm btn-default">Update Card</a>
+                <a href="/" class="btn btn-sm btn-default">Delete Card</a>
         </div>
     </div>
 </span>
@@ -38,5 +38,5 @@
 </span>
 <br/>
 
-<a class="btn btn-primary" ui-sref="inside.group-manage">Create Group</a>
+<a class="btn btn-primary" ui-sref="inside.group-manage">Create Card</a>
 
