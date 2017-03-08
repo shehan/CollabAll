@@ -83,7 +83,7 @@
 
                 //Finally, we add to our list
                 $scope.links.push({
-                    name: name,
+                    name: state.displayName,
                     stateName: state.name
                 });
             });

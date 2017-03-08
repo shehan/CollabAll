@@ -13,32 +13,38 @@
                     .state('login', {
                         url: '/login',
                         templateUrl: 'templates/login.html',
-                        controller: 'loginController'
+                        controller: 'loginController',
+                        displayName:'Login'
                     })
                     .state('inside', {
                         abstract: true,
                         templateUrl: 'templates/inside.html',
-                        controller: 'insideController'
+                        controller: 'insideController',
+                        displayName:''
                     })
                     .state('inside.home', {
                         url: '/', //The url for the state
                         templateUrl: 'templates/home.html', //The path to the html template
-                        controller: 'homeController' //The path to the angular controller
+                        controller: 'homeController', //The path to the angular controller
+                        displayName:'Home'
                     })
                     .state('inside.group-manage', {
                         url: '/manage-group/:groupID',
                         templateUrl: 'templates/group-manage.html',
-                        controller: 'groupManageController'
+                        controller: 'groupManageController',
+                        displayName:'Create Group'
                     })
                     .state('inside.group-my', {
                         url: '/my-groups',
                         templateUrl: 'templates/group-my.html',
-                        controller: 'groupMyController'
+                        controller: 'groupMyController',
+                        displayName:'My Groups'
                     })
                     .state('signup', {
                         url: '/signup',
                         templateUrl: 'templates/user-create.html',
-                        controller: 'userCreateController'
+                        controller: 'userCreateController',
+                        displayName:'Sign Up'
                     });
             }])
 
