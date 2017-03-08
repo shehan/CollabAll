@@ -94,30 +94,6 @@
                     response.send({success: true, group: data});
                 });
             }
-/*
-            addUser: function (request, response) {
-                var groupId = request.body.GroupId;
-                var userIds = request.body.UserIds;
-                var usergroupId = request.body.usergroupId;
-
-                UserGroupModel.destroy({
-                    where: {
-                        groupID: groupId,
-                    }
-                }).then(function (data) {
-                    userIds.forEach(function (userId) {
-                        UserGroupModel.upsert({
-                            ID: usergroupId,
-                            userID: userId.ID,
-                            groupID: groupId,
-                            IsActive: true
-                        });
-                    });
-                });
-
-                response.send({success: true});
-            }
-*/
         };
 
         function updateGroupUsers(groupId, userIds) {
