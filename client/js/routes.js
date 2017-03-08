@@ -46,6 +46,12 @@
                         controller: 'groupCardsController',
                         displayName:'Group Cards'
                     })
+                    .state('inside.group-card-manage', {
+                        url: '/group/:groupID/cards/:cardID',
+                        templateUrl: 'templates/card-manage.html',
+                        controller: 'cardManageController',
+                        displayName:'Group Cards'
+                    })
                     .state('signup', {
                         url: '/signup',
                         templateUrl: 'templates/user-create.html',

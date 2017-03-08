@@ -10,6 +10,8 @@
 
         var init = function (router) {
             router.get('/get-cards-for-group', endpoints.getGroupCards);
+            router.get('/get-card-by-id', endpoints.getCardById);
+            router.post('/create-card', endpoints.createCard);
         };
 
         var endpoints = {
@@ -24,7 +26,35 @@
                 }).then(function (data) {
                         response.send({success: true, cards: data});
                     });
-            }
+            },
+
+            getCardById: function (request, response) {
+                var cardId = request.query.CardId;
+                return CardModel.findOne({
+                    where: {
+                        id: cardId
+                    },
+                    include: [UserModel, GroupModel]
+                }).then(function (data) {
+                    response.send({success: true, card: data});
+                });
+            },
+
+            createCard: function (request, response) {
+                var groupId = request.body.GroupId;
+                var cardTitle = request.body.CardTitle;
+                var cardDescription = request.body.CardDescription;
+                var userId = request.body.UserId;
+                return CardModel.create({
+                    Title: cardTitle,
+                    Description: cardDescription,
+                    userID: userId,
+                    groupID: groupId,
+                    IsActive: true
+                }).then(function (data) {
+                    response.send({success: true, card: data});
+                });
+            },
 
         };
 

@@ -14,6 +14,7 @@
         'UserCreateControllerModule',
         'GroupManageControllerModule',
         'GroupMyControllerModule',
-        'GroupCardsControllerModule'
+        'GroupCardsControllerModule',
+        'CardManageControllerModule'
     ]);
 }());

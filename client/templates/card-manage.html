@@ -5,18 +5,27 @@
 
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
-        <form ng-submit="saveGroup()" class="form-horizontal">
+        <form ng-submit="saveCard()" class="form-horizontal">
             <fieldset>
 
                 <!-- Form Name -->
-                <legend>My Card</legend>
+                <legend>Group Card</legend>
 
                 <!-- Text input-->
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="groupname">Group Name *</label>
+                    <label class="col-md-4 control-label" for="cardTitle">Title *</label>
                     <div class="col-md-4">
-                        <input id="groupname" name="groupname" ng-model="groupName" type="text" placeholder="Group Name"
+                        <input id="cardTitle" name="cardTitle" ng-model="cardTitle" type="text" placeholder="Title"
                                class="form-control input-md" required="">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="cardDescription">Description: *</label>
+                    <div class="col-md-4">
+                        <textarea id="cardDescription" name="cardDescription" class="form-control input-md"
+                                  ng-model="cardDescription" placeholder="Description" style="height:150px"
+                                  required></textarea>
                     </div>
                 </div>
 
@@ -34,9 +43,9 @@
                         </button>
                     </div>
                     <div class="col-md-5">
-                        <select id='selectGroupUsers' multiple size='10' style="width:100%"
-                                ng-model="selectedGroupUsers"
-                                ng-options="user.Email for user in groupUsers"></select>
+                        <select id='selectCardUsers' multiple size='10' style="width:100%"
+                                ng-model="selectedCardUsers"
+                                ng-options="user.Email for user in cardUsers"></select>
                     </div>
                 </div>
                 <div class="form-group" ng-repeat="error in validation">

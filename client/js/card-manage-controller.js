@@ -1,15 +1,17 @@
 (function () {
     'use strict';
 
-    angular.module('GroupManageControllerModule', [])
+    angular.module('CardManageControllerModule', [])
 
-        .controller('groupManageController', ['$scope', 'AuthService', '$state', '$http', '$stateParams',
+        .controller('cardManageController', ['$scope', 'AuthService', '$state', '$http', '$stateParams',
             function ($scope, AuthService, $state, $http, $stateParams) {
 
-                $scope.title = "CollabAll - Create Group";
+                $scope.title = "CollabAll - Create Card";
                 $scope.validation = [];
                 $scope.groupID = $stateParams.groupID;
-                $scope.groupName = '';
+                $scope.cardID = $stateParams.cardID;
+                $scope.cardTitle = '';
+                $scope.cardDescription = '';
 
                 $scope.allUsers = [];
                 $scope.cardUsers = [];
@@ -21,10 +23,12 @@
                 document.getElementById("overlayScreen").style.width = "100%";
                 document.getElementById("overlayScreen").style.height = "100%";
 
-                if ($scope.groupID != "") {
-                    $http.get('services/group/get-group-by-id', {params: {GroupId: $scope.groupID}})
+                if ($scope.cardID != "") {
+                    $http.get('services/card/get-card-by-id', {params: {CardId: $scope.cardID}})
                         .then(function (response) {
-                            $scope.groupName = response.data.group.Name;
+                            $scope.cardTitle = response.data.card.Title;
+                            $scope.cardDescription = response.data.card.Description;
+                            $scope.cardUsers.push(response.data.card.user);
                         });
                 }
 
@@ -34,11 +38,6 @@
                         $scope.allUsers.sort(compare);
 
                     }).then(function () {
-                    $http.get('services/group/get-group-members', {params: {GroupId: $scope.groupID}})
-                        .then(function (response) {
-                            $scope.cardUsers = response.data.users;
-                            $scope.cardUsers.sort(compare);
-
                             for (var i = 0; i < $scope.cardUsers.length; i++) {
                                 for (var j = 0; j < $scope.allUsers.length; j++) {
                                     if ($scope.cardUsers[i].ID == $scope.allUsers[j].ID) {
@@ -50,15 +49,14 @@
 
                             document.getElementById("overlayScreen").style.width = "0%";
                             document.getElementById("overlayScreen").style.height = "0%";
-                        });
                 });
 
-                $scope.saveGroup = function () {
+                $scope.saveCard = function () {
                     if (isFormValid()) {
                         document.getElementById("overlayScreen").style.width = "100%";
                         document.getElementById("overlayScreen").style.height = "100%";
 
-                        $scope.status = "Creating Group....";
+                        $scope.status = "Creating Card....";
 
                         if ($scope.groupID != "") {
                             $http.post('services/group/update-group',
@@ -75,10 +73,12 @@
                                 });
                         }
                         else {
-                            $http.post('services/group/create-group',
+                            $http.post('services/card/create-card',
                                 {
-                                    GroupName: $scope.groupName,
-                                    UserIds: $scope.cardUsers
+                                    CardTitle: $scope.cardTitle,
+                                    CardDescription: $scope.cardDescription,
+                                    GroupId: $scope.groupID,
+                                    UserId: $scope.cardUsers
                                 })
                                 .then(function (response) {
                                     document.getElementById("overlayScreen").style.width = "0%";
