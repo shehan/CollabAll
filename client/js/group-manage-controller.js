@@ -53,29 +53,41 @@
                         });
                 });
 
-                $scope.createGroup = function () {
+                $scope.saveGroup = function () {
                     if (isFormValid()) {
                         document.getElementById("overlayScreen").style.width = "100%";
                         document.getElementById("overlayScreen").style.height = "100%";
 
                         $scope.status = "Creating Group....";
 
-                        $http.post('services/group/create-group',
-                            {
-                                GroupName: $scope.groupName
-                            })
-                            .then(function (response) {
-                                $http.post('services/group/add-user',
-                                    {
-                                        GroupId: response.data.group.ID,
-                                        UserIds: $scope.groupUsers
-                                    }).then(function (response) {
+                        if ($scope.groupID != "") {
+                            $http.post('services/group/update-group',
+                                {
+                                    GroupId: $scope.groupID,
+                                    GroupName: $scope.groupName,
+                                    UserIds: $scope.groupUsers
+                                })
+                                .then(function (response) {
                                     document.getElementById("overlayScreen").style.width = "0%";
                                     document.getElementById("overlayScreen").style.height = "0%";
 
                                     // $state.go('inside.view-papers');
                                 });
-                            });
+                        }
+                        else {
+                            $http.post('services/group/create-group',
+                                {
+                                    GroupName: $scope.groupName,
+                                    UserIds: $scope.groupUsers
+                                })
+                                .then(function (response) {
+                                    document.getElementById("overlayScreen").style.width = "0%";
+                                    document.getElementById("overlayScreen").style.height = "0%";
+
+                                    // $state.go('inside.view-papers');
+                                });
+                        }
+
                     }
                 };
 
@@ -94,7 +106,7 @@
 
                 $scope.removeFromGroup = function () {
                     for (var i = 0; i < $scope.selectedGroupUsers.length; i++) {
-                        for (var j = 0; j < $scope.allUsers.length; j++) {
+                        for (var j = 0; j < $scope.groupUsers.length; j++) {
                             if ($scope.selectedGroupUsers[i].ID == $scope.groupUsers[j].ID) {
                                 $scope.allUsers.push($scope.groupUsers[j]);
                                 $scope.allUsers.sort(compare);

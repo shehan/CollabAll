@@ -8,13 +8,13 @@
         var UserGroupModel = db.user_group;
 
         var init = function (router) {
-            // router.post('/update-role-by-id', endpoints.updateRoleById);
             router.get('/get-my-groups', endpoints.getMyGroups);
             router.get('/get-all-groups', endpoints.getAllGroups);
             router.get('/get-group-members', endpoints.getGroupMembers);
             router.get('/get-group-by-id', endpoints.getGroupById);
             router.post('/create-group', endpoints.createGroup);
-            router.post('/add-user', endpoints.addUser);
+            router.post('/update-group', endpoints.updateGroup);
+            //router.post('/add-user', endpoints.addUser);
             //  router.post('/remove-user', endpoints.removeUser);
         };
 
@@ -35,8 +35,8 @@
                     },
                     include: [GroupModel]
                 }).then(function (data) {
-                        response.send({success: true, groups: data});
-                    });
+                    response.send({success: true, groups: data});
+                });
             },
 
             getGroupMembers: function (request, response) {
@@ -68,14 +68,33 @@
 
             createGroup: function (request, response) {
                 var groupName = request.body.GroupName;
+                var userIds = request.body.UserIds;
                 return GroupModel.create({
                     Name: groupName,
                     IsActive: true
                 }).then(function (data) {
+                    updateGroupUsers(data.ID, userIds);
                     response.send({success: true, group: data});
                 });
             },
 
+            updateGroup: function (request, response) {
+                var groupId = request.body.GroupId;
+                var groupName = request.body.GroupName;
+                var usergroupId = request.body.usergroupId;
+                var userIds = request.body.UserIds;
+                return GroupModel.update({
+                        Name: groupName,
+                        IsActive: true
+                    },
+                    {
+                        where: {id: groupId}
+                    }).then(function (data) {
+                    updateGroupUsers(groupId, userIds);
+                    response.send({success: true, group: data});
+                });
+            }
+/*
             addUser: function (request, response) {
                 var groupId = request.body.GroupId;
                 var userIds = request.body.UserIds;
@@ -98,7 +117,24 @@
 
                 response.send({success: true});
             }
+*/
         };
+
+        function updateGroupUsers(groupId, userIds) {
+            UserGroupModel.destroy({
+                where: {
+                    groupID: groupId
+                }
+            }).then(function (data) {
+                userIds.forEach(function (userId) {
+                    UserGroupModel.upsert({
+                        userID: userId.ID,
+                        groupID: groupId,
+                        IsActive: true
+                    });
+                });
+            });
+        }
 
         module.exports = {
             init: init
