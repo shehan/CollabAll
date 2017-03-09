@@ -11,7 +11,7 @@
                 $scope.userID = AuthService.authenticatedUser().ID;
                 $scope.groupID = $stateParams.groupID;
                 $scope.stream='';
-                var prevAction='';
+                $scope.prevAction='';
                 $scope.deviceOrientation={};
                 $scope.deviceOrientation.alpha='';
                 $scope.deviceOrientation.beta='';
@@ -85,9 +85,9 @@
                         pos = "LEFT";
 
                     if (pos != ''){
-                        if(pos != prevAction)
+                        if(pos != $scope.prevAction)
                         {
-                            prevAction = pos;
+                            $scope.prevAction = pos;
                             socket.emit("deviceTilt", { deviceOrientation:  pos });
                             $window.navigator.vibrate(200);
                         }
