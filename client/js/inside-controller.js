@@ -9,27 +9,7 @@
 
 
             var user = 'userid=' + $scope.userID;
-            var socket = io.connect({query: $scope.userID});
 
-            socket.on('connect', function(msg){
-                socket.emit('join',$scope.userID);
-                console.log("client joining server");
-            });
-
-            socket.emit("subscribe", { group: "1" });
-
-       //     socket.emit("unsubscribe", { group: "1" });
-
-            socket.on("disconnect", function(){
-                console.log("client disconnected from server");
-            });
-
-
-            socket.on('interjection', function(data) {
-                console.log('Incoming interjection:', data);
-            });
-
-            console.log(socket);
 
 
             $scope.title = "CollabAll";

@@ -73,6 +73,11 @@ io.on('connection', function(socket){
         socket.leave(group.group);
     });
 
+    socket.on('deviceTilt', function (deviceOrientation) {
+        console.log(socket.name + ' : '+ deviceOrientation.deviceOrientation);
+        socket.broadcast.emit('tilt',deviceOrientation.deviceOrientation);
+    });
+
     socket.on('disconnect', function(){
         console.log( socket.name + ' has disconnected from the chat.' + socket.id);
     });
