@@ -84,7 +84,7 @@
                                     document.getElementById("overlayScreen").style.width = "0%";
                                     document.getElementById("overlayScreen").style.height = "0%";
 
-                                    // $state.go('inside.view-papers');
+                                    $scope.status =  "Group Created!";
                                 });
                         }
 
@@ -129,7 +129,7 @@
                 function isFormValid() {
                     $scope.validation = [];
 
-                    if ($scope.cardUsers.length <= 0) {
+                    if ($scope.groupUsers.length <= 0) {
                         $scope.validation.push("There needs to be a minimum of one user assigned to the group");
                     }
 
