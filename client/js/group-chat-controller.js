@@ -12,6 +12,7 @@
                 $scope.groupID = $stateParams.groupID;
                 $scope.stream='';
                 var prevAction='';
+                $scope.deviceOrientation={};
                 $scope.deviceOrientation.alpha='';
                 $scope.deviceOrientation.beta='';
                 $scope.deviceOrientation.gamma='';
