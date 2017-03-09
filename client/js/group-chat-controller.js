@@ -82,15 +82,14 @@
 
                 var pos='';
                 setInterval(function(){
-                    if($scope.deviceOrientation.alpha >= 40 && $scope.deviceOrientation.alpha<=66)
+                    if($scope.deviceOrientation.beta >= 40 && $scope.deviceOrientation.beta<=66)
                         pos = "UP";
-                    if($scope.deviceOrientation.alpha >= -30 && $scope.deviceOrientation.alpha<=-15)
+                    if($scope.deviceOrientation.beta >= -30 && $scope.deviceOrientation.beta<=-15)
                         pos = "DOWN";
-                    if($scope.deviceOrientation.beta >= 30 && $scope.deviceOrientation.beta<=80)
-                        pos = "DOWN" +
-                            "";
-                    if($scope.deviceOrientation.beta >= -80 && $scope.deviceOrientation.beta<=-30)
-                        pos = "DOWN";
+                    if($scope.deviceOrientation.gamma >= 30 && $scope.deviceOrientation.gamma<=80)
+                        pos = "LEFT";
+                    if($scope.deviceOrientation.gamma >= -80 && $scope.deviceOrientation.gamma<=-30)
+                        pos = "RIGHT";
 
                     if (pos != ''){
                         if(pos != $scope.prevAction)
