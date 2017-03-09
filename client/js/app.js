@@ -15,6 +15,7 @@
         'GroupManageControllerModule',
         'GroupMyControllerModule',
         'GroupCardsControllerModule',
-        'CardManageControllerModule'
+        'CardManageControllerModule',
+        'GroupChatControllerModule'
     ]);
 }());

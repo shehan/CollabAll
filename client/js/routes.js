@@ -52,6 +52,12 @@
                         controller: 'cardManageController',
                         displayName:'Group Cards'
                     })
+                    .state('inside.group-chat', {
+                        url: '/group/:groupID/chat',
+                        templateUrl: 'templates/group-chat.html',
+                        controller: 'groupChatController',
+                        displayName:'Group Chat'
+                    })
                     .state('signup', {
                         url: '/signup',
                         templateUrl: 'templates/user-create.html',
