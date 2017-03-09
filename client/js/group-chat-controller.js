@@ -66,10 +66,13 @@
                         + event.beta + ", "
                         + event.gamma;
                     $scope.$apply();
-                    socket.emit("deviceTilt", { deviceOrientation:  $scope.deviceOrientation });
+
                 }
 
-
+                setInterval(function(){
+                    socket.emit("deviceTilt", { deviceOrientation:  $scope.deviceOrientation });
+                    $window.navigator.vibrate(200);
+                }, 3000);
 
 
 
