@@ -8,10 +8,10 @@
     }
 </style>
 
-<p ng-if="loadingGroups">Loading Groups...</p>
+<p ng-if="loadingGroups">Loading Cards...</p>
 
 <legend>Group Cards</legend>
-<span ng-if="myGroups.length >= 1">
+<span ng-if="cards.length >= 1">
     <div class="row grid table-bordered">
         <div class="col-sm-2" style="background: burlywood">ID</div>
         <div class="col-sm-2" style="background: burlywood">Title</div>
@@ -21,19 +21,20 @@
         <div class="col-sm-2" style="background: burlywood">Action</div>
     </div>
 
-    <div class="row grid table-bordered" ng-repeat="group in myGroups">
-        <div class="col-sm-3">{{group.group.ID}}</div>
-        <div class="col-sm-3">{{group.group.Name}}</div>
-        <div class="col-sm-3">{{group.group.createdAt | date:'medium'}}</div>
-
-        <div class="col-sm-3">
-                <a href="/manage-group/{{group.group.ID}}" class="btn btn-sm btn-default">Update Card</a>
+    <div class="row grid table-bordered" ng-repeat="card in cards">
+        <div class="col-sm-2">{{card.ID}}</div>
+        <div class="col-sm-2">{{card.Title}}</div>
+        <div class="col-sm-2">{{card.Description}}</div>
+        <div class="col-sm-2">{{card.user.Email}}</div>
+        <div class="col-sm-2">{{card.createdAt | date:'medium'}}</div>
+        <div class="col-sm-2">
+                <a href="/group/{{groupID}}/cards/{{card.ID}}" class="btn btn-sm btn-default">Update Card</a>
                 <a href="/" class="btn btn-sm btn-default">Delete Card</a>
         </div>
     </div>
 </span>
 
-<span ng-if="myGroups.length == 0">
+<span ng-if="cards.length == 0">
     No Cards Available.<br>
 </span>
 <br/>

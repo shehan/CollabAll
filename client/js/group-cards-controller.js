@@ -18,7 +18,7 @@
 
                 $http.get('services/card/get-cards-for-group', {params: {GroupId: $scope.groupID}})
                     .then(function (response) {
-                        $scope.cards = response.data.groups;
+                        $scope.cards = response.data.cards;
 
                         document.getElementById("overlayScreen").style.width = "0%";
                         document.getElementById("overlayScreen").style.height = "0%";
