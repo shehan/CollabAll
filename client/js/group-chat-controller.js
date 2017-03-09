@@ -11,6 +11,10 @@
                 $scope.userID = AuthService.authenticatedUser().ID;
                 $scope.groupID = $stateParams.groupID;
                 $scope.stream='';
+                var prevAction='';
+                $scope.deviceOrientation.alpha='';
+                $scope.deviceOrientation.beta='';
+                $scope.deviceOrientation.gamma='';
 
                 var socket = io.connect({query: $scope.userID});
 
@@ -61,17 +65,30 @@
                 }
 
                 function orientation(event){
-                    $scope.deviceOrientation = "Magnetometer: "
-                        + event.alpha + ", "
-                        + event.beta + ", "
-                        + event.gamma;
+                    $scope.deviceOrientation.alpha=event.alpha;
+                    $scope.deviceOrientation.beta=event.beta;
+                    $scope.deviceOrientation.gamma=event.gamma;
                     $scope.$apply();
 
                 }
 
+                var pos;
                 setInterval(function(){
-                    socket.emit("deviceTilt", { deviceOrientation:  $scope.deviceOrientation });
-                    $window.navigator.vibrate(200);
+                    if($scope.deviceOrientation.alpha >= 40 && $scope.deviceOrientation.alpha<=66)
+                        pos = "UP";
+                    if($scope.deviceOrientation.alpha >= -30 && $scope.deviceOrientation.alpha<=-15)
+                        pos = "DOWN";
+                    if($scope.deviceOrientation.beta >= 50 && $scope.deviceOrientation.beta<=80)
+                        pos = "RIGHT";
+                    if($scope.deviceOrientation.beta >= -50 && $scope.deviceOrientation.beta<=-80)
+                        pos = "LEFT";
+
+                    if(pos != prevAction)
+                    {
+                        prevAction = pos;
+                        socket.emit("deviceTilt", { deviceOrientation:  pos });
+                        $window.navigator.vibrate(200);
+                    }
                 }, 3000);
 
 
