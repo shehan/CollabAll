@@ -69,6 +69,13 @@
                     $scope.deviceOrientation.alpha=event.alpha;
                     $scope.deviceOrientation.beta=event.beta;
                     $scope.deviceOrientation.gamma=event.gamma;
+
+                    if (event.beta >  90) { $scope.deviceOrientation.beta =  90};
+                    if (event.beta < -90) { $scope.deviceOrientation.beta = -90};
+
+                    $scope.deviceOrientation.beta += 90;
+                    $scope.deviceOrientation.gamma += 90;
+
                     $scope.$apply();
 
                 }
@@ -80,9 +87,10 @@
                     if($scope.deviceOrientation.alpha >= -30 && $scope.deviceOrientation.alpha<=-15)
                         pos = "DOWN";
                     if($scope.deviceOrientation.beta >= 30 && $scope.deviceOrientation.beta<=80)
-                        pos = "RIGHT";
+                        pos = "DOWN" +
+                            "";
                     if($scope.deviceOrientation.beta >= -80 && $scope.deviceOrientation.beta<=-30)
-                        pos = "LEFT";
+                        pos = "DOWN";
 
                     if (pos != ''){
                         if(pos != $scope.prevAction)
