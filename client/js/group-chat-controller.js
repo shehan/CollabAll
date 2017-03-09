@@ -32,8 +32,8 @@
                 });
 
                 socket.on('tilt', function(data) {
-                    $scope.stream = $scope.stream + data
-                    $scope.apply();
+                    $scope.stream = $scope.stream + data;
+                    $scope.$apply();
                 });
 
                 console.log(socket);
