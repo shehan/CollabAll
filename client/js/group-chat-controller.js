@@ -79,9 +79,9 @@
                         pos = "UP";
                     if($scope.deviceOrientation.alpha >= -30 && $scope.deviceOrientation.alpha<=-15)
                         pos = "DOWN";
-                    if($scope.deviceOrientation.beta >= 50 && $scope.deviceOrientation.beta<=80)
+                    if($scope.deviceOrientation.beta >= 30 && $scope.deviceOrientation.beta<=80)
                         pos = "RIGHT";
-                    if($scope.deviceOrientation.beta >= -50 && $scope.deviceOrientation.beta<=-80)
+                    if($scope.deviceOrientation.beta >= -80 && $scope.deviceOrientation.beta<=-30)
                         pos = "LEFT";
 
                     if (pos != ''){
@@ -93,7 +93,7 @@
                         }
                     }
 
-                }, 3000);
+                }, 1000);
 
 
 
