@@ -34,6 +34,7 @@
                 socket.on('tilt', function(data) {
                     $scope.stream = $scope.stream + data + "\n";
                     $scope.$apply();
+                    $window.document.body.scrollTop = $window.document.body.scrollHeight;
                 });
 
                 console.log(socket);
