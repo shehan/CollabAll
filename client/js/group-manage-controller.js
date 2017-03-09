@@ -12,10 +12,10 @@
                 $scope.groupName = '';
 
                 $scope.allUsers = [];
-                $scope.cardUsers = [];
+                $scope.groupUsers = [];
 
                 $scope.selectedAllUsers = [];
-                $scope.selectedCardUsers = [];
+                $scope.selectedGroupUsers = [];
 
 
                 document.getElementById("overlayScreen").style.width = "100%";
@@ -36,12 +36,12 @@
                     }).then(function () {
                     $http.get('services/group/get-group-members', {params: {GroupId: $scope.groupID}})
                         .then(function (response) {
-                            $scope.cardUsers = response.data.users;
-                            $scope.cardUsers.sort(compare);
+                            $scope.groupUsers = response.data.users;
+                            $scope.groupUsers.sort(compare);
 
-                            for (var i = 0; i < $scope.cardUsers.length; i++) {
+                            for (var i = 0; i < $scope.groupUsers.length; i++) {
                                 for (var j = 0; j < $scope.allUsers.length; j++) {
-                                    if ($scope.cardUsers[i].ID == $scope.allUsers[j].ID) {
+                                    if ($scope.groupUsers[i].ID == $scope.allUsers[j].ID) {
                                         $scope.allUsers.splice(j, 1);
                                         break;
                                     }
@@ -65,7 +65,7 @@
                                 {
                                     GroupId: $scope.groupID,
                                     GroupName: $scope.groupName,
-                                    UserIds: $scope.cardUsers
+                                    UserIds: $scope.groupUsers
                                 })
                                 .then(function (response) {
                                     document.getElementById("overlayScreen").style.width = "0%";
@@ -78,7 +78,7 @@
                             $http.post('services/group/create-group',
                                 {
                                     GroupName: $scope.groupName,
-                                    UserIds: $scope.cardUsers
+                                    UserIds: $scope.groupUsers
                                 })
                                 .then(function (response) {
                                     document.getElementById("overlayScreen").style.width = "0%";
@@ -95,8 +95,8 @@
                     for (var i = 0; i < $scope.selectedAllUsers.length; i++) {
                         for (var j = 0; j < $scope.allUsers.length; j++) {
                             if ($scope.selectedAllUsers[i].ID == $scope.allUsers[j].ID) {
-                                $scope.cardUsers.push($scope.allUsers[j]);
-                                $scope.cardUsers.sort(compare);
+                                $scope.groupUsers.push($scope.allUsers[j]);
+                                $scope.groupUsers.sort(compare);
                                 $scope.allUsers.splice(j, 1);
                                 break;
                             }
@@ -105,12 +105,12 @@
                 };
 
                 $scope.removeFromGroup = function () {
-                    for (var i = 0; i < $scope.selectedCardUsers.length; i++) {
-                        for (var j = 0; j < $scope.cardUsers.length; j++) {
-                            if ($scope.selectedCardUsers[i].ID == $scope.cardUsers[j].ID) {
-                                $scope.allUsers.push($scope.cardUsers[j]);
+                    for (var i = 0; i < $scope.selectedGroupUsers.length; i++) {
+                        for (var j = 0; j < $scope.groupUsers.length; j++) {
+                            if ($scope.selectedGroupUsers[i].ID == $scope.groupUsers[j].ID) {
+                                $scope.allUsers.push($scope.groupUsers[j]);
                                 $scope.allUsers.sort(compare);
-                                $scope.cardUsers.splice(j, 1);
+                                $scope.groupUsers.splice(j, 1);
                                 break;
                             }
                         }
