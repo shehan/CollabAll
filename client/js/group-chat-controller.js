@@ -32,7 +32,7 @@
                 });
 
                 socket.on('tilt', function(data) {
-                    $scope.stream = $scope.stream + data + "<br/>";
+                    $scope.stream = $scope.stream + data + "\n";
                     $scope.$apply();
                 });
 
