@@ -73,7 +73,7 @@
 
                 }
 
-                var pos;
+                var pos='';
                 setInterval(function(){
                     if($scope.deviceOrientation.alpha >= 40 && $scope.deviceOrientation.alpha<=66)
                         pos = "UP";
@@ -84,12 +84,15 @@
                     if($scope.deviceOrientation.beta >= -50 && $scope.deviceOrientation.beta<=-80)
                         pos = "LEFT";
 
-                    if(pos != prevAction)
-                    {
-                        prevAction = pos;
-                        socket.emit("deviceTilt", { deviceOrientation:  pos });
-                        $window.navigator.vibrate(200);
+                    if (pos != ''){
+                        if(pos != prevAction)
+                        {
+                            prevAction = pos;
+                            socket.emit("deviceTilt", { deviceOrientation:  pos });
+                            $window.navigator.vibrate(200);
+                        }
                     }
+
                 }, 3000);
 
 
