@@ -58,12 +58,14 @@
 
                         $scope.status = "Creating Card....";
 
-                        if ($scope.groupID != "") {
-                            $http.post('services/group/update-group',
+                        if ($scope.cardID != "") {
+                            $http.post('services/card/update-card',
                                 {
+                                    CardId: $scope.cardID,
+                                    CardTitle: $scope.cardTitle,
+                                    CardDescription: $scope.cardDescription,
                                     GroupId: $scope.groupID,
-                                    GroupName: $scope.groupName,
-                                    UserIds: $scope.cardUsers
+                                    UserId: $scope.cardUsers[0].ID
                                 })
                                 .then(function (response) {
                                     document.getElementById("overlayScreen").style.width = "0%";
@@ -78,7 +80,7 @@
                                     CardTitle: $scope.cardTitle,
                                     CardDescription: $scope.cardDescription,
                                     GroupId: $scope.groupID,
-                                    UserId: $scope.cardUsers
+                                    UserId: $scope.cardUsers[0].ID
                                 })
                                 .then(function (response) {
                                     document.getElementById("overlayScreen").style.width = "0%";
