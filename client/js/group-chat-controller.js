@@ -84,11 +84,11 @@
                 setInterval(function(){
                     if($scope.deviceOrientation.beta >= 40 && $scope.deviceOrientation.beta<=66)
                         pos = "DOWN";
-                    if($scope.deviceOrientation.beta >= -30 && $scope.deviceOrientation.beta<=-15)
+                    if($scope.deviceOrientation.beta >= 150 && $scope.deviceOrientation.beta<=170)
                         pos = "UP";
                     if($scope.deviceOrientation.gamma >= 30 && $scope.deviceOrientation.gamma<=80)
                         pos = "LEFT";
-                    if($scope.deviceOrientation.gamma >= -80 && $scope.deviceOrientation.gamma<=-30)
+                    if($scope.deviceOrientation.gamma >= 115 && $scope.deviceOrientation.gamma<=150)
                         pos = "RIGHT";
 
                     if (pos != ''){
