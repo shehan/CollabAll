@@ -51,7 +51,7 @@
                 }
 
                 if ($window.DeviceOrientationEvent) {
-                    $window.addEventListener("deviceorientation", orientation, true);
+                    $window.addEventListener("deviceorientation", orientation, false);
                 }
                 else{
                     alert("DeviceOrientation NOT supported");
@@ -83,9 +83,9 @@
                 var pos='';
                 setInterval(function(){
                     if($scope.deviceOrientation.beta >= 40 && $scope.deviceOrientation.beta<=66)
-                        pos = "UP";
-                    if($scope.deviceOrientation.beta >= -30 && $scope.deviceOrientation.beta<=-15)
                         pos = "DOWN";
+                    if($scope.deviceOrientation.beta >= -30 && $scope.deviceOrientation.beta<=-15)
+                        pos = "UP";
                     if($scope.deviceOrientation.gamma >= 30 && $scope.deviceOrientation.gamma<=80)
                         pos = "LEFT";
                     if($scope.deviceOrientation.gamma >= -80 && $scope.deviceOrientation.gamma<=-30)
