@@ -16,8 +16,8 @@
                 $scope.allUsers = [];
                 $scope.cardUsers = [];
 
-                $scope.selectedAllUsers = [];
-                $scope.selectedCardUsers = [];
+                $scope.selectedAllUsers;
+                $scope.selectedCardUsers;
 
 
                 document.getElementById("overlayScreen").style.width = "100%";
@@ -47,6 +47,9 @@
                                 }
                             }
 
+                            $scope.selectedAllUsers=$scope.allUsers[0];
+                            $scope.selectedCardUsers=$scope.cardUsers[0];
+
                             document.getElementById("overlayScreen").style.width = "0%";
                             document.getElementById("overlayScreen").style.height = "0%";
                 });
@@ -71,7 +74,8 @@
                                     document.getElementById("overlayScreen").style.width = "0%";
                                     document.getElementById("overlayScreen").style.height = "0%";
 
-                                    // $state.go('inside.view-papers');
+                                    $scope.status = "Card Updated!";
+                                    $state.go('inside.group-cards', {groupID:$scope.groupID});
                                 });
                         }
                         else {
@@ -86,7 +90,8 @@
                                     document.getElementById("overlayScreen").style.width = "0%";
                                     document.getElementById("overlayScreen").style.height = "0%";
 
-                                    // $state.go('inside.view-papers');
+                                    $scope.status = "Card Created!";
+                                    $state.go('inside.group-cards', {groupID:$scope.groupID});
                                 });
                         }
 
@@ -94,29 +99,24 @@
                 };
 
                 $scope.addToGroup = function () {
-                    for (var i = 0; i < $scope.selectedAllUsers.length; i++) {
-                        for (var j = 0; j < $scope.allUsers.length; j++) {
-                            if ($scope.selectedAllUsers[i].ID == $scope.allUsers[j].ID) {
-                                $scope.cardUsers.push($scope.allUsers[j]);
-                                $scope.cardUsers.sort(compare);
-                                $scope.allUsers.splice(j, 1);
-                                break;
-                            }
-                        }
+                    if($scope.cardUsers.length >=1){
+                        alert("A card can have only 1 owner. Remove the current owner and add a new owner");
+                        return;
                     }
+
+                    $scope.cardUsers.push($scope.selectedAllUsers);
+                    $scope.cardUsers.sort(compare);
+                    $scope.allUsers.splice($scope.allUsers.indexOf($scope.selectedAllUsers), 1);
+                    $scope.selectedAllUsers=$scope.allUsers[0];
+                    $scope.selectedCardUsers=$scope.cardUsers[0];
                 };
 
                 $scope.removeFromGroup = function () {
-                    for (var i = 0; i < $scope.selectedCardUsers.length; i++) {
-                        for (var j = 0; j < $scope.cardUsers.length; j++) {
-                            if ($scope.selectedCardUsers[i].ID == $scope.cardUsers[j].ID) {
-                                $scope.allUsers.push($scope.cardUsers[j]);
-                                $scope.allUsers.sort(compare);
-                                $scope.cardUsers.splice(j, 1);
-                                break;
-                            }
-                        }
-                    }
+                    $scope.allUsers.push($scope.selectedCardUsers[0]);
+                    $scope.allUsers.sort(compare);
+                    $scope.cardUsers.splice($scope.cardUsers.indexOf($scope.selectedCardUsers[0]), 1);
+                    $scope.selectedAllUsers=$scope.allUsers[0];
+                    $scope.selectedCardUsers=$scope.cardUsers[0];
                 };
 
 
@@ -132,7 +132,11 @@
                     $scope.validation = [];
 
                     if ($scope.cardUsers.length <= 0) {
-                        $scope.validation.push("There needs to be a minimum of one user assigned to the group");
+                        $scope.validation.push("A card should be assigned an owner.");
+                    }
+
+                    if ($scope.cardUsers.length > 1) {
+                        $scope.validation.push("A card can have only 1 owner.");
                     }
 
 
