@@ -10,10 +10,13 @@
 
 <div>
     <a href="mailto:axp6201@rit.edu" class="pull-right btn btn-primary btn-outline btn-rounded">Feedback!</a>
+    <a ui-sref="inside.group-my" class="pull-right btn btn-primary btn-outline btn-rounded">My Groups</a>
+    <a ui-sref="inside.home" class="pull-right btn btn-primary btn-outline btn-rounded">Home</a>
+    <br/>
     <h2>My Groups
         <small>TODO: enter some catchy text here</small>
     </h2>
-    <span class="fa fa-users bg-fade" aria-hidden="true"></span>
+    <!--<span class="fa fa-users bg-fade" aria-hidden="true"></span>-->
     <div class="jumbotron">
         <div class="container">
             <span ng-if="myGroups.length >= 1">
