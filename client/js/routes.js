@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('CollabAllRoutes', [])
+    angular.module('CollabAllRoutes', ['ui.router', 'ngAnimate'])
 
         .config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             function( $stateProvider,   $urlRouterProvider,   $locationProvider) {
