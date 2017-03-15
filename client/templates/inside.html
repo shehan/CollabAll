@@ -1,10 +1,44 @@
+<div class="dashboard-page">
+    <div class="container-fluid">
+        <div class="row">
+                <div class="col-sm-3 col-md-2 sidebar">
+                    <div class="text-center">
+                        <h2 class="brand">CollabAll</h2>
+                        <img src="../img/flat-avatar.png" class="user-avatar" /><br />
+                        <a ui-sref="login" class="btn btn-white btn-outline btn-rounded btn-sm">Logout</a>
+                    </div>
 
+                    <ul class="nav nav-sidebar">
+                        <li   ng-class="{active: isCurrentState(link.stateName)}" ng-repeat="link in links" ><a ui-sref="{{link.stateName}}">{{link.name}}</a></li>
+
+                        <!--
+                        <li ng-class="{active: $state.includes('overview')}"><a ui-sref="overview">Overview <span class="sr-only">(current)</span></a></li>
+                        <li ng-class="{active: $state.includes('reports')}"><a ui-sref="reports">Reports</a></li>
+                        <li><a href="http://startreact.com/product/ani-theme/">Free React version</a></li>
+                        <li><a href="http://www.strapui.com/ani-angularjs-theme">Angular Premium Edition</a></li>
+                        -->
+                        <center>
+                            <small>Made with <span class="fa fa-heart-o" aria-hidden="true"></span> at <a style="color: #ffffff;" href="http://www.se.rit.edu" target="_blank">RIT</a></small>
+                        </center>
+
+                    </ul>
+
+                </div>
+            <div class="overlay" id="overlayScreen">
+                <div class="overlay-content">Processing...Please Wait...<br/><br/><img src="img/loading.gif"/></div>
+            </div>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ui-view>
+            </div>
+        </div>
+    </div>
+</div>
+<!--
 <div>
 
-    <!-- Navbar -->
+
     <nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 0;">
         <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
+
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                     <span class="sr-only">Toggle navigation</span>
@@ -20,9 +54,9 @@
             </ul>
         </div>
     </nav>
+-->
 
-
-
+<!--
 
     <div class="wrapper">
         <div class="sidebar">
@@ -32,7 +66,7 @@
         </div>
 
         <div class="container">
-            <!-- Loading Screen Overlay -->
+
             <div class="overlay" id="overlayScreen">
                 <div class="overlay-content">Processing...Please Wait...<br/><br/><img src="img/loading.gif"/></div>
             </div>
@@ -41,4 +75,4 @@
         </div>
     </div>
 </div>
-
+-->

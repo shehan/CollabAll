@@ -1,4 +1,81 @@
-<!-- Loading Screen Overlay -->
+<div>
+    <a href="mailto:axp6201@rit.edu" class="pull-right btn btn-primary btn-outline btn-rounded">Feedback!</a>
+    <h2>Group Card
+        <small>TODO: enter some catchy text here</small>
+    </h2>
+    <span class="fa fa-window-restore bg-fade" aria-hidden="true"></span>
+    <div class="jumbotron">
+        <div class="container">
+            <div>
+                <form ng-submit="saveCard()" class="ng-pristine ng-valid">
+                    <div class="form-content">
+                        <div class="form-group">
+                            <label for="cardTitle">Card Title</label>
+                            <input type="text" class="form-control input-lg" ng-model="cardTitle" id="cardTitle"
+                                   placeholder="Card Title" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cardTitle">Card Description</label>
+                            <textarea id="cardDescription" name="cardDescription" class="form-control input-lg"
+                                      ng-model="cardDescription" placeholder="Description" style="height:150px"
+                                      required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-5">
+                                <label for="selectAllUsers">Available Users</label>
+                                    <select id="selectAllUsers" name="selectAllUsers" size='10' ng-model="selectedAllUsers"
+                                            ng-options="user.Email for user in allUsers"></select>
+                            </div>
+                            <div class="col-md-2" style="text-align: center;padding-top: 5%" >
+                                <button class="btn btn-default btn-sm" type="button" id='btn-AddToGroup'
+                                        ng-click='addToGroup();'>
+                                    Add As Owner<br>
+                                    <span class="glyphicon glyphicon-arrow-right"></span>
+                                </button>
+                                <br/><br/><br/>
+                                <button class="btn btn-default btn-sm" type="button" id='btn-RemoveFromGroup'
+                                        ng-click='removeFromGroup();'>
+                                    Remove Owner<br>
+                                    <span class="glyphicon glyphicon-arrow-left"></span>
+                                </button>
+                            </div>
+                            <div class="col-md-5">
+                                <label for="selectCardUsers">Card Owner</label>
+                                <select id='selectCardUsers' name="selectCardUsers" multiple size='10' ng-model="selectedCardUsers"
+                                        ng-options="user.Email for user in cardUsers"></select>
+                            </div>
+                        </div>
+
+                        <div class="form-group" ng-repeat="error in validation">
+                            <label class="col-md-3 control-label"></label>
+                            <div class="col-md-9">
+                                <label class="control-label">{{error}}</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>&nbsp;</label>
+                            <div>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                                &nbsp;
+                                <a ui-sref="inside.group-my" class="btn btn-default">Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div>{{ status }}</div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<!--
 <div class="overlay" id="overlayScreen">
     <div class="overlay-content">Processing...Please Wait...<br/><br/><img src="../img/loading.gif"/></div>
 </div>
@@ -8,10 +85,10 @@
         <form ng-submit="saveCard()" class="form-horizontal">
             <fieldset>
 
-                <!-- Form Name -->
+
                 <legend>Group Card</legend>
 
-                <!-- Text input-->
+
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="cardTitle">Title *</label>
                     <div class="col-md-4">
@@ -55,7 +132,7 @@
                     </div>
                 </div>
 
-                <!-- Button -->
+
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="create"></label>
                     <div class="col-md-4">
@@ -72,3 +149,4 @@
     </div>
 </div>
 
+-->

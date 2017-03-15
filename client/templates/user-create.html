@@ -3,15 +3,56 @@
     <div class="overlay-content">Processing...Please Wait...<br/><br/><img src="../img/loading.gif"/></div>
 </div>
 
+<div class="login-page">
+    <div class="row">
+        <div class="col-md-4 col-lg-4 col-md-offset-4 col-lg-offset-4">
+            <img src="../img/flat-avatar.png" class="user-avatar" />
+            <h1>CollabAll</h1>
+            <form role="form" ng-submit="createUser()" class="ng-pristine ng-valid">
+
+                <div class="form-content">
+                    <div class="form-group">
+                        <input type="text" class="form-control input-underline input-lg" ng-model="firstName" id="firstName" placeholder="First Name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control input-underline input-lg" ng-model="lastName" id="lastName" placeholder="Last Name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control input-underline input-lg" ng-model="email" id="email" placeholder="Email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" class="form-control input-underline input-lg" id="password" ng-model="password" placeholder="Password" required>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" class="form-control input-underline input-lg" id="password2" ng-model="password2" placeholder="Confirm Password" required>
+                    </div>
+
+                    <div class="form-group" ng-repeat="error in validation">
+                            <label class="control-label">{{error}}</label>
+                    </div>
+                </div>
+
+                <button  type="submit"  class="btn btn-white btn-outline btn-lg btn-rounded">Submit</button>&nbsp;
+                <a ui-sref="login" class="btn btn-white btn-outline btn-lg btn-rounded">Cancel</a>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+<!--
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
     <form ng-submit="createUser()" class="form-horizontal" >
         <fieldset>
 
-            <!-- Form Name -->
             <legend>Signup</legend>
 
-            <!-- Text input-->
             <div class="form-group">
                 <label class="col-md-4 control-label" for="firstname">First Name *</label>
                 <div class="col-md-4">
@@ -19,7 +60,6 @@
                 </div>
             </div>
 
-            <!-- Text input-->
             <div class="form-group">
                 <label class="col-md-4 control-label" for="lastname">Last Name *</label>
                 <div class="col-md-4">
@@ -27,7 +67,6 @@
                 </div>
             </div>
 
-            <!-- Text input-->
             <div class="form-group">
                 <label class="col-md-4 control-label" for="email">Email *</label>
                 <div class="col-md-4">
@@ -36,7 +75,7 @@
                 </div>
             </div>
 
-            <!-- Password input-->
+
             <div class="form-group">
                 <label class="col-md-4 control-label" for="password">Password *</label>
                 <div class="col-md-4">
@@ -44,7 +83,7 @@
                 </div>
             </div>
 
-            <!-- Password input-->
+
             <div class="form-group">
                 <label class="col-md-4 control-label" for="password2">Confirm Password *</label>
                 <div class="col-md-4">
@@ -59,7 +98,7 @@
                 </div>
             </div>
 
-            <!-- Button -->
+
             <div class="form-group">
                 <label class="col-md-4 control-label" for="create"></label>
                 <div class="col-md-4">
@@ -73,3 +112,5 @@
     <div>{{ status }}</div>
 </div>
 </div>
+
+-->

@@ -8,6 +8,51 @@
     }
 </style>
 
+<div>
+    <a href="mailto:axp6201@rit.edu" class="pull-right btn btn-primary btn-outline btn-rounded">Feedback!</a>
+    <h2>Group Cards
+        <small>TODO: enter some catchy text here</small>
+    </h2>
+    <span class="fa fa-window-restore bg-fade" aria-hidden="true"></span>
+    <div class="jumbotron">
+        <div class="container">
+            <span ng-if="cards.length >= 1">
+                <div class="row grid table-bordered">
+                    <div class="col-sm-2" style="background: burlywood">ID</div>
+                    <div class="col-sm-2" style="background: burlywood">Title</div>
+                    <div class="col-sm-2" style="background: burlywood">Description</div>
+                    <div class="col-sm-2" style="background: burlywood">Owner</div>
+                    <div class="col-sm-2" style="background: burlywood">Created On</div>
+                    <div class="col-sm-2" style="background: burlywood">Action</div>
+                </div>
+
+                <div class="row grid table-bordered" ng-repeat="card in cards">
+                    <div class="col-sm-2">{{card.ID}}</div>
+                    <div class="col-sm-2">{{card.Title}}</div>
+                    <div class="col-sm-2">{{card.Description}}</div>
+                    <div class="col-sm-2">{{card.user.Email}}</div>
+                    <div class="col-sm-2">{{card.createdAt | date:'medium'}}</div>
+                    <div class="col-sm-2">
+                        <a href="/group/{{groupID}}/cards/{{card.ID}}" class="btn btn-sm btn-default">Update Card</a>
+                        <a href="/" class="btn btn-sm btn-default">Delete Card</a>
+                    </div>
+                </div>
+            </span>
+
+            <span ng-if="cards.length == 0">
+                No Cards Available.<br>
+            </span>
+
+            <br/>
+
+            <a class="btn btn-primary" href="/group/{{groupID}}/cards/">Create A Card</a>
+
+        </div>
+    </div>
+</div>
+
+
+<!--
 <p ng-if="loadingGroups">Loading Cards...</p>
 
 <legend>Group Cards</legend>
@@ -41,3 +86,4 @@
 
 <a class="btn btn-primary" href="/group/{{groupID}}/cards/" >Create Card</a>
 
+-->

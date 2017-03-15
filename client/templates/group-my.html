@@ -8,9 +8,49 @@
     }
 </style>
 
+<div>
+    <a href="mailto:axp6201@rit.edu" class="pull-right btn btn-primary btn-outline btn-rounded">Feedback!</a>
+    <h2>My Groups
+        <small>TODO: enter some catchy text here</small>
+    </h2>
+    <span class="fa fa-users bg-fade" aria-hidden="true"></span>
+    <div class="jumbotron">
+        <div class="container">
+            <span ng-if="myGroups.length >= 1">
+                <div class="row grid table-bordered">
+                    <div class="col-sm-3" style="background: burlywood">ID</div>
+                    <div class="col-sm-3" style="background: burlywood">Group Name</div>
+                    <div class="col-sm-3" style="background: burlywood">Created On</div>
+                    <div class="col-sm-3" style="background: burlywood">Action</div>
+                </div>
+
+                <div class="row grid table-bordered" ng-repeat="group in myGroups">
+                    <div class="col-sm-3">{{group.group.ID}}</div>
+                    <div class="col-sm-3">{{group.group.Name}}</div>
+                    <div class="col-sm-3">{{group.group.createdAt | date:'medium'}}</div>
+
+                    <div class="col-sm-3">
+                        <a href="/manage-group/{{group.group.ID}}" class="btn btn-sm btn-default">Update Members</a>
+                        <a href="/group/{{group.group.ID}}/cards" class="btn btn-sm btn-default">Update Cards</a>
+                        <a href="/group/{{group.group.ID}}/chat" class="btn btn-sm btn-default">Meet Now</a>
+                    </div>
+                </div>
+            </span>
+
+            <span ng-if="myGroups.length == 0">
+                No Groups Available for {{contactAuthor}}.<br>
+            </span>
+            <br/>
+
+            <a class="btn btn-primary" ui-sref="inside.group-manage">Create A Group</a>
+
+        </div>
+    </div>
+</div>
+<!--
 <p ng-if="loadingGroups">Loading Groups...</p>
 
-<legend>My Groups</legend>
+
 <span ng-if="myGroups.length >= 1">
     <div class="row grid table-bordered">
         <div class="col-sm-3" style="background: burlywood">ID</div>
@@ -38,4 +78,4 @@
 <br/>
 
 <a class="btn btn-primary" ui-sref="inside.group-manage">Create Group</a>
-
+-->

@@ -1,17 +1,82 @@
-<!-- Loading Screen Overlay -->
-<div class="overlay" id="overlayScreen">
-    <div class="overlay-content">Processing...Please Wait...<br/><br/><img src="../img/loading.gif"/></div>
+<div>
+    <a href="mailto:axp6201@rit.edu" class="pull-right btn btn-primary btn-outline btn-rounded">Feedback!</a>
+    <h2>My Group
+        <small>TODO: enter some catchy text here</small>
+    </h2>
+    <span class="fa fa-users bg-fade" aria-hidden="true"></span>
+    <div class="jumbotron">
+        <div class="container">
+            <div>
+                <form ng-submit="saveGroup()" class="ng-pristine ng-valid">
+
+                    <div class="form-content">
+                        <div class="form-group">
+                            <label for="groupName">Group Name</label>
+                            <input type="text" class="form-control input-lg" ng-model="groupName" id="groupName"
+                                   placeholder="Group Name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-5">
+                                <label for="selectAllUsers">Available Users</label>
+                                <select id='selectAllUsers' name="selectAllUsers" multiple size='10'
+                                        ng-model="selectedAllUsers"
+                                        ng-options="user.Email for user in allUsers "></select>
+                            </div>
+                            <div class="col-md-2" style="text-align: center;padding-top: 5%" >
+                                <button class="btn btn-default btn-sm" type="button" id='btn-AddToGroup'
+                                        ng-click='addToGroup();'>
+                                    Add To Group<br>
+                                    <span class="glyphicon glyphicon-arrow-right"></span></button>
+                                <br/><br/><br/>
+                                <button class="btn btn-default btn-sm" type="button" id='btn-RemoveFromGroup'
+                                        ng-click='removeFromGroup();'>
+                                    Remove From Group<br>
+                                    <span class="glyphicon glyphicon-arrow-left"></span>
+                                </button>
+                            </div>
+                            <div class="col-md-5">
+                                <label for="selectAllUsers">Group Members</label>
+                                <select id='selectGroupUsers' multiple size='10'
+                                        ng-model="selectedGroupUsers"
+                                        ng-options="user.Email for user in groupUsers"></select>
+                            </div>
+                        </div>
+
+                        <div class="form-group" ng-repeat="error in validation">
+                            <div>
+                                <label class="control-label">{{error}}</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>&nbsp;</label>
+                            <div>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                                &nbsp;
+                                <a ui-sref="inside.group-my" class="btn btn-default">Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+                <div>{{ status }}</div>
+            </div>
+
+        </div>
+    </div>
 </div>
 
+<!--
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
         <form ng-submit="saveGroup()" class="form-horizontal">
             <fieldset>
 
-                <!-- Form Name -->
+
                 <legend>My Group</legend>
 
-                <!-- Text input-->
+
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="groupname">Group Name *</label>
                     <div class="col-md-4">
@@ -46,7 +111,7 @@
                     </div>
                 </div>
 
-                <!-- Button -->
+
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="create"></label>
                     <div class="col-md-4">
@@ -62,4 +127,4 @@
         <div>{{ status }}</div>
     </div>
 </div>
-
+-->
