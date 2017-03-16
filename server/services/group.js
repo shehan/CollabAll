@@ -6,6 +6,7 @@
         var UserModel = db.user;
         var GroupModel = db.group;
         var UserGroupModel = db.user_group;
+        var CardModel = db.card;
 
         var init = function (router) {
             router.get('/get-my-groups', endpoints.getMyGroups);
@@ -14,8 +15,7 @@
             router.get('/get-group-by-id', endpoints.getGroupById);
             router.post('/create-group', endpoints.createGroup);
             router.post('/update-group', endpoints.updateGroup);
-            //router.post('/add-user', endpoints.addUser);
-            //  router.post('/remove-user', endpoints.removeUser);
+            router.post('/delete-group', endpoints.deleteGroup);
         };
 
         var endpoints = {
@@ -78,6 +78,29 @@
                 });
             },
 
+            deleteGroup: function (request, response) {
+                var groupId = request.body.GroupId;
+                return GroupModel.destroy({
+                    where: {
+                        ID: groupId
+                    }
+                }).then(function (data) {
+                    return UserGroupModel.destroy({
+                        where: {
+                            groupID: groupId
+                        }
+                    }).then(function(data){
+                        return CardModel.destroy({
+                            where:{
+                                groupID:groupId
+                            }
+                        }).then(function (data) {
+                            response.send({success: true, group: data});
+                        });
+                    });
+                });
+            },
+
             updateGroup: function (request, response) {
                 var groupId = request.body.GroupId;
                 var groupName = request.body.GroupName;
@@ -95,6 +118,7 @@
                 });
             }
         };
+
 
         function updateGroupUsers(groupId, userIds) {
             UserGroupModel.destroy({
