@@ -16,6 +16,7 @@
         'GroupMyControllerModule',
         'GroupCardsControllerModule',
         'CardManageControllerModule',
-        'GroupChatControllerModule'
+        'GroupChatControllerModule',
+        'MyProfileControllerModule'
     ]);
 }());

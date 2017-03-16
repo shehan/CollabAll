@@ -43,6 +43,20 @@
                 window.localStorage.removeItem(AUTH_USER);
             }
 
+            var update = function (user) {
+                return $q(function(resolve, reject) {
+                    $http.post('services/user/update', user).then(function(result) {
+                        if (result.data.success) {
+                            storeUserCredentials(authToken,result.data.user);
+                            resolve(result.data.msg);
+                        } else {
+                            reject(result.data.msg);
+                        }
+                    });
+                });
+            };
+
+
             var register = function(user) {
                 return $q(function(resolve, reject) {
                     $http.post('services/user/create', user).then(function(result) {
@@ -79,6 +93,7 @@
                 login: login,
                 register: register,
                 logout: logout,
+                update: update,
                 authenticatedUser: function () {return authUser;},
                 isAuthenticated: function() {return isAuthenticated;}
             };

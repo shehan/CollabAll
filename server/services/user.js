@@ -1,6 +1,6 @@
 //http://localhost:8080/services/user/get-all-users
 (function () {
-    'use strict';
+        'use strict';
 
         var db = require('../models/index');
         var config = require('../config/salt.js');
@@ -15,6 +15,7 @@
             router.get('/get-all-active-users', endpoints.getAllActiveUsers);
             router.get('/get-user-by-id/:userId', endpoints.getUserById);
             router.get('/get-user-by-email/:userEmail', endpoints.getUserByEmail);
+            router.post('/update', endpoints.update);
             router.post('/create', endpoints.create);
             router.post('/authenticate', endpoints.authenticate);
         };
@@ -74,6 +75,37 @@
                 });
             },
 
+            update: function (request, response) {
+                var userId = request.body.ID;
+                var firstName = request.body.firstName;
+                var lastName = request.body.lastName;
+                var email = request.body.email;
+                return UserModel.update({
+                    FirstName: firstName,
+                    LastName: lastName,
+                    Email: email
+                }, {
+                    where: {
+                        ID: userId
+                    }
+                }).then(function (data) {
+                    return UserModel.findOne({
+                        where: {
+                            ID: userId
+                        },
+                        attributes: {
+                            exclude: ['Password']
+                        }
+                    }).then(function (data) {
+                        response.send({success: true, user: data});
+                    });
+                }).catch(function (error) {
+                    var msg = 'The email address is already registered';
+                    response.send({success: false, msg: msg});
+                    console.log(error);
+                });
+            },
+
             create: function (request, response) {
 
                 var firstName = request.body.firstName;
@@ -84,23 +116,23 @@
 
                 console.log(firstName);
                 return UserModel.create({
-                        FirstName: firstName,
-                        LastName: lastName,
-                        Email: email,
-                        Password: password,
-                        IsActive: true,
-                        roleID: roleId
+                    FirstName: firstName,
+                    LastName: lastName,
+                    Email: email,
+                    Password: password,
+                    IsActive: true,
+                    roleID: roleId
                 }).then(function (data) {
                     data.Password = "";
                     response.send({success: true, user: data});
-                }).catch(function(error){
+                }).catch(function (error) {
                     var msg = 'The email address is already registered';
                     response.send({success: false, msg: msg});
                     console.log(error);
                 });
             },
 
-            authenticate: function(request, res) {
+            authenticate: function (request, res) {
                 var email = request.body.email;
                 var password = request.body.password;
 
@@ -108,9 +140,9 @@
                     where: {
                         Email: email
                     }
-                }).then(function(user) {
+                }).then(function (user) {
 
-                    if(!user){
+                    if (!user) {
                         var msg = 'Authentication failed. User not found.';
                         console.log(msg);
                         return res.send({success: false, msg: msg});
@@ -128,12 +160,11 @@
                             res.send({success: false, msg: 'Authentication failed. Wrong password.'});
                         }
                     });
-                }).catch(function(error){
+                }).catch(function (error) {
                     console.log('uh oh' + error);
                 });
             }
         };
-
 
 
         module.exports = {

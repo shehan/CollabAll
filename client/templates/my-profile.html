@@ -1,0 +1,50 @@
+<div>
+    <a href="mailto:axp6201@rit.edu" class="pull-right btn btn-primary btn-outline btn-rounded">Feedback!</a>
+    <a ui-sref="inside.group-my" class="pull-right btn btn-primary btn-outline btn-rounded">My Groups</a>
+    <a ui-sref="inside.home" class="pull-right btn btn-primary btn-outline btn-rounded">Home</a>
+    <br/>
+
+    <h2>My Profile
+        <small>TODO: enter some catchy text here</small>
+    </h2>
+    <!--<span class="fa fa-window-restore bg-fade" aria-hidden="true"></span>-->
+    <div class="jumbotron">
+        <div class="container">
+            <div>
+                <form ng-submit="saveProfile()" class="ng-pristine ng-valid">
+                    <div class="form-content">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" class="form-control input-lg" ng-model="firstName" id="firstName" placeholder="First Name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" class="form-control input-lg" ng-model="lastName" id="lastName" placeholder="Last Name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="text" class="form-control input-lg" ng-model="email" id="email" placeholder="Email" required>
+                        </div>
+
+                        <div class="form-group" ng-repeat="error in validation">
+                            <label class="control-label">{{error}}</label>
+                        </div>
+
+                        <div class="form-group">
+                            <label>&nbsp;</label>
+                            <div>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                                &nbsp;
+                                <a ui-sref="inside.home" class="btn btn-default">Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div>{{ status }}</div>
+            </div>
+
+        </div>
+    </div>
+</div>

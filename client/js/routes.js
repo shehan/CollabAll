@@ -28,6 +28,12 @@
                         controller: 'homeController', //The path to the angular controller
                         displayName:'Home'
                     })
+                    .state('inside.my-profile', {
+                        url: '/my-profile',
+                        templateUrl: 'templates/my-profile.html',
+                        controller: 'myProfileController',
+                        displayName:'My Profile'
+                    })
                     .state('inside.group-manage', {
                         url: '/manage-group/:groupID',
                         templateUrl: 'templates/group-manage.html',
