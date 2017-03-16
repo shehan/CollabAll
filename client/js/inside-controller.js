@@ -15,7 +15,7 @@
             $scope.title = "CollabAll";
 
             $scope.logout = function () {
-                socket.disconnect();
+                //socket.disconnect();
                 AuthService.logout();
                 $state.go('login');
             };

@@ -25,6 +25,7 @@
                                 $scope.status ='Password Updated!';
                                 document.getElementById("overlayScreen").style.width = "0%";
                                 document.getElementById("overlayScreen").style.height = "0%";
+                                AuthService.logout();
                                 $state.go('login');
                             },
                             function (error) {
