@@ -34,6 +34,12 @@
                         controller: 'myProfileController',
                         displayName:'My Profile'
                     })
+                    .state('inside.my-password', {
+                        url: '/reset-password/:userID',
+                        templateUrl: 'templates/my-password.html',
+                        controller: 'myPasswordController',
+                        displayName:'Reset Password'
+                    })
                     .state('inside.group-manage', {
                         url: '/manage-group/:groupID',
                         templateUrl: 'templates/group-manage.html',
