@@ -10,12 +10,32 @@
                 $scope.contactAuthor = AuthService.authenticatedUser().FirstName + " " + AuthService.authenticatedUser().LastName;
                 $scope.userID = AuthService.authenticatedUser().ID;
                 $scope.groupID = $stateParams.groupID;
+                $scope.group=[];
+                $scope.groupMembers=[];
                 $scope.stream='';
                 $scope.prevAction='';
                 $scope.deviceOrientation={};
                 $scope.deviceOrientation.alpha='';
                 $scope.deviceOrientation.beta='';
                 $scope.deviceOrientation.gamma='';
+
+
+                document.getElementById("overlayScreen").style.width = "100%";
+                document.getElementById("overlayScreen").style.height = "100%";
+
+                $http.get('services/group/get-group-members', {params: {GroupId: $scope.groupID}})
+                    .then(function (response) {
+                        $scope.groupMembers = response.data.users;
+                        $scope.groupMembers.sort(compare);
+
+                        $http.get('services/group/get-group-by-id', {params: {GroupId: $scope.groupID}})
+                            .then(function(response){
+                                $scope.group = response.data.group;
+                                document.getElementById("overlayScreen").style.width = "0%";
+                                document.getElementById("overlayScreen").style.height = "0%";
+                            });
+                    });
+
 
                 var socket = io.connect({query: $scope.userID});
 
@@ -103,6 +123,13 @@
                 }, 1000);
 
 
+                function compare(a, b) {
+                    if (a.FirstName < b.FirstName)
+                        return -1;
+                    if (a.FirstName > b.FirstName)
+                        return 1;
+                    return 0;
+                }
 
             }]);
 
