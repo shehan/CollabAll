@@ -9,7 +9,7 @@
                 $scope.title = "CollabAll - My Profile";
                 $scope.validation = [];
 
-                $scope.userID = AuthService.authenticatedUser().ID;;
+                $scope.userID = AuthService.authenticatedUser().ID;
                 $scope.email = AuthService.authenticatedUser().Email;
                 $scope.firstName = AuthService.authenticatedUser().FirstName;
                 $scope.lastName = AuthService.authenticatedUser().LastName;
