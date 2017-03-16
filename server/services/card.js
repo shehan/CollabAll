@@ -13,6 +13,7 @@
             router.get('/get-card-by-id', endpoints.getCardById);
             router.post('/create-card', endpoints.createCard);
             router.post('/update-card', endpoints.updateCard);
+            router.post('/delete-card', endpoints.deleteCard);
         };
 
         var endpoints = {
@@ -52,6 +53,17 @@
                     userID: userId,
                     groupID: groupId,
                     IsActive: true
+                }).then(function (data) {
+                    response.send({success: true, card: data});
+                });
+            },
+
+            deleteCard: function (request, response) {
+                var cardId = request.body.CardId;
+                return CardModel.destroy({
+                    where: {
+                        ID: cardId
+                    }
                 }).then(function (data) {
                     response.send({success: true, card: data});
                 });

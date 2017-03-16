@@ -37,7 +37,7 @@
                     <div class="col-sm-2">{{card.createdAt | date:'medium'}}</div>
                     <div class="col-sm-2">
                         <a href="/group/{{groupID}}/cards/{{card.ID}}" class="btn btn-sm btn-default">Update Card</a>
-                        <a href="/" class="btn btn-sm btn-default">Delete Card</a>
+                        <button type="button" ng-click="deleteCard(card)" class="btn btn-sm btn-default">Delete Card</button>
                     </div>
                 </div>
             </span>
