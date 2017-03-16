@@ -36,8 +36,8 @@
                     <div class="col-sm-2">{{card.user.Email}}</div>
                     <div class="col-sm-2">{{card.createdAt | date:'medium'}}</div>
                     <div class="col-sm-2">
-                        <a href="/group/{{groupID}}/cards/{{card.ID}}" class="btn btn-sm btn-default">Update Card</a>
-                        <button type="button" ng-click="deleteCard(card)" class="btn btn-sm btn-default">Delete Card</button>
+                        <a alt="Update Card" href="/group/{{groupID}}/cards/{{card.ID}}" class="btn btn-md btn-default"><span class="fa fa-pencil"></span>&nbsp;</a>
+                        <a alt="Delete Card" href="#"  ng-click="deleteCard(card)" class="btn btn-md btn-default"><span class="fa fa-trash"></span>&nbsp;</a>
                     </div>
                 </div>
             </span>
