@@ -18,16 +18,14 @@
                         document.getElementById("overlayScreen").style.height = "100%";
 
                         $scope.status = "Updating Password....";
-                        AuthService.update({
+                        AuthService.passwordReset({
                             ID:$scope.userID,
-                            email: $scope.email,
-                            firstName: $scope.firstName,
-                            lastName: $scope.lastName
+                            password: $scope.password
                         }).then(function () {
                                 $scope.status ='Password Updated!';
-
                                 document.getElementById("overlayScreen").style.width = "0%";
                                 document.getElementById("overlayScreen").style.height = "0%";
+                                $state.go('login');
                             },
                             function (error) {
                                 console.log(error);

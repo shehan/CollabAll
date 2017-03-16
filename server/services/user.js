@@ -15,6 +15,7 @@
             router.get('/get-all-active-users', endpoints.getAllActiveUsers);
             router.get('/get-user-by-id/:userId', endpoints.getUserById);
             router.get('/get-user-by-email/:userEmail', endpoints.getUserByEmail);
+            router.post('/update-password', endpoints.updatePassword);
             router.post('/update', endpoints.update);
             router.post('/create', endpoints.create);
             router.post('/authenticate', endpoints.authenticate);
@@ -84,6 +85,33 @@
                     FirstName: firstName,
                     LastName: lastName,
                     Email: email
+                }, {
+                    where: {
+                        ID: userId
+                    }
+                }).then(function (data) {
+                    return UserModel.findOne({
+                        where: {
+                            ID: userId
+                        },
+                        attributes: {
+                            exclude: ['Password']
+                        }
+                    }).then(function (data) {
+                        response.send({success: true, user: data});
+                    });
+                }).catch(function (error) {
+                    var msg = 'The email address is already registered';
+                    response.send({success: false, msg: msg});
+                    console.log(error);
+                });
+            },
+
+            updatePassword: function (request, response) {
+                var userId = request.body.ID;
+                var password = UserModel.hashPassword(request.body.password);
+                return UserModel.update({
+                    Password: password
                 }, {
                     where: {
                         ID: userId

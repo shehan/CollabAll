@@ -56,6 +56,18 @@
                 });
             };
 
+            var passwordReset = function (user) {
+                return $q(function(resolve, reject) {
+                    $http.post('services/user/update-password', user).then(function(result) {
+                        if (result.data.success) {
+                            destroyUserCredentials();
+                            resolve(result.data.msg);
+                        } else {
+                            reject(result.data.msg);
+                        }
+                    });
+                });
+            };
 
             var register = function(user) {
                 return $q(function(resolve, reject) {
@@ -94,6 +106,7 @@
                 register: register,
                 logout: logout,
                 update: update,
+                passwordReset: passwordReset,
                 authenticatedUser: function () {return authUser;},
                 isAuthenticated: function() {return isAuthenticated;}
             };
