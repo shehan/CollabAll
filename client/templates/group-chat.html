@@ -1,3 +1,9 @@
+<style>
+    #messages {
+        height: 200px;
+        overflow-y: scroll;
+    }
+</style>
 <div>
     <a href="mailto:axp6201@rit.edu" class="pull-right btn btn-primary btn-outline btn-rounded">Feedback!</a>
     <a ui-sref="inside.group-my" class="pull-right btn btn-primary btn-outline btn-rounded">My Groups</a>
@@ -7,16 +13,55 @@
         <small>
             <br>Group: {{group.Name}}
             <br>Team: <span ng-repeat="user in groupMembers">{{user.Email}}{{$last ? '' : ', '}}</span>
+            <br><h5>Current Card: {{currentCard}} | Communicating: {{currentCommunicating}}</h5>
         </small>
     </h2>
     <!--<span class="fa fa-smile-o bg-fade" aria-hidden="true"></span>-->
     <div class="jumbotron">
         <div class="container">
             <p>
-            <ul>
-                <li  ng-repeat="card in groupCards" >{{card.Title}}</li>
-            </ul>
+                <div id="messages">
+                    <div class="message" ng-repeat="message in messages">
+                        {{message.user}}{{message.body}}
+                     </div>
+                    <a id="bottom"></a>&nbsp;&nbsp;
+                </div>
             </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">Group Cards</div>
+                <div class="panel-body">
+                    <div class="thumbnail" ng-repeat="card in groupCards">
+                        <div class="caption">
+                            <h3>{{card.Title}}</h3>
+                            <p>{{card.Description}}</p>
+                            <p><i>Owner: {{card.user.Email}}</i></p>
+                            <p><button class="btn btn-primary btn-block" ng-click="newCard(card.ID)">Discuss</button></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">Current Card: {{currentCard}}</div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">Actions</div>
+                <div class="panel-body">
+                    <div class="thumbnail">
+                        <div class="caption">
+                            <p><button class="btn btn-success btn-block" ng-click="communicate()">Communicate</button></p>
+                            <p><button class="btn btn-info btn-block" ng-click="interject('1')">Slow Down!</button></p>
+                            <p><button class="btn btn-warning btn-block" ng-click="interject('2')">Question!</button></p>
+                            <p><button class="btn btn-info btn-block" ng-click="interject('3')">Repeat!</button></p>
+                            <p><button class="btn btn-warning btn-block" ng-click="interject('4')">Don't Understand!</button></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

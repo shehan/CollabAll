@@ -19,6 +19,9 @@
                 $scope.deviceOrientation.alpha = '';
                 $scope.deviceOrientation.beta = '';
                 $scope.deviceOrientation.gamma = '';
+                $scope.messages = [];
+                $scope.currentCard='';
+                $scope.currentCommunicating='';
 
 
                 document.getElementById("overlayScreen").style.width = "100%";
@@ -41,6 +44,47 @@
                                     });
                             });
                     });
+
+                $scope.communicate = function(){
+                    var message={
+                        body : "is communicating!",
+                        user:  $scope.contactAuthor
+                    };
+                    $scope.messages.push(message);
+                    $scope.currentCommunicating=$scope.contactAuthor;
+                    $window.document.getElementById('messages').scrollTop = messages.scrollHeight;
+                };
+
+                $scope.newCard = function(cardID){
+                    var result = $scope.groupCards.find(function (d) {
+                        return d.ID === cardID;
+                    });
+
+                    var message={
+                        body : "new discussion card: " + result.Title,
+                        user:  "john"
+                    };
+                    $scope.messages.push(message);
+                    $scope.currentCard = result.Title;
+                    $window.document.getElementById('messages').scrollTop = messages.scrollHeight;
+                };
+
+                $scope.interject = function(id){
+                    var result='';
+                    switch (id){
+                        case '1':result = 'Slow Down!';break;
+                        case '2':result = 'Question!';break;
+                        case '3':result = 'Repeat!';break;
+                        case '4':result = 'Don\'t Understand!';break;
+                    }
+
+                    var message={
+                        body : "new discussion card: " + result,
+                        user:  "john"
+                    };
+                    $scope.messages.push(message);
+                    $window.document.getElementById('messages').scrollTop = messages.scrollHeight;
+                };
 
 
                 var socket = io.connect({query: $scope.userID});
