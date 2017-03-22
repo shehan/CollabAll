@@ -22,7 +22,7 @@
             <p>
                 <div id="messages">
                     <div class="message" ng-repeat="message in messages">
-                        {{message.user}}{{message.body}}
+                        {{message.user}} <small> >> </small> {{message.body}}
                      </div>
                     <a id="bottom"></a>&nbsp;&nbsp;
                 </div>

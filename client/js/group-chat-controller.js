@@ -45,21 +45,14 @@
                             });
                     });
 
-/************************START: Button Handler Code************************/
+
+
+                /************************START: Button Handler Code************************/
                 $scope.communicate = function () {
-                    /*
-                    var message = {
-                        body: "is communicating!",
-                        user: $scope.contactAuthor
-                    };
-                    $scope.messages.push(message);
-                  >>>  $scope.currentCommunicating = $scope.contactAuthor;
-                    $window.document.getElementById('messages').scrollTop = messages.scrollHeight;
-                    */
 
                     var action = {
                         body: "Communicating!",
-                        user:  $scope.contactAuthor,
+                        user: $scope.contactAuthor,
                         groupID: $scope.groupID
                     };
                     emitAction(action);
@@ -72,19 +65,9 @@
                         return d.ID === cardID;
                     });
 
-                    /*
-                    var message = {
-                        body: "new discussion card: " + result.Title,
-                        user: "john"
-                    };
-                    $scope.messages.push(message);
-                  >>>  $scope.currentCard = result.Title;
-                    $window.document.getElementById('messages').scrollTop = messages.scrollHeight;
-                    */
-
                     var action = {
                         body: "Discussing: " + result.Title,
-                        user:  $scope.contactAuthor,
+                        user: $scope.contactAuthor,
                         groupID: $scope.groupID
                     };
                     emitAction(action);
@@ -109,42 +92,19 @@
                             break;
                     }
 
-                    /*
-                    var message = {
-                        body: "new discussion card: " + result,
-                        user: $scope.contactAuthor
-                    };
-                    $scope.messages.push(message);
-                    $window.document.getElementById('messages').scrollTop = messages.scrollHeight;
-                    */
-
                     var action = {
                         body: "Interjection: " + result,
-                        user:  $scope.contactAuthor,
+                        user: $scope.contactAuthor,
                         groupID: $scope.groupID
                     };
                     emitAction(action);
                     appendChat(action);
                 };
+                /************************END: Button Handler Code************************/
 
-/************************END: Button Handler Code************************/
-function appendChat(message)
-{
-    $scope.messages.push(message);
-    $window.document.getElementById('messages').scrollTop = messages.scrollHeight
 
-    if(message.body.includes("Discussing:")){
-        $scope.currentCard = message.body;
-    }
 
-    if(message.body.includes("Communicating!")){
-        $scope.currentCommunicating = message.user;
-    }
-
-    $scope.$apply();
-}
-
-/************************START: Socket Code************************/
+                /************************START: Socket Code************************/
                 var socket = io.connect({query: $scope.userID});
 
                 socket.on('connect', function (msg) {
@@ -172,19 +132,21 @@ function appendChat(message)
                     }
                 });
 
-                $scope.$on("$destroy", function() {
-                    socket.emit("unsubscribe", { group: $scope.groupID });
+                $scope.$on("$destroy", function () {
+                    socket.emit("unsubscribe", {group: $scope.groupID});
                 });
 
-                function emitAction(action){
+                function emitAction(action) {
                     socket.emit("deviceTilt", {deviceOrientation: action});
                     $window.navigator.vibrate(200)
                 }
 
                 console.log(socket);
-/************************END: Socket Code************************/
+                /************************END: Socket Code************************/
 
-/************************START: Device Motion************************/
+
+
+                /************************START: Device Motion************************/
 
                 if ($window.DeviceMotionEvent) {
                     $window.addEventListener("devicemotion", motion, true);
@@ -246,16 +208,39 @@ function appendChat(message)
                                 $scope.prevAction = pos;
                                 var action = {
                                     body: pos,
-                                    user:  $scope.contactAuthor,
+                                    user: $scope.contactAuthor,
                                     groupID: $scope.groupID
                                 };
-;                              emitAction(action);
+                                ;
+                                emitAction(action);
+                                appendChat(action)
                             }
                         }
                     }
 
                 }, 1000);
-/************************END: Device Motion************************/
+                /************************END: Device Motion************************/
+
+
+                function appendChat(message) {
+                    $scope.messages.push(message);
+                    $window.document.getElementById('messages').scrollTop = messages.scrollHeight
+
+                    if (message.body.includes("Discussing:")) {
+                        $scope.currentCard = message.body;
+                    }
+
+                    if (message.body.includes("Communicating!")) {
+                        $scope.currentCommunicating = message.user;
+                    }
+
+                    //$scope.$apply();
+
+                    if (message.user != $scope.contactAuthor){
+                        $window.navigator.vibrate([150,150])
+                    }
+                }
+
 
                 function compare(a, b) {
                     if (a.FirstName < b.FirstName)
