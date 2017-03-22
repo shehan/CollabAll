@@ -45,14 +45,25 @@
                             });
                     });
 
+/************************START: Button Handler Code************************/
                 $scope.communicate = function () {
+                    /*
                     var message = {
                         body: "is communicating!",
                         user: $scope.contactAuthor
                     };
                     $scope.messages.push(message);
-                    $scope.currentCommunicating = $scope.contactAuthor;
+                  >>>  $scope.currentCommunicating = $scope.contactAuthor;
                     $window.document.getElementById('messages').scrollTop = messages.scrollHeight;
+                    */
+
+                    var action = {
+                        body: "Communicating!",
+                        user:  $scope.contactAuthor,
+                        groupID: $scope.groupID
+                    };
+                    emitAction(action);
+
                 };
 
                 $scope.newCard = function (cardID) {
@@ -60,13 +71,23 @@
                         return d.ID === cardID;
                     });
 
+                    /*
                     var message = {
                         body: "new discussion card: " + result.Title,
                         user: "john"
                     };
                     $scope.messages.push(message);
-                    $scope.currentCard = result.Title;
+                  >>>  $scope.currentCard = result.Title;
                     $window.document.getElementById('messages').scrollTop = messages.scrollHeight;
+                    */
+
+                    var action = {
+                        body: "Discussing: " + result.Title,
+                        user:  $scope.contactAuthor,
+                        groupID: $scope.groupID
+                    };
+                    emitAction(action);
+
                 };
 
                 $scope.interject = function (id) {
@@ -86,15 +107,26 @@
                             break;
                     }
 
+                    /*
                     var message = {
                         body: "new discussion card: " + result,
-                        user: "john"
+                        user: $scope.contactAuthor
                     };
                     $scope.messages.push(message);
                     $window.document.getElementById('messages').scrollTop = messages.scrollHeight;
+                    */
+
+                    var action = {
+                        body: "Interjection: " + result,
+                        user:  $scope.contactAuthor,
+                        groupID: $scope.groupID
+                    };
+                    emitAction(action);
                 };
 
+/************************END: Button Handler Code************************/
 
+/************************START: Socket Code************************/
                 var socket = io.connect({query: $scope.userID});
 
                 socket.on('connect', function (msg) {
@@ -114,7 +146,13 @@
 
                 socket.on('tilt', function (data) {
                     if (data.groupID == $scope.groupID) {
-                        console.log(data);
+                        var message = {
+                            body: data.body,
+                            user: data.user
+                        };
+                        $scope.messages.push(message);
+                        $window.document.getElementById('messages').scrollTop = messages.scrollHeight;
+
                         $scope.$apply();
                     }
                 });
@@ -123,7 +161,15 @@
                     socket.emit("unsubscribe", { group: $scope.groupID });
                 });
 
+                function emitAction(action){
+                    socket.emit("deviceTilt", {deviceOrientation: action});
+                    $window.navigator.vibrate(200)
+                }
+
                 console.log(socket);
+/************************END: Socket Code************************/
+
+/************************START: Device Motion************************/
 
                 if ($window.DeviceMotionEvent) {
                     $window.addEventListener("devicemotion", motion, true);
@@ -155,11 +201,11 @@
                     if (event.beta > 90) {
                         $scope.deviceOrientation.beta = 90
                     }
-                    ;
+
                     if (event.beta < -90) {
                         $scope.deviceOrientation.beta = -90
                     }
-                    ;
+
 
                     $scope.deviceOrientation.beta += 90;
                     $scope.deviceOrientation.gamma += 90;
@@ -188,14 +234,13 @@
                                     user:  $scope.contactAuthor,
                                     groupID: $scope.groupID
                                 };
-                                socket.emit("deviceTilt", {deviceOrientation: action});
-                                $window.navigator.vibrate(200);
+;                              emitAction(action);
                             }
                         }
                     }
 
                 }, 1000);
-
+/************************END: Device Motion************************/
 
                 function compare(a, b) {
                     if (a.FirstName < b.FirstName)
