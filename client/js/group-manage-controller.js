@@ -7,6 +7,8 @@
             function ($scope, AuthService, $state, $http, $stateParams) {
 
                 $scope.title = "CollabAll - Create Group";
+                $scope.contactAuthor = AuthService.authenticatedUser().FirstName + " " + AuthService.authenticatedUser().LastName;
+                $scope.userID = AuthService.authenticatedUser().ID;
                 $scope.validation = [];
                 $scope.groupID = $stateParams.groupID;
                 $scope.groupName = '';
@@ -38,6 +40,13 @@
                         .then(function (response) {
                             $scope.groupUsers = response.data.users;
                             $scope.groupUsers.sort(compare);
+
+                            if ($scope.groupID == '') {
+                                var result = $scope.allUsers.find(function (d) {
+                                    return d.ID ===  $scope.userID;
+                                });
+                                $scope.groupUsers.push(result);
+                            }
 
                             for (var i = 0; i < $scope.groupUsers.length; i++) {
                                 for (var j = 0; j < $scope.allUsers.length; j++) {
