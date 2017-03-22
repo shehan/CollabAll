@@ -32,7 +32,7 @@
                         });
                 }
 
-                $http.get('services/user/get-all-active-users')
+                $http.get('services/group/get-group-members', {params: {GroupId: $scope.groupID}})
                     .then(function (response) {
                         $scope.allUsers = response.data.users;
                         $scope.allUsers.sort(compare);
