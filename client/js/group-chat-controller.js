@@ -113,8 +113,10 @@
                 });
 
                 socket.on('tilt', function (data) {
-                    console.log(data);
-                    $scope.$apply();
+                    if (data.groupID == $scope.groupID) {
+                        console.log(data);
+                        $scope.$apply();
+                    }
                 });
 
                 $scope.$on("$destroy", function() {

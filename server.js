@@ -71,6 +71,7 @@ io.on('connection', function(socket){
     socket.on('unsubscribe', function (group) {
         console.log(socket.name + ' unsubscribe from group: '+ group.group);
         socket.leave(group.group);
+        socket.disconnect();
     });
 
     socket.on('deviceTilt', function (deviceOrientation) {
