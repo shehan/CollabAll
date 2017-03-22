@@ -20,8 +20,8 @@
                 $scope.deviceOrientation.beta = '';
                 $scope.deviceOrientation.gamma = '';
                 $scope.messages = [];
-                $scope.currentCard='';
-                $scope.currentCommunicating='';
+                $scope.currentCard = '';
+                $scope.currentCommunicating = '';
 
 
                 document.getElementById("overlayScreen").style.width = "100%";
@@ -45,42 +45,50 @@
                             });
                     });
 
-                $scope.communicate = function(){
-                    var message={
-                        body : "is communicating!",
-                        user:  $scope.contactAuthor
+                $scope.communicate = function () {
+                    var message = {
+                        body: "is communicating!",
+                        user: $scope.contactAuthor
                     };
                     $scope.messages.push(message);
-                    $scope.currentCommunicating=$scope.contactAuthor;
+                    $scope.currentCommunicating = $scope.contactAuthor;
                     $window.document.getElementById('messages').scrollTop = messages.scrollHeight;
                 };
 
-                $scope.newCard = function(cardID){
+                $scope.newCard = function (cardID) {
                     var result = $scope.groupCards.find(function (d) {
                         return d.ID === cardID;
                     });
 
-                    var message={
-                        body : "new discussion card: " + result.Title,
-                        user:  "john"
+                    var message = {
+                        body: "new discussion card: " + result.Title,
+                        user: "john"
                     };
                     $scope.messages.push(message);
                     $scope.currentCard = result.Title;
                     $window.document.getElementById('messages').scrollTop = messages.scrollHeight;
                 };
 
-                $scope.interject = function(id){
-                    var result='';
-                    switch (id){
-                        case '1':result = 'Slow Down!';break;
-                        case '2':result = 'Question!';break;
-                        case '3':result = 'Repeat!';break;
-                        case '4':result = 'Don\'t Understand!';break;
+                $scope.interject = function (id) {
+                    var result = '';
+                    switch (id) {
+                        case '1':
+                            result = 'Slow Down!';
+                            break;
+                        case '2':
+                            result = 'Question!';
+                            break;
+                        case '3':
+                            result = 'Repeat!';
+                            break;
+                        case '4':
+                            result = 'Don\'t Understand!';
+                            break;
                     }
 
-                    var message={
-                        body : "new discussion card: " + result,
-                        user:  "john"
+                    var message = {
+                        body: "new discussion card: " + result,
+                        user: "john"
                     };
                     $scope.messages.push(message);
                     $window.document.getElementById('messages').scrollTop = messages.scrollHeight;
@@ -158,20 +166,22 @@
 
                 var pos = '';
                 setInterval(function () {
-                    if ($scope.deviceOrientation.beta >= 40 && $scope.deviceOrientation.beta <= 66)
-                        pos = "DOWN";
-                    if ($scope.deviceOrientation.beta >= 150 && $scope.deviceOrientation.beta <= 170)
-                        pos = "UP";
-                    if ($scope.deviceOrientation.gamma >= 30 && $scope.deviceOrientation.gamma <= 80)
-                        pos = "LEFT";
-                    if ($scope.deviceOrientation.gamma >= 115 && $scope.deviceOrientation.gamma <= 150)
-                        pos = "RIGHT";
+                    if ($state.current.name == 'inside.group-chat') {
+                        if ($scope.deviceOrientation.beta >= 40 && $scope.deviceOrientation.beta <= 66)
+                            pos = "DOWN";
+                        if ($scope.deviceOrientation.beta >= 150 && $scope.deviceOrientation.beta <= 170)
+                            pos = "UP";
+                        if ($scope.deviceOrientation.gamma >= 30 && $scope.deviceOrientation.gamma <= 80)
+                            pos = "LEFT";
+                        if ($scope.deviceOrientation.gamma >= 115 && $scope.deviceOrientation.gamma <= 150)
+                            pos = "RIGHT";
 
-                    if (pos != '') {
-                        if (pos != $scope.prevAction) {
-                            $scope.prevAction = pos;
-                            socket.emit("deviceTilt", {deviceOrientation: pos});
-                            $window.navigator.vibrate(200);
+                        if (pos != '') {
+                            if (pos != $scope.prevAction) {
+                                $scope.prevAction = pos;
+                                socket.emit("deviceTilt", {deviceOrientation: pos});
+                                $window.navigator.vibrate(200);
+                            }
                         }
                     }
 
