@@ -63,6 +63,7 @@
                         groupID: $scope.groupID
                     };
                     emitAction(action);
+                    appendChat(action);
 
                 };
 
@@ -87,6 +88,7 @@
                         groupID: $scope.groupID
                     };
                     emitAction(action);
+                    appendChat(action);
 
                 };
 
@@ -122,9 +124,25 @@
                         groupID: $scope.groupID
                     };
                     emitAction(action);
+                    appendChat(action);
                 };
 
 /************************END: Button Handler Code************************/
+function appendChat(message)
+{
+    $scope.messages.push(message);
+    $window.document.getElementById('messages').scrollTop = messages.scrollHeight
+
+    if(message.body.includes("Discussing:")){
+        $scope.currentCard = message.body;
+    }
+
+    if(message.body.includes("Communicating!")){
+        $scope.currentCommunicating = message.user;
+    }
+
+    $scope.$apply();
+}
 
 /************************START: Socket Code************************/
                 var socket = io.connect({query: $scope.userID});
@@ -150,10 +168,7 @@
                             body: data.body,
                             user: data.user
                         };
-                        $scope.messages.push(message);
-                        $window.document.getElementById('messages').scrollTop = messages.scrollHeight;
-
-                        $scope.$apply();
+                        appendChat(message);
                     }
                 });
 
