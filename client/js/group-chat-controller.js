@@ -104,8 +104,6 @@
 
                 socket.emit("subscribe", {group: $scope.groupID});
 
-                //     socket.emit("unsubscribe", { group: "1" });
-
                 socket.on("disconnect", function () {
                     console.log("client disconnected from server");
                 });
@@ -117,6 +115,10 @@
                 socket.on('tilt', function (data) {
                     console.log(data);
                     $scope.$apply();
+                });
+
+                $scope.$on("$destroy", function() {
+                    socket.emit("unsubscribe", { group: $scope.groupID });
                 });
 
                 console.log(socket);
