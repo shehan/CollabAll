@@ -75,7 +75,7 @@ io.on('connection', function(socket){
 
     socket.on('deviceTilt', function (deviceOrientation) {
         console.log(socket.name + ' : '+ deviceOrientation.deviceOrientation);
-        socket.broadcast.emit('tilt',deviceOrientation.deviceOrientation);
+        socket.broadcast.in(deviceOrientation.deviceOrientation.groupID).emit('tilt',deviceOrientation.deviceOrientation);
     });
 
     socket.on('disconnect', function(){

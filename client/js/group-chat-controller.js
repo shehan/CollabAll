@@ -102,7 +102,7 @@
                     console.log("client joining server");
                 });
 
-                socket.emit("subscribe", {group: "1"});
+                socket.emit("subscribe", {group: $scope.groupID});
 
                 //     socket.emit("unsubscribe", { group: "1" });
 
@@ -181,7 +181,8 @@
                                 $scope.prevAction = pos;
                                 var action = {
                                     body: pos,
-                                    user:  $scope.contactAuthor
+                                    user:  $scope.contactAuthor,
+                                    groupID: $scope.groupID
                                 };
                                 socket.emit("deviceTilt", {deviceOrientation: action});
                                 $window.navigator.vibrate(200);
