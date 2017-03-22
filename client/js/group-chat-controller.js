@@ -115,7 +115,7 @@
                 });
 
                 socket.on('tilt', function (data) {
-                    $scope.stream = $scope.stream + data + "\n";
+                    console.log(data);
                     $scope.$apply();
                 });
 
@@ -168,18 +168,22 @@
                 setInterval(function () {
                     if ($state.current.name == 'inside.group-chat') {
                         if ($scope.deviceOrientation.beta >= 40 && $scope.deviceOrientation.beta <= 66)
-                            pos = "DOWN";
+                            pos = "Don't Understand!";
                         if ($scope.deviceOrientation.beta >= 150 && $scope.deviceOrientation.beta <= 170)
-                            pos = "UP";
+                            pos = "Slow Down!";
                         if ($scope.deviceOrientation.gamma >= 30 && $scope.deviceOrientation.gamma <= 80)
-                            pos = "LEFT";
+                            pos = "Question!";
                         if ($scope.deviceOrientation.gamma >= 115 && $scope.deviceOrientation.gamma <= 150)
-                            pos = "RIGHT";
+                            pos = "Repeat!";
 
                         if (pos != '') {
                             if (pos != $scope.prevAction) {
                                 $scope.prevAction = pos;
-                                socket.emit("deviceTilt", {deviceOrientation: pos});
+                                var action = {
+                                    body: pos,
+                                    user:  $scope.contactAuthor
+                                };
+                                socket.emit("deviceTilt", {deviceOrientation: action});
                                 $window.navigator.vibrate(200);
                             }
                         }
