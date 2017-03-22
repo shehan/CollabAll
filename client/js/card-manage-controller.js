@@ -59,7 +59,7 @@
                         document.getElementById("overlayScreen").style.width = "100%";
                         document.getElementById("overlayScreen").style.height = "100%";
 
-                        $scope.status = "Creating Card....";
+                        $scope.status = "Saving Card....";
 
                         if ($scope.cardID != "") {
                             $http.post('services/card/update-card',

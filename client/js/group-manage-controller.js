@@ -58,7 +58,7 @@
                         document.getElementById("overlayScreen").style.width = "100%";
                         document.getElementById("overlayScreen").style.height = "100%";
 
-                        $scope.status = "Creating Group....";
+                        $scope.status = "Saving Group....";
 
                         if ($scope.groupID != "") {
                             $http.post('services/group/update-group',
