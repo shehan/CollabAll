@@ -71,7 +71,8 @@
                                     document.getElementById("overlayScreen").style.width = "0%";
                                     document.getElementById("overlayScreen").style.height = "0%";
 
-                                    // $state.go('inside.view-papers');
+                                    $scope.status = "Group Updated!";
+                                    $state.go('inside.group-my');
                                 });
                         }
                         else {
@@ -85,6 +86,7 @@
                                     document.getElementById("overlayScreen").style.height = "0%";
 
                                     $scope.status =  "Group Created!";
+                                    $state.go('inside.group-my');
                                 });
                         }
 
