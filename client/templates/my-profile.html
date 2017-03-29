@@ -28,6 +28,15 @@
                             <input type="text" class="form-control input-lg" ng-model="email" id="email" placeholder="Email" required>
                         </div>
 
+                        <div class="form-group">
+                            <label for="avatar">Avatar</label>
+                            <input type="file"  class="form-control" id="avatar"  ng-model-instant onchange="angular.element(this).scope().encodeImageFileAsURL(this)" />
+                        </div>
+
+                        <div class="form-group"  ng-show="pic.length>0">
+                           <img class="img-thumbnail" style="width:100px;margin:5px;" ng-src='{{pic}}'>
+                        </div>
+
                         <div class="form-group" ng-repeat="error in validation">
                             <label class="control-label">{{error}}</label>
                         </div>

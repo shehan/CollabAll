@@ -3,8 +3,8 @@
 
     angular.module('MyProfileControllerModule', [])
 
-        .controller('myProfileController', ['$scope', 'AuthService', '$state',
-            function ($scope, AuthService, $state) {
+        .controller('myProfileController', ['$scope', 'AuthService', '$state','$window',
+            function ($scope, AuthService, $state, $window) {
 
                 $scope.title = "CollabAll - My Profile";
                 $scope.validation = [];
@@ -14,6 +14,8 @@
                 $scope.firstName = AuthService.authenticatedUser().FirstName;
                 $scope.lastName = AuthService.authenticatedUser().LastName;
 
+                $scope.pic = AuthService.authenticatedUser().Avatar;
+                console.log($scope.pic);
 
                 $scope.saveProfile = function () {
                     if (isFormValid()) {
@@ -25,7 +27,8 @@
                             ID:$scope.userID,
                             email: $scope.email,
                             firstName: $scope.firstName,
-                            lastName: $scope.lastName
+                            lastName: $scope.lastName,
+                            avatar: $scope.pic
                         }).then(function () {
                                 $scope.status ='Profile Updated!';
 
@@ -65,6 +68,33 @@
                     }
 
                     return true;
+                }
+
+
+                $scope.encodeImageFileAsURL = function(event) {
+                    var files = event.files;
+
+                    for (var i = 0; i < files.length; i++) {
+                        var file = files[i];
+
+                        var img=file.size;
+                        var imgsize=(img/1024)/1024;
+                        if(imgsize >=1.0) {
+                            alert("Image needs to be less than 1 MB");
+                            return;
+                        }
+
+                        var reader = new FileReader();
+                        reader.onload = $scope.imageIsLoaded;
+                        reader.readAsDataURL(file);
+                    }
+                };
+
+                $scope.imageIsLoaded = function(e){
+                    $scope.$apply(function() {
+                        $scope.pic = e.target.result;
+                        console .log($scope.pic);
+                    });
                 }
 
             }]);
