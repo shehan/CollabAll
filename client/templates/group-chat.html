@@ -23,9 +23,9 @@
             <p>
                 <div id="messages">
                     <div class="message" ng-repeat="message in messages">
-                        {{message.user}} <small> >> </small> {{message.body}}
+                        <img class="img-circle" style="width:40px;margin:2px;" ng-src='{{message.userAvatar}}'>{{message.user}} <small> >> </small> {{message.body}}
                      </div>
-                    <a id="bottom"></a>&nbsp;&nbsp;
+                    <a id="bottom"></a><br><br><br>
                 </div>
             </p>
         </div>
