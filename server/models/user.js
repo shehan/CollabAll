@@ -28,6 +28,7 @@
                     type: DataTypes.STRING(255),
                     allowNull: false
                 },
+                Avatar: DataTypes.TEXT,
                 IsActive: DataTypes.BOOLEAN
             },
             {

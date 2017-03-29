@@ -81,7 +81,9 @@
                 var firstName = request.body.firstName;
                 var lastName = request.body.lastName;
                 var email = request.body.email;
+                var avatar = request.body.avatar;
                 return UserModel.update({
+                    Avatar: avatar,
                     FirstName: firstName,
                     LastName: lastName,
                     Email: email
@@ -141,6 +143,7 @@
                 var email = request.body.email;
                 var password = UserModel.hashPassword(request.body.password);
                 var roleId = 1;
+                var avatar = request.body.avatar;
 
                 console.log(firstName);
                 return UserModel.create({
@@ -149,7 +152,8 @@
                     Email: email,
                     Password: password,
                     IsActive: true,
-                    roleID: roleId
+                    roleID: roleId,
+                    Avatar: avatar
                 }).then(function (data) {
                     data.Password = "";
                     response.send({success: true, user: data});
