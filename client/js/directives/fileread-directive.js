@@ -17,9 +17,9 @@ angular.module('FileReadDirective', [])
                         var filename = element[0].value.replace(/.*[\/\\]/, '');
                         filename = filename.split('.');
                         var format = filename[filename.length-1];
-                        if(format !== 'pdf' && //TODO consider refactorign so this is reusable
-                            format !== 'doc' &&
-                            format !== 'docx'){
+                        if(format !== 'jpg' && //TODO consider refactorign so this is reusable
+                            format !== 'gif' &&
+                            format !== 'jpeg'){
                             scope.$apply(function() {
                                 scope.format = false;
                             });
