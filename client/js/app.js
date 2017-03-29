@@ -7,7 +7,6 @@
         'CollabAllRoutes',
         'AuthModule',
 
-        'FileReadDirective',
         'LoginControllerModule',
         'InsideControllerModule',
         'HomeControllerModule',
