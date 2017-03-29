@@ -8,6 +8,7 @@
 
                 $scope.title = "CollabAll - Group Chat";
                 $scope.contactAuthor = AuthService.authenticatedUser().FirstName + " " + AuthService.authenticatedUser().LastName;
+                $scope.contactAuthorAvatar = AuthService.authenticatedUser().Avatar;
                 $scope.userID = AuthService.authenticatedUser().ID;
                 $scope.groupID = $stateParams.groupID;
                 $scope.group = [];
@@ -53,6 +54,7 @@
                     var action = {
                         body: "Communicating!",
                         user: $scope.contactAuthor,
+                        userAvatar: $scope.contactAuthorAvatar,
                         groupID: $scope.groupID
                     };
                     emitAction(action);
@@ -68,6 +70,7 @@
                     var action = {
                         body: "Discussing: " + result.Title,
                         user: $scope.contactAuthor,
+                        userAvatar: $scope.contactAuthorAvatar,
                         groupID: $scope.groupID
                     };
                     emitAction(action);
@@ -95,6 +98,7 @@
                     var action = {
                         body: "Interjection: " + result,
                         user: $scope.contactAuthor,
+                        userAvatar: $scope.contactAuthorAvatar,
                         groupID: $scope.groupID
                     };
                     emitAction(action);
@@ -123,10 +127,11 @@
                 });
 
                 socket.on('tilt', function (data) {
-                    if (data.groupID == $scope.groupID) {
+                    if (data.groupID === $scope.groupID) {
                         var message = {
                             body: data.body,
-                            user: data.user
+                            user: data.user,
+                            userAvatar: data.userAvatar
                         };
                         appendChat(message);
                     }
@@ -209,6 +214,7 @@
                                 var action = {
                                     body: pos,
                                     user: $scope.contactAuthor,
+                                    userAvatar: $scope.contactAuthorAvatar,
                                     groupID: $scope.groupID
                                 };
                                 ;
