@@ -28,7 +28,6 @@
                     type: DataTypes.STRING(255),
                     allowNull: false
                 },
-                Avatar: DataTypes.TEXT,
                 IsActive: DataTypes.BOOLEAN
             },
             {
@@ -46,6 +45,13 @@
                             foreignKeyConstraint: true
                         });
                         user.hasMany(models.card, {
+                            as: 'User',
+                            onDelete: 'CASCADE',
+                            foreignKey: {allowNull: false},
+                            constraints: true,
+                            foreignKeyConstraint: true
+                        });
+                        user.hasOne(models.user_avatar, {
                             as: 'User',
                             onDelete: 'CASCADE',
                             foreignKey: {allowNull: false},

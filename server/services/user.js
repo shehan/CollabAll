@@ -8,6 +8,7 @@
 
 
         var UserModel = db.user;
+        var UserAvatarModel = db.user_avatar;
 
         var init = function (router) {
             // router.post('/update-role-by-id', endpoints.updateRoleById);
@@ -83,7 +84,6 @@
                 var email = request.body.email;
                 var avatar = request.body.avatar;
                 return UserModel.update({
-                    Avatar: avatar,
                     FirstName: firstName,
                     LastName: lastName,
                     Email: email
@@ -92,15 +92,21 @@
                         ID: userId
                     }
                 }).then(function (data) {
-                    return UserModel.findOne({
-                        where: {
-                            ID: userId
-                        },
-                        attributes: {
-                            exclude: ['Password']
-                        }
-                    }).then(function (data) {
-                        response.send({success: true, user: data});
+                    return UserAvatarModel.upsert({
+                        userID: userId,
+                        Avatar: avatar,
+                        IsActive: true
+                    }).then(function (data2) {
+                        return UserModel.findOne({
+                            where: {
+                                ID: userId
+                            },
+                            attributes: {
+                                exclude: ['Password']
+                            }
+                        }).then(function (data) {
+                            response.send({success: true, user: data});
+                        })
                     });
                 }).catch(function (error) {
                     var msg = 'The email address is already registered';
@@ -143,7 +149,6 @@
                 var email = request.body.email;
                 var password = UserModel.hashPassword(request.body.password);
                 var roleId = 1;
-                var avatar = request.body.avatar;
 
                 console.log(firstName);
                 return UserModel.create({
@@ -152,8 +157,7 @@
                     Email: email,
                     Password: password,
                     IsActive: true,
-                    roleID: roleId,
-                    Avatar: avatar
+                    roleID: roleId
                 }).then(function (data) {
                     data.Password = "";
                     response.send({success: true, user: data});
@@ -168,7 +172,7 @@
                 var email = request.body.email;
                 var password = request.body.password;
 
-                UserModel.findOne({
+                return UserModel.findOne({
                     where: {
                         Email: email
                     }
@@ -186,8 +190,14 @@
                             // if user is found and password is right create a token
                             var token = jwt.encode(user, config.secret);
                             user.Password = "";
-                            // return the information including token as JSON
-                            res.json({success: true, token: 'JWT ' + token, user: user});
+                            return UserAvatarModel.findOne({
+                                where: {
+                                    UserID: user.ID
+                                }
+                            }).then(function (avatar) {
+                                // return the information including token as JSON
+                                res.json({success: true, token: 'JWT ' + token, user: user, avatar:avatar});
+                            })
                         } else {
                             res.send({success: false, msg: 'Authentication failed. Wrong password.'});
                         }

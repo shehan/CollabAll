@@ -15,7 +15,7 @@
                 $scope.lastName = AuthService.authenticatedUser().LastName;
 
                 $scope.pic = AuthService.authenticatedUser().Avatar;
-                console.log($scope.pic);
+                //console.log($scope.pic);
 
                 $scope.saveProfile = function () {
                     if (isFormValid()) {
@@ -93,7 +93,7 @@
                 $scope.imageIsLoaded = function(e){
                     $scope.$apply(function() {
                         $scope.pic = e.target.result;
-                        console .log($scope.pic);
+                        //console .log($scope.pic);
                     });
                 }
 

@@ -240,7 +240,7 @@
                         $scope.currentCommunicating = message.user;
                     }
 
-                    //$scope.$apply();
+                    $scope.$applyAsync()
 
                     if (message.user != $scope.contactAuthor){
                         $window.navigator.vibrate([150,150])
