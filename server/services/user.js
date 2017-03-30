@@ -110,7 +110,7 @@
                     });
                 }).catch(function (error) {
                     var msg = 'The email address is already registered';
-                    response.send({success: false, msg: msg});
+                    response.send({success: false, msg: msg, error:error});
                     console.log(error);
                 });
             },
