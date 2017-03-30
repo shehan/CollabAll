@@ -8,7 +8,7 @@
                     primaryKey: true,
                     autoIncrement: true
                 },
-                Avatar: DataTypes.TEXT,
+                Avatar: DataTypes.TEXT('long'),
                 IsActive: DataTypes.BOOLEAN
             },
             {
