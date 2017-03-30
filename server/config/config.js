@@ -5,8 +5,8 @@ module.exports = {
     "database": "database_dev",
     "host": "us-cdbr-azure-east2-d.cloudapp.net",
 	"storage": "database_dev.sqlite",
-    "dialect": "sqlite"
-      //"dialect": "mysql"
+    //"dialect": "sqlite"
+      "dialect": "mysql"
   },
   "test": {
     "username": "bd8fdea224eabf",
@@ -14,8 +14,8 @@ module.exports = {
     "database": "database_dev",
     "host": "us-cdbr-azure-east2-d.cloudapp.net",
     "storage": "database_dev.sqlite",
-      "dialect": "sqlite"
-      //"dialect": "mysql"
+      //"dialect": "sqlite"
+      "dialect": "mysql"
   },
   "production": {
     "username": "bd8fdea224eabf",
@@ -23,7 +23,7 @@ module.exports = {
     "database": "database_dev",
     "host": "us-cdbr-azure-east2-d.cloudapp.net",
     "storage": "database_dev.sqlite",
-      "dialect": "sqlite"
-      //"dialect": "mysql"
+      //"dialect": "sqlite"
+      "dialect": "mysql"
   }
 };
