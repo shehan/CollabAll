@@ -233,7 +233,7 @@
                     $window.document.getElementById('messages').scrollTop = messages.scrollHeight
 
                     if (message.body.includes("Discussing:")) {
-                        $scope.currentCard = message.body;
+                        $scope.currentCard = message.body.replace("Discussing:", "");
                     }
 
                     if (message.body.includes("Communicating!")) {
