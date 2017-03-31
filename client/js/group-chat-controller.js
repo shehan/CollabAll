@@ -96,7 +96,7 @@
                     }
 
                     var action = {
-                        body: "Interjection: " + result,
+                        body: result,
                         user: $scope.contactAuthor,
                         userAvatar: $scope.contactAuthorAvatar,
                         groupID: $scope.groupID
