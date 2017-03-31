@@ -25,6 +25,18 @@
                 <div class="message" ng-repeat="message in messages">
                     <img class="img-circle" style="width:40px;margin:2px;" ng-src='{{message.userAvatar}}'>{{message.user}}
                     <small> >></small>
+                    <i ng-if="message.body == 'Communicating!'" style="opacity: 1" class='fa fa-microphone fa-lg btn btn-success'
+                       aria-hidden='true' disabled></i>
+                    <i ng-if="message.body == 'Interjection: Slow Down!' "style="opacity: 1" class='fa fa-stop fa-lg btn btn-info'
+                       aria-hidden='true' disabled></i>
+                    <i ng-if="message.body == 'Interjection: Question!'" style="opacity: 1" class='fa fa-question fa-lg btn btn-warning'
+                       aria-hidden='true' disabled></i>
+                    <i ng-if="message.body == 'Interjection: Repeat!'" style="opacity: 1" class='fa fa-repeat fa-lg btn btn-primary'
+                       aria-hidden='true' disabled></i>
+                    <i ng-if="message.body == 'Interjection: Don\'t Understand!'" style="opacity: 1" class='fa fa-exclamation fa-lg btn btn-danger'
+                       aria-hidden='true' disabled></i>
+                    <i ng-if="message.body.indexOf('Discussing:') !== -1" style="opacity: 1" class='fa fa-window-maximize fa-lg btn btn-default'
+                       aria-hidden='true' disabled></i>
                     {{message.body}}
                 </div>
                 <a id="bottom"></a><br><br><br>
@@ -32,19 +44,29 @@
             </p>
             <div class="btn-toolbar text-center" role="toolbar" aria-label="Toolbar with button groups">
                 <div class="btn-group btn-group-lg mr-2" role="group" aria-label="First group">
-                    <button class="btn btn-success" style="margin: 5px" ng-click="communicate()"><i class="fa fa-microphone fa-2x" aria-hidden="true"></i><br>Communicate</button>
+                    <button class="btn btn-success" style="margin: 5px" ng-click="communicate()"><i
+                            class="fa fa-microphone fa-2x" aria-hidden="true"></i><br>Communicate
+                    </button>
                 </div>
                 <div class="btn-group btn-group-lg mr-2" role="group" aria-label="First group">
-                    <button class="btn btn-info" style="margin: 5px" ng-click="interject('1')"><i class="fa fa-stop fa-2x" aria-hidden="true"></i><br>Slow Down!</button>
+                    <button class="btn btn-info" style="margin: 5px" ng-click="interject('1')"><i
+                            class="fa fa-stop fa-2x" aria-hidden="true"></i><br>Slow Down!
+                    </button>
                 </div>
                 <div class="btn-group btn-group-lg mr-2" role="group" aria-label="First group">
-                    <button class="btn btn-warning" style="margin: 5px" ng-click="interject('2')"><i class="fa fa-question fa-2x" aria-hidden="true"></i><br>Question!</button>
+                    <button class="btn btn-warning" style="margin: 5px" ng-click="interject('2')"><i
+                            class="fa fa-question fa-2x" aria-hidden="true"></i><br>Question!
+                    </button>
                 </div>
                 <div class="btn-group btn-group-lg mr-2" role="group" aria-label="First group">
-                    <button class="btn btn-info" style="margin: 5px" ng-click="interject('3')"><i class="fa fa-repeat fa-2x" aria-hidden="true"></i><br>Repeat!</button>
+                    <button class="btn btn-primary" style="margin: 5px" ng-click="interject('3')"><i
+                            class="fa fa-repeat fa-2x" aria-hidden="true"></i><br>Repeat!
+                    </button>
                 </div>
                 <div class="btn-group btn-group-lg mr-2" role="group" aria-label="First group">
-                    <button class="btn btn-warning" style="margin: 5px" ng-click="interject('4')"><i class="fa fa-exclamation fa-2x" aria-hidden="true"></i><br>Don't Understand!</button>
+                    <button class="btn btn-danger" style="margin: 5px" ng-click="interject('4')"><i
+                            class="fa fa-exclamation fa-2x" aria-hidden="true"></i><br>Don't Understand!
+                    </button>
                 </div>
             </div>
         </div>
