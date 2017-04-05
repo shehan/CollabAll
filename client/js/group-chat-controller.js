@@ -57,9 +57,8 @@
                         userAvatar: $scope.contactAuthorAvatar,
                         groupID: $scope.groupID
                     };
-                    emitAction(action);
                     appendChat(action);
-
+                    emitAction(action);
                 };
 
                 $scope.newCard = function (cardID) {
@@ -73,9 +72,8 @@
                         userAvatar: $scope.contactAuthorAvatar,
                         groupID: $scope.groupID
                     };
-                    emitAction(action);
                     appendChat(action);
-
+                    emitAction(action);
                 };
 
                 $scope.interject = function (id) {
@@ -101,8 +99,8 @@
                         userAvatar: $scope.contactAuthorAvatar,
                         groupID: $scope.groupID
                     };
-                    emitAction(action);
                     appendChat(action);
+                    emitAction(action);
                 };
                 /************************END: Button Handler Code************************/
 
@@ -218,8 +216,8 @@
                                     groupID: $scope.groupID
                                 };
                                 ;
-                                emitAction(action);
                                 appendChat(action)
+                                emitAction(action);
                             }
                         }
                     }
