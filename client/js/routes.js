@@ -64,6 +64,18 @@
                         controller: 'cardManageController',
                         displayName:'Group Cards'
                     })
+                    .state('inside.group-interjections', {
+                        url: '/group/:groupID/interjections',
+                        templateUrl: 'templates/group-interjections.html',
+                        controller: 'groupInterjectionsController',
+                        displayName:'Group Interjections'
+                    })
+                    .state('inside.group-interjection-manage', {
+                        url: '/group/:groupID/interjections/:interjectionID',
+                        templateUrl: 'templates/interjection-manage.html',
+                        controller: 'interjectionManageController',
+                        displayName:'Group Interjections'
+                    })
                     .state('inside.group-chat', {
                         url: '/group/:groupID/chat',
                         templateUrl: 'templates/group-chat.html',

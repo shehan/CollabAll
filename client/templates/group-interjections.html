@@ -1,0 +1,55 @@
+<style>
+    .row.grid:nth-child(1) {
+        background: lavenderblush;
+    }
+
+    .row.grid:nth-child(even) {
+        background: lavender;
+    }
+</style>
+
+<div>
+    <a ng-click="logout()" class="pull-right btn btn-primary btn-outline btn-rounded">Logout</a>
+    <a ui-sref="inside.group-my" class="pull-right btn btn-primary btn-outline btn-rounded">My Groups</a>
+    <a ui-sref="inside.home" class="pull-right btn btn-primary btn-outline btn-rounded">Home</a>
+    <br/>
+    <h2>CollabAll
+        <small>Group Interjections</small>
+    </h2>
+    <!--<span class="fa fa-window-restore bg-fade" aria-hidden="true"></span>-->
+    <div class="jumbotron">
+        <div class="container">
+            <span ng-if="interjections.length >= 1">
+                <div class="row grid table-bordered">
+                    <div class="col-sm-2" style="background: burlywood">ID</div>
+                    <div class="col-sm-2" style="background: burlywood">Title</div>
+                    <div class="col-sm-2" style="background: burlywood">Description</div>
+                    <div class="col-sm-2" style="background: burlywood">Icon</div>
+                    <div class="col-sm-2" style="background: burlywood">Created On</div>
+                    <div class="col-sm-2" style="background: burlywood">Action</div>
+                </div>
+
+                <div class="row grid table-bordered" ng-repeat="interjection in interjections">
+                    <div class="col-sm-2">{{interjection.ID}}</div>
+                    <div class="col-sm-2">{{interjection.Title}}</div>
+                    <div class="col-sm-2">{{interjection.Description}}</div>
+                    <div class="col-sm-2">{{interjection.Icon}}</div>
+                    <div class="col-sm-2">{{interjection.createdAt | date:'medium'}}</div>
+                    <div class="col-sm-2">
+                        <a alt="Update Interjection" href="/group/{{groupID}}/interjections/{{interjection.ID}}" class="btn btn-md btn-default"><span class="fa fa-pencil"></span>&nbsp;</a>
+                        <a alt="Delete Interjection" href="#"  ng-click="deleteInterjection(interjection)" class="btn btn-md btn-default"><span class="fa fa-trash"></span>&nbsp;</a>
+                    </div>
+                </div>
+            </span>
+
+            <span ng-if="interjection.length == 0">
+                No Interjections Available.<br>
+            </span>
+
+            <br/>
+
+            <a class="btn btn-primary" href="/group/{{groupID}}/interjections/">Create An Interjection</a>
+
+        </div>
+    </div>
+</div>

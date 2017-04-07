@@ -1,0 +1,81 @@
+<div>
+    <a ng-click="logout()" class="pull-right btn btn-primary btn-outline btn-rounded">Logout</a>
+    <a ui-sref="inside.group-my" class="pull-right btn btn-primary btn-outline btn-rounded">My Groups</a>
+    <a ui-sref="inside.home" class="pull-right btn btn-primary btn-outline btn-rounded">Home</a>
+    <br/>
+
+    <h2>CollabAll
+        <small>Group Interjection</small>
+    </h2>
+    <!--<span class="fa fa-window-restore bg-fade" aria-hidden="true"></span>-->
+    <div class="jumbotron">
+        <div class="container">
+            <div>
+                <form ng-submit="saveInterjection()" class="ng-pristine ng-valid">
+                    <div class="form-content">
+                        <div class="form-group">
+                            <label for="interjectionTitle">Interjection Title</label>
+                            <input type="text" class="form-control input-lg" ng-model="interjectionTitle"
+                                   id="interjectionTitle"
+                                   placeholder="Card Title" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="interjectionDescription">Interjection Description</label>
+                            <textarea id="interjectionDescription" name="interjectionDescription"
+                                      class="form-control input-lg"
+                                      ng-model="interjectionDescription" placeholder="Description" style="height:150px"
+                                      required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="interjectionColorBackground">Interjection Button Background Color</label>
+                            <button style="background: {{nonInput.colorBackground}}" colorpicker
+                                    type="button" colorpicker-position="top"
+                                    ng-model="nonInput.colorBackground" id="interjectionColorBackground" name="interjectionColorBackground">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </button>
+                            <!--
+                            <input class="form-control input" style="background: {{hexPicker.color}}" colorpicker ng-model="hexPicker.color" type="text" readonly id="interjectionColor" name="interjectionColor">
+                            -->
+                        </div>
+
+                        <div class="form-group">
+                            <label for="interjectionColorForeground">Interjection Button Foreground (Text) Color</label>
+                            <button style="background: {{nonInput.colorForeground}}" colorpicker
+                                    type="button" colorpicker-position="top"
+                                    ng-model="nonInput.colorForeground" id="interjectionColorForeground" name="interjectionColorForeground">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </button>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="interjectionIcon">Interjection Icon</label>
+                            <ui-iconpicker ng-model="iconClass" onclick="this.classList.toggle('open');"
+                                           id="interjectionIcon" name="interjectionIcon"></ui-iconpicker>
+                            <!-- <input class="form-control" type="text" ng-model="iconClass"/> -->
+                        </div>
+
+                        <div class="form-group">
+                            <label for="interjectionButtonPreview">Button Preview</label>
+                            <button class="btn btn-block"  id="interjectionButtonPreview" name="interjectionButtonPreview" type="button"  style="margin: 5px; background: {{nonInput.colorBackground}}; color: {{nonInput.colorForeground}}">
+                                <i class="{{iconClass}} fa-2x" aria-hidden="true"></i><br>
+                                {{interjectionTitle}}
+                            </button>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>&nbsp;</label>
+                            <div>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                                &nbsp;
+                                <a ui-sref="inside.group-my" class="btn btn-default">Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div>{{ status }}</div>
+            </div>
+
+        </div>
+    </div>
+</div>

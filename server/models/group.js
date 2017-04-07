@@ -28,6 +28,13 @@
                             constraints: true,
                             foreignKeyConstraint: true
                         });
+                        group.hasMany(models.group_interjection, {
+                            as: 'Group',
+                            onDelete: 'CASCADE',
+                            foreignKey: {allowNull: false},
+                            constraints: true,
+                            foreignKeyConstraint: true
+                        });
                     }
                 }
             }
