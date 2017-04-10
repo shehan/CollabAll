@@ -22,22 +22,28 @@
             <span ng-if="interjections.length >= 1">
                 <div class="row grid table-bordered">
                     <div class="col-sm-2" style="background: burlywood">ID</div>
-                    <div class="col-sm-2" style="background: burlywood">Title</div>
+                    <div class="col-sm-4" style="background: burlywood">Interjection</div>
                     <div class="col-sm-2" style="background: burlywood">Description</div>
-                    <div class="col-sm-2" style="background: burlywood">Icon</div>
                     <div class="col-sm-2" style="background: burlywood">Created On</div>
                     <div class="col-sm-2" style="background: burlywood">Action</div>
                 </div>
 
                 <div class="row grid table-bordered" ng-repeat="interjection in interjections">
                     <div class="col-sm-2">{{interjection.ID}}</div>
-                    <div class="col-sm-2">{{interjection.Title}}</div>
+                    <div class="col-sm-4">
+                        <button class="btn btn-block" id="interjectionButtonPreview" name="interjectionButtonPreview" type="button"
+                                style="margin: 5px; background: {{interjection.BackgroundColor}}; color: {{interjection.TextColor}}">
+                                <i class="{{interjection.Icon}} fa-2x" aria-hidden="true"></i><br>
+                                {{interjection.Title}}
+                        </button>
+                    </div>
                     <div class="col-sm-2">{{interjection.Description}}</div>
-                    <div class="col-sm-2">{{interjection.Icon}}</div>
                     <div class="col-sm-2">{{interjection.createdAt | date:'medium'}}</div>
                     <div class="col-sm-2">
-                        <a alt="Update Interjection" href="/group/{{groupID}}/interjections/{{interjection.ID}}" class="btn btn-md btn-default"><span class="fa fa-pencil"></span>&nbsp;</a>
-                        <a alt="Delete Interjection" href="#"  ng-click="deleteInterjection(interjection)" class="btn btn-md btn-default"><span class="fa fa-trash"></span>&nbsp;</a>
+                        <a alt="Update Interjection" href="/group/{{groupID}}/interjections/{{interjection.ID}}"
+                           class="btn btn-md btn-default"><span class="fa fa-pencil"></span>&nbsp;</a>
+                        <a alt="Delete Interjection" href="#" ng-click="deleteInterjection(interjection)"
+                           class="btn btn-md btn-default"><span class="fa fa-trash"></span>&nbsp;</a>
                     </div>
                 </div>
             </span>
