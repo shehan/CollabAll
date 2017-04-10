@@ -29,6 +29,11 @@
                         </div>
 
                         <div class="form-group">
+                                <label for="role">Role</label>
+                                <select id="role" name="role"  ng-model="selectedRole" ng-options="role.FriendlyName for role in roles track by role.ID"></select>
+                        </div>
+
+                        <div class="form-group">
                             <label for="avatar">Avatar</label>
                             <input type="file"  class="form-control" id="avatar"  ng-model-instant onchange="angular.element(this).scope().encodeImageFileAsURL(this)" />
                         </div>

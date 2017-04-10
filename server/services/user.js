@@ -83,10 +83,12 @@
                 var lastName = request.body.lastName;
                 var email = request.body.email;
                 var avatar = request.body.avatar;
+                var roleId = request.body.roleId;
                 return UserModel.update({
                     FirstName: firstName,
                     LastName: lastName,
-                    Email: email
+                    Email: email,
+                    roleID: roleId
                 }, {
                     where: {
                         ID: userId

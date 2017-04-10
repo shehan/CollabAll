@@ -3,8 +3,8 @@
 
     angular.module('MyProfileControllerModule', [])
 
-        .controller('myProfileController', ['$scope', 'AuthService', '$state','$window',
-            function ($scope, AuthService, $state, $window) {
+        .controller('myProfileController', ['$scope', 'AuthService', '$state','$window','$http',
+            function ($scope, AuthService, $state, $window, $http) {
 
                 $scope.title = "CollabAll - My Profile";
                 $scope.validation = [];
@@ -15,7 +15,27 @@
                 $scope.lastName = AuthService.authenticatedUser().LastName;
 
                 $scope.pic = AuthService.authenticatedUser().Avatar;
-                //console.log($scope.pic);
+                $scope.roles;
+
+
+                document.getElementById("overlayScreen").style.width = "100%";
+                document.getElementById("overlayScreen").style.height = "100%";
+
+                $http.get('services/role/get-all-roles')
+                    .then(function (response) {
+                        $scope.roles = response.data.roles;
+                        for(var i=0;i< $scope.roles.length;i++){
+                            if($scope.roles[i].ID == AuthService.authenticatedUser().roleID){
+                                $scope.selectedRole = $scope.roles[i];
+                                break;
+                            }
+                        }
+
+                        document.getElementById("overlayScreen").style.width = "0%";
+                        document.getElementById("overlayScreen").style.height = "0%";
+
+                    });
+
 
                 $scope.saveProfile = function () {
                     if (isFormValid()) {
@@ -28,7 +48,8 @@
                             email: $scope.email,
                             firstName: $scope.firstName,
                             lastName: $scope.lastName,
-                            avatar: $scope.pic
+                            avatar: $scope.pic,
+                            roleId:$scope.selectedRole.ID
                         }).then(function () {
                                 $scope.status ='Profile Updated!';
 
