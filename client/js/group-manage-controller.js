@@ -43,7 +43,7 @@
 
                             if ($scope.groupID == '') {
                                 var result = $scope.allUsers.find(function (d) {
-                                    return d.ID ===  $scope.userID;
+                                    return d.ID === $scope.userID;
                                 });
                                 $scope.groupUsers.push(result);
                             }
@@ -91,11 +91,19 @@
                                     UserIds: $scope.groupUsers
                                 })
                                 .then(function (response) {
-                                    document.getElementById("overlayScreen").style.width = "0%";
-                                    document.getElementById("overlayScreen").style.height = "0%";
+                                    $http.post('services/interjection/set-default-interjections-for-group',
+                                        {
+                                            GroupId: response.data.group.ID
+                                        })
+                                        .then(function (response) {
 
-                                    $scope.status =  "Group Created!";
-                                    $state.go('inside.group-my');
+                                            document.getElementById("overlayScreen").style.width = "0%";
+                                            document.getElementById("overlayScreen").style.height = "0%";
+
+                                            $scope.status = "Group Created!";
+                                            $state.go('inside.group-my');
+                                        });
+
                                 });
                         }
 
