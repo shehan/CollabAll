@@ -16,7 +16,7 @@
                 document.getElementById("overlayScreen").style.width = "100%";
                 document.getElementById("overlayScreen").style.height = "100%";
 
-                $http.get('services/interjections/get-interjections-for-group', {params: {GroupId: $scope.groupID}})
+                $http.get('services/interjection/get-interjections-for-group', {params: {GroupId: $scope.groupID}})
                     .then(function (response) {
                         $scope.interjections = response.data.interjections;
 
