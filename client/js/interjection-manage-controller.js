@@ -14,8 +14,8 @@
                 $scope.interjectionDescription = '';
                 $scope.interjectionIcon = '';
                 $scope.interjectionColor = '';
-                $scope.interjectionCaptionist = '';
-                $scope.interjectionInterpreter = '';
+                $scope.interjectionCaptionist = false;
+                $scope.interjectionInterpreter = true;
 
                 document.getElementById("overlayScreen").style.width = "100%";
                 document.getElementById("overlayScreen").style.height = "100%";
@@ -45,12 +45,13 @@
                     if ($scope.interjectionID != "") {
                         $http.post('services/interjection/update-interjections-for-group',
                             {
-                                Title: $scope.interjectionTitle,
-                                Description: $scope.interjectionDescription,
-                                Icon: $scope.interjectionIcon,
-                                Color: $scope.interjectionColor,
-                                IncludeCaptionist: $scope.interjectionCaptionist,
-                                IncludeInterpreter: $scope.interjectionInterpreter,
+                                InterjectionTitle: $scope.interjectionTitle,
+                                InterjectionDescription: $scope.interjectionDescription,
+                                InterjectionIcon: $scope.interjectionIcon,
+                                InterjectionBackgroundColor: $scope.nonInput.interjectionBackgroundColor,
+                                InterjectionTextColor: $scope.nonInput.interjectioTextColor,
+                                InterjectionCaptionist: $scope.interjectionCaptionist,
+                                InterjectionInterpreter: $scope.interjectionInterpreter,
                                 GroupId: $scope.groupID,
                                 GroupInterjectionId: $scope.interjectionID
                             })
@@ -65,12 +66,13 @@
                     else {
                         $http.post('services/interjection/create-interjections-for-group',
                             {
-                                Title: $scope.interjectionTitle,
-                                Description: $scope.interjectionDescription,
-                                Icon: $scope.interjectionIcon,
-                                Color: $scope.interjectionColor,
-                                IncludeCaptionist: $scope.interjectionCaptionist,
-                                IncludeInterpreter: $scope.interjectionInterpreter,
+                                InterjectionTitle: $scope.interjectionTitle,
+                                InterjectionDescription: $scope.interjectionDescription,
+                                InterjectionIcon: $scope.interjectionIcon,
+                                InterjectionBackgroundColor: $scope.nonInput.interjectionBackgroundColor,
+                                InterjectionTextColor: $scope.nonInput.interjectioTextColor,
+                                InterjectionCaptionist: $scope.interjectionCaptionist,
+                                InterjectionInterpreter: $scope.interjectionInterpreter,
                                 GroupId: $scope.groupID
                             })
                             .then(function (response) {
