@@ -13,7 +13,7 @@
             router.post('/create-interjections-for-group', endpoints.createGroupInterjection);
             router.post('/update-interjections-for-group', endpoints.updateGroupInterjection);
             router.post('/delete-interjections-for-group', endpoints.deleteGroupInterjection);
-        //    router.post('/set-default-interjections-for-group', endpoints.setGroupDefaultInterjections);
+            router.post('/set-default-interjections-for-group', endpoints.setGroupDefaultInterjections);
 
             router.post('/send-interjection', endpoints.sendInterjection);
         };
@@ -40,6 +40,18 @@
                     },
                     include: [GroupModel]
                 }).then(function (data) {
+                    response.send({success: true, interjection: data});
+                });
+            },
+
+            setGroupDefaultInterjections: function (request, response) {
+                var groupId = request.body.GroupId;
+                return GroupInterjectionModel.bulkCreate([
+                    {groupID:groupId, Title: 'Slow Down!', Description: 'Slow Down!', Icon:'fa fa-stop', BackgroundColor:'#5bc0de',TextColor:'#fff',IncludeCaptionist:true,IncludeInterpreter:true,IsActive:true},
+                    {groupID:groupId, Title: 'Question!', Description: 'Question!', Icon:'fa fa-question', BackgroundColor:'#f0ad4e',TextColor:'#fff',IncludeCaptionist:true,IncludeInterpreter:true,IsActive:true},
+                    {groupID:groupId, Title: 'Repeat!', Description: 'Question!', Icon:'fa fa-repeat', BackgroundColor:'#3ca2e0',TextColor:'#fff',IncludeCaptionist:true,IncludeInterpreter:true,IsActive:true},
+                    {groupID:groupId, Title: 'Don\'t Understand!', Description: 'Don\'t Understand!', Icon:'fa fa-exclamation', BackgroundColor:'#d9534f',TextColor:'#fff',IncludeCaptionist:true,IncludeInterpreter:true,IsActive:true},
+                ]).then(function (data) {
                     response.send({success: true, interjection: data});
                 });
             },
