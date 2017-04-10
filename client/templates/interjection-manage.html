@@ -17,22 +17,31 @@
                             <label for="interjectionTitle">Interjection Title</label>
                             <input type="text" class="form-control input-lg" ng-model="interjectionTitle"
                                    id="interjectionTitle"
-                                   placeholder="Card Title" required>
+                                   placeholder="Title" required>
                         </div>
 
                         <div class="form-group">
                             <label for="interjectionDescription">Interjection Description</label>
                             <textarea id="interjectionDescription" name="interjectionDescription"
                                       class="form-control input-lg"
-                                      ng-model="interjectionDescription" placeholder="Description" style="height:150px"
-                                      required></textarea>
+                                      ng-model="interjectionDescription" placeholder="Description" style="height:150px"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="captionist">Associate With Captionist Role</label>
+                            <input type="checkbox" id="captionist" name="captionist" ng-checked="interjectionCaptionist">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="interpreter">Associate With Interpreter Role</label>
+                            <input type="checkbox" id="interpreter" name="interpreter" ng-checked="interjectionInterpreter">
                         </div>
 
                         <div class="form-group">
                             <label for="interjectionColorBackground">Interjection Button Background Color</label>
-                            <button style="background: {{nonInput.colorBackground}}" colorpicker
+                            <button style="background: {{nonInput.interjectionBackgroundColor   }}" colorpicker
                                     type="button" colorpicker-position="top"
-                                    ng-model="nonInput.colorBackground" id="interjectionColorBackground" name="interjectionColorBackground">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    ng-model="nonInput.interjectionBackgroundColor" id="interjectionColorBackground" name="interjectionColorBackground">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             </button>
                             <!--
                             <input class="form-control input" style="background: {{hexPicker.color}}" colorpicker ng-model="hexPicker.color" type="text" readonly id="interjectionColor" name="interjectionColor">
@@ -41,23 +50,23 @@
 
                         <div class="form-group">
                             <label for="interjectionColorForeground">Interjection Button Foreground (Text) Color</label>
-                            <button style="background: {{nonInput.colorForeground}}" colorpicker
+                            <button style="background: {{nonInput.interjectioTextColor}}" colorpicker
                                     type="button" colorpicker-position="top"
-                                    ng-model="nonInput.colorForeground" id="interjectionColorForeground" name="interjectionColorForeground">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    ng-model="nonInput.interjectioTextColor" id="interjectionColorForeground" name="interjectionColorForeground">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             </button>
                         </div>
 
                         <div class="form-group">
                             <label for="interjectionIcon">Interjection Icon</label>
-                            <ui-iconpicker ng-model="iconClass" onclick="this.classList.toggle('open');"
+                            <ui-iconpicker ng-model="interjectionIcon" onclick="this.classList.toggle('open');"
                                            id="interjectionIcon" name="interjectionIcon"></ui-iconpicker>
                             <!-- <input class="form-control" type="text" ng-model="iconClass"/> -->
                         </div>
 
                         <div class="form-group">
                             <label for="interjectionButtonPreview">Button Preview</label>
-                            <button class="btn btn-block"  id="interjectionButtonPreview" name="interjectionButtonPreview" type="button"  style="margin: 5px; background: {{nonInput.colorBackground}}; color: {{nonInput.colorForeground}}">
-                                <i class="{{iconClass}} fa-2x" aria-hidden="true"></i><br>
+                            <button class="btn btn-block"  id="interjectionButtonPreview" name="interjectionButtonPreview" type="button"  style="margin: 5px; background: {{nonInput.interjectionBackgroundColor}}; color: {{nonInput.interjectioTextColor}}">
+                                <i class="{{interjectionIcon}} fa-2x" aria-hidden="true"></i><br>
                                 {{interjectionTitle}}
                             </button>
                         </div>

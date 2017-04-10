@@ -14,7 +14,8 @@
                 },
                 Description: DataTypes.STRING(500),
                 Icon: DataTypes.STRING(50),
-                Color: DataTypes.STRING(50),
+                BackgroundColor: DataTypes.STRING(50),
+                TextColor: DataTypes.STRING(50),
                 IncludeCaptionist:DataTypes.BOOLEAN,
                 IncludeInterpreter:DataTypes.BOOLEAN,
                 IsActive: DataTypes.BOOLEAN

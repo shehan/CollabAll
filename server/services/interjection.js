@@ -49,14 +49,16 @@
                 var interjectionTitle = request.body.InterjectionTitle;
                 var interjectionDescription = request.body.InterjectionDescription;
                 var interjectionIcon = request.body.InterjectionIcon;
-                var interjectionColor = request.body.InterjectionColor;
+                var interjectionBackgroundColor = request.body.InterjectionBackgroundColor;
+                var interjectionTextColor = request.body.InterjectionTextColor;
                 var interjectionCaptionist = request.body.InterjectionCaptionist;
                 var interjectionInterpreter = request.body.InterjectionInterpreter;
                 return GroupInterjectionModel.create({
                     Title: interjectionTitle,
                     Description: interjectionDescription,
                     Icon: interjectionIcon,
-                    Color: interjectionColor,
+                    TextColor: interjectionTextColor,
+                    BackgroundColor: interjectionBackgroundColor,
                     IncludeCaptionist: interjectionCaptionist,
                     IncludeInterpreter: interjectionInterpreter,
                     groupID: groupId,
@@ -83,14 +85,16 @@
                 var interjectionTitle = request.body.InterjectionTitle;
                 var interjectionDescription = request.body.InterjectionDescription;
                 var interjectionIcon = request.body.InterjectionIcon;
-                var interjectionColor = request.body.InterjectionColor;
+                var interjectionBackgroundColor = request.body.InterjectionBackgroundColor;
+                var interjectionTextColor = request.body.InterjectionTextColor;
                 var interjectionCaptionist = request.body.InterjectionCaptionist;
                 var interjectionInterpreter = request.body.InterjectionInterpreter;
                 return GroupInterjectionModel.update({
                     Title: interjectionTitle,
                     Description: interjectionDescription,
                     Icon: interjectionIcon,
-                    Color: interjectionColor,
+                    TextColor: interjectionTextColor,
+                    BackgroundColor: interjectionBackgroundColor,
                     IncludeCaptionist: interjectionCaptionist,
                     IncludeInterpreter: interjectionInterpreter,
                     groupID: groupId
