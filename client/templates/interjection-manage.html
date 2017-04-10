@@ -29,17 +29,17 @@
 
                         <div class="form-group">
                             <label for="captionist">Associate With Captionist Role</label>
-                            <input type="checkbox" id="captionist" name="captionist" ng-checked="interjectionCaptionist">
+                            <input type="checkbox" id="captionist" name="captionist" ng-model="interjectionCaptionist" ng-checked="interjectionCaptionist">
                         </div>
 
                         <div class="form-group">
                             <label for="interpreter">Associate With Interpreter Role</label>
-                            <input type="checkbox" id="interpreter" name="interpreter" ng-checked="interjectionInterpreter">
+                            <input type="checkbox" id="interpreter" name="interpreter" ng-model="interjectionInterpreter" ng-checked="interjectionInterpreter">
                         </div>
 
                         <div class="form-group">
                             <label for="interjectionColorBackground">Interjection Button Background Color</label>
-                            <button style="background: {{nonInput.interjectionBackgroundColor   }}" colorpicker
+                            <button style="background: {{nonInput.interjectionBackgroundColor}}" colorpicker
                                     type="button" colorpicker-position="top"
                                     ng-model="nonInput.interjectionBackgroundColor" id="interjectionColorBackground" name="interjectionColorBackground">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             </button>
