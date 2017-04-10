@@ -16,6 +16,8 @@
                 $scope.interjectionColor = '';
                 $scope.interjectionCaptionist = false;
                 $scope.interjectionInterpreter = true;
+                $scope.nonInput = [];
+
 
                 document.getElementById("overlayScreen").style.width = "100%";
                 document.getElementById("overlayScreen").style.height = "100%";
@@ -26,7 +28,8 @@
                             $scope.interjectionTitle = response.data.interjection.Title;
                             $scope.interjectionDescription = response.data.interjection.Description;
                             $scope.interjectionIcon = response.data.interjection.Icon;
-                            $scope.interjectionColor = response.data.interjection.Color;
+                            $scope.nonInput.interjectionBackgroundColor = response.data.interjection.BackgroundColor;
+                            $scope.nonInput.interjectioTextColor = response.data.interjection.TextColor;
                             $scope.interjectionCaptionist = response.data.interjection.IncludeCaptionist;
                             $scope.interjectionInterpreter = response.data.interjection.IncludeInterpreter;
                         });
