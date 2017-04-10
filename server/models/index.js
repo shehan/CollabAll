@@ -40,15 +40,16 @@ db.sequelize
     .then(function () {
         console.log('Connection successful');
         db.sequelize
-        .sync()
-        //    .sync({force: true})
+        //.sync()
+            .sync({force: true})
             .then(function () {
                 console.log('Tables Created');
                 var RoleModel = db.role;
                 return RoleModel.bulkCreate([
                     {Name: 'Student', FriendlyName: 'Student', IsActive:true},
-                    {Name: 'Educator', FriendlyName: 'Educator', IsActive:true},
-                    {Name: 'Admin', FriendlyName: 'Administrator', IsActive:true}
+                    {Name: 'Faculty', FriendlyName: 'Faculty', IsActive:true},
+                    {Name: 'Captionist', FriendlyName: 'Captionist', IsActive:true},
+                    {Name: 'Interpreter', FriendlyName: 'Interpreter', IsActive:true}
                 ]);
             }, function (err) {
                 console.log('An error occurred while creating the table:', err);
