@@ -16,6 +16,7 @@
                 $scope.interjectionColor = '';
                 $scope.interjectionCaptionist = false;
                 $scope.interjectionInterpreter = false;
+                $scope.interjectionPosition = '';
                 $scope.nonInput = [];
 
 
@@ -32,6 +33,7 @@
                             $scope.nonInput.interjectioTextColor = response.data.interjection.TextColor;
                             $scope.interjectionCaptionist = response.data.interjection.IncludeCaptionist;
                             $scope.interjectionInterpreter = response.data.interjection.IncludeInterpreter;
+                            $scope.interjectionPosition = response.data.interjection.Position;
                         });
                 }
 
@@ -55,6 +57,7 @@
                                 InterjectionTextColor: $scope.nonInput.interjectioTextColor,
                                 InterjectionCaptionist: $scope.interjectionCaptionist,
                                 InterjectionInterpreter: $scope.interjectionInterpreter,
+                                InterjectionPosition: $scope.interjectionPosition,
                                 GroupId: $scope.groupID,
                                 GroupInterjectionId: $scope.interjectionID
                             })
@@ -76,6 +79,7 @@
                                 InterjectionTextColor: $scope.nonInput.interjectioTextColor,
                                 InterjectionCaptionist: $scope.interjectionCaptionist,
                                 InterjectionInterpreter: $scope.interjectionInterpreter,
+                                InterjectionPosition: $scope.interjectionPosition,
                                 GroupId: $scope.groupID
                             })
                             .then(function (response) {
