@@ -12,6 +12,7 @@
                     type: DataTypes.STRING(255),
                     allowNull: false
                 },
+                Position:DataTypes.INTEGER,
                 Description: DataTypes.STRING(500),
                 Icon: DataTypes.STRING(50),
                 BackgroundColor: DataTypes.STRING(50),
