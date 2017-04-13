@@ -15,7 +15,7 @@
                 $scope.interjectionIcon = '';
                 $scope.interjectionColor = '';
                 $scope.interjectionCaptionist = false;
-                $scope.interjectionInterpreter = true;
+                $scope.interjectionInterpreter = false;
                 $scope.nonInput = [];
 
 
