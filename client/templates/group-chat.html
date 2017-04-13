@@ -26,28 +26,47 @@
                     <img class="img-circle" style="width:40px;margin:2px;" ng-src='{{message.userAvatar}}'>
                     <i ng-if="message.userAvatar.length == 0">{{message.user}}</i>
                     <small> >></small>
-                    <i ng-if="message.body == 'Communicating!'" style="opacity: 1;width: 40px;margin: 2px;"
-                       class='fa fa-microphone fa-lg btn btn-success'
-                       aria-hidden='true' disabled></i>
-                    <i ng-if="message.body == 'Slow Down!' " style="opacity: 1;width: 40px;margin: 2px;" class='fa fa-stop fa-lg btn btn-info'
-                       aria-hidden='true' disabled></i>
-                    <i ng-if="message.body == 'Question!'" style="opacity: 1;width: 40px;margin: 2px;"
-                       class='fa fa-question fa-lg btn btn-warning'
-                       aria-hidden='true' disabled></i>
-                    <i ng-if="message.body == 'Repeat!'" style="opacity: 1;width: 40px;margin: 2px;" class='fa fa-repeat fa-lg btn btn-primary'
-                       aria-hidden='true' disabled></i>
-                    <i ng-if="message.body == 'Don\'t Understand!'" style="opacity: 1;width: 40px;margin: 2px;"
-                       class='fa fa-exclamation fa-lg btn btn-danger'
-                       aria-hidden='true' disabled></i>
-                    <i ng-if="message.body.indexOf('Discussing:') !== -1" style="opacity: 1;width: 40px;margin: 2px;"
-                       class='fa fa-window-maximize fa-lg btn btn-default'
-                       aria-hidden='true' disabled></i>
-                    {{message.body}}
+
+                    <span ng-if="message.body == 'Communicating!'">
+                        <i  style="opacity: 1;width: 40px;margin: 2px;"
+                            class='fa fa-microphone fa-lg btn btn-success'
+                            aria-hidden='true' disabled></i>
+                        {{message.body}}
+                    </span>
+
+                    <span ng-if="message.body.includes() !== undefined &&  message.body.includes('Discussing:')">
+                        <i  style="opacity: 1;width: 40px;margin: 2px;"
+                            class='fa fa-window-maximize fa-lg btn btn-default'
+                            aria-hidden='true' disabled></i>
+                        {{message.body}}
+                    </span>
+
+                    <span ng-if="message.body != 'Communicating!'">
+                        <i style="opacity: 1;width: 40px;margin: 2px;  background: {{message.body.BackgroundColor}}; color: {{message.body.TextColor}}"
+                            class='{{message.body.Icon}} fa-lg btn' aria-hidden='true' disabled></i>
+                        {{message.body.Title}}
+                    </span>
+
                 </div>
                 <a id="bottom"></a><br><br><br>
             </div>
             </p>
             <div class="row">
+                <div class="col-lg-3 col-md-12 col-sm-12">
+                    <button class="btn btn-success btn-block" style="margin: 5px" ng-click="communicate()"><i
+                            class="fa fa-microphone fa-2x" aria-hidden="true"></i><br>Communicate
+                    </button>
+                </div>
+                <div class="col-lg-3 col-md-12 col-sm-12" ng-repeat="interjection in groupInterjections">
+                    <button class="btn btn-block" id="interjectionButton{{interjection.ID}}"
+                            name="interjectionButton{{interjection.ID}}" type="button"
+                            style="margin: 5px; background: {{interjection.BackgroundColor}}; color: {{interjection.TextColor}}"
+                            ng-click="issueInterjection(interjection)">
+                        <i class="{{interjection.Icon}} fa-2x" aria-hidden="true"></i><br>
+                        {{interjection.Title}}
+                    </button>
+                </div>
+                <!--
                 <div class="col-lg-3 col-md-12 col-sm-12">
                     <button class="btn btn-success btn-block" style="margin: 5px" ng-click="communicate()"><i
                             class="fa fa-microphone fa-2x" aria-hidden="true"></i><br>Communicate
@@ -73,6 +92,7 @@
                             class="fa fa-exclamation fa-2x" aria-hidden="true"></i><br>Don't Understand!
                     </button>
                 </div>
+                -->
             </div>
         </div>
     </div>

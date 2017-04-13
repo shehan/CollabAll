@@ -14,6 +14,7 @@
                 $scope.group = [];
                 $scope.groupMembers = [];
                 $scope.groupCards = [];
+                $scope.groupInterjections = [];
                 $scope.stream = '';
                 $scope.prevAction = '';
                 $scope.deviceOrientation = {};
@@ -39,9 +40,15 @@
 
                                 $http.get('services/group/get-group-by-id', {params: {GroupId: $scope.groupID}})
                                     .then(function (response) {
-                                        $scope.group = response.data.group;
-                                        document.getElementById("overlayScreen").style.width = "0%";
-                                        document.getElementById("overlayScreen").style.height = "0%";
+
+                                        $http.get('services/interjection/get-interjections-for-group', {params: {GroupId: $scope.groupID}})
+                                            .then(function (response) {
+
+                                                $scope.groupInterjections = response.data.interjections;
+
+                                                document.getElementById("overlayScreen").style.width = "0%";
+                                                document.getElementById("overlayScreen").style.height = "0%";
+                                            });
                                     });
                             });
                     });
@@ -49,6 +56,17 @@
 
 
                 /************************START: Button Handler Code************************/
+                $scope.issueInterjection = function (interjection) {
+                    var action = {
+                        body: interjection,
+                        user: $scope.contactAuthor,
+                        userAvatar: $scope.contactAuthorAvatar,
+                        groupID: $scope.groupID
+                    };
+                    appendChat(action);
+                    emitAction(action);
+                };
+
                 $scope.communicate = function () {
 
                     var action = {
@@ -230,13 +248,13 @@
                     $scope.messages.push(message);
                     $window.document.getElementById('messages').scrollTop = messages.scrollHeight
 
-                    if (message.body.includes("Discussing:")) {
+                    if(message.body === "Communicating!"){
+                        $scope.currentCommunicating = message.user;
+                    }
+                    else   if(message.body.includes() !== undefined &&  message.body.includes("Discussing:")){
                         $scope.currentCard = message.body.replace("Discussing:", "");
                     }
 
-                    if (message.body.includes("Communicating!")) {
-                        $scope.currentCommunicating = message.user;
-                    }
 
                     $scope.$applyAsync()
 
