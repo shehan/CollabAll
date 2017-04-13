@@ -27,13 +27,6 @@
                     <i ng-if="message.userAvatar.length == 0">{{message.user}}</i>
                     <small> >></small>
 
-                    <span ng-if="message.body == 'Communicating!'">
-                        <i  style="opacity: 1;width: 40px;margin: 2px;"
-                            class='fa fa-microphone fa-lg btn btn-success'
-                            aria-hidden='true' disabled></i>
-                        {{message.body}}
-                    </span>
-
                     <span ng-if="message.body.includes() !== undefined &&  message.body.includes('Discussing:')">
                         <i  style="opacity: 1;width: 40px;margin: 2px;"
                             class='fa fa-window-maximize fa-lg btn btn-default'
@@ -41,7 +34,7 @@
                         {{message.body}}
                     </span>
 
-                    <span ng-if="message.body != 'Communicating!'">
+                    <span ng-if="message.body != 'Discussing:'">
                         <i style="opacity: 1;width: 40px;margin: 2px;  background: {{message.body.BackgroundColor}}; color: {{message.body.TextColor}}"
                             class='{{message.body.Icon}} fa-lg btn' aria-hidden='true' disabled></i>
                         {{message.body.Title}}
@@ -51,12 +44,19 @@
                 <a id="bottom"></a><br><br><br>
             </div>
             </p>
-            <div class="row">
-                <div class="col-lg-3 col-md-12 col-sm-12">
-                    <button class="btn btn-success btn-block" style="margin: 5px" ng-click="communicate()"><i
-                            class="fa fa-microphone fa-2x" aria-hidden="true"></i><br>Communicate
+            <div class="row" ng-repeat="interjection in groupInterjections track by $index" ng-if="$index%4==0">
+                <div class="col-lg-3 col-md-12 col-sm-12 letter-box"
+                     ng-repeat="i in [$index,$index+1,$index+2,$index+3]"
+                     ng-if="groupInterjections[i]!=null">
+                    <button class="btn btn-block" id="interjectionButton{{groupInterjections[i].ID}}"
+                            name="interjectionButton{{groupInterjections[i].ID}}" type="button"
+                            style="margin: 5px; background: {{groupInterjections[i].BackgroundColor}}; color: {{groupInterjections[i].TextColor}}"
+                            ng-click="issueInterjection(groupInterjections[i])">
+                        <i class="{{groupInterjections[i].Icon}} fa-2x" aria-hidden="true"></i><br>
+                        {{groupInterjections[i].Title}}
                     </button>
                 </div>
+                <!--
                 <div class="col-lg-3 col-md-12 col-sm-12" ng-repeat="interjection in groupInterjections">
                     <button class="btn btn-block" id="interjectionButton{{interjection.ID}}"
                             name="interjectionButton{{interjection.ID}}" type="button"
@@ -66,6 +66,8 @@
                         {{interjection.Title}}
                     </button>
                 </div>
+                -->
+
                 <!--
                 <div class="col-lg-3 col-md-12 col-sm-12">
                     <button class="btn btn-success btn-block" style="margin: 5px" ng-click="communicate()"><i

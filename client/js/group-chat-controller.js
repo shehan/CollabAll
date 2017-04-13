@@ -46,6 +46,14 @@
 
                                                 $scope.groupInterjections = response.data.interjections;
 
+                                                $scope.communicateInterjection = {
+                                                    Title: "Communicating!",
+                                                    Icon: "fa fa-microphone",
+                                                    BackgroundColor: "#449d44",
+                                                    TextColor: "#ffffff"
+                                                };
+                                                $scope.groupInterjections.splice(0, 0,$scope.communicateInterjection);
+
                                                 document.getElementById("overlayScreen").style.width = "0%";
                                                 document.getElementById("overlayScreen").style.height = "0%";
                                             });
@@ -248,7 +256,7 @@
                     $scope.messages.push(message);
                     $window.document.getElementById('messages').scrollTop = messages.scrollHeight
 
-                    if(message.body === "Communicating!"){
+                    if(message.body.includes === undefined && message.body.Title==="Communicating!"){
                         $scope.currentCommunicating = message.user;
                     }
                     else   if(message.body.includes() !== undefined &&  message.body.includes("Discussing:")){
