@@ -152,6 +152,7 @@
 
                 socket.on('tilt', function (data) {
                     if (data.groupID === $scope.groupID) {
+                        console.log(data);
                         var message = {
                             body: data.body,
                             user: data.user,
