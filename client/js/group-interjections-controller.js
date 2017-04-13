@@ -33,9 +33,9 @@
 
                     document.getElementById("overlayScreen").style.width = "100%";
                     document.getElementById("overlayScreen").style.height = "100%";
-                    $http.post('services/interjection/delete-interjection',
+                    $http.post('services/interjection/delete-interjections-for-group',
                         {
-                            InterjectionId: interjection.ID
+                            GroupInterjectionId: interjection.ID
                         })
                         .then(function (response) {
                             document.getElementById("overlayScreen").style.width = "0%";
