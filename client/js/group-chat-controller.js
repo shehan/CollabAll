@@ -11,7 +11,7 @@
                 $scope.contactAuthorAvatar = AuthService.authenticatedUser().Avatar;
                 $scope.userID = AuthService.authenticatedUser().ID;
                 $scope.groupID = $stateParams.groupID;
-                $scope.group = [];
+                $scope.group = {};
                 $scope.groupMembers = [];
                 $scope.groupCards = [];
                 $scope.groupInterjections = [];
@@ -40,6 +40,7 @@
 
                                 $http.get('services/group/get-group-by-id', {params: {GroupId: $scope.groupID}})
                                     .then(function (response) {
+                                        $scope.group = response.data.group;
 
                                         $http.get('services/interjection/get-interjections-for-group', {params: {GroupId: $scope.groupID}})
                                             .then(function (response) {
