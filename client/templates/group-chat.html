@@ -23,7 +23,7 @@
             <p>
             <div id="messages">
                 <div class="message" ng-repeat="message in messages">
-                    <img class="img-circle" style="width:40px;margin:2px;" ng-src='{{message.userAvatar}}'>
+                    <img class="img-circle" style="width:40px;margin:2px;" ng-src='{{message.userAvatar}}' ng-if="message.userAvatar.length != 0">
                     <i ng-if="message.userAvatar.length == 0">{{message.user}}</i>
                     <small> >></small>
 
