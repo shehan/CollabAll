@@ -261,7 +261,7 @@
                     if(message.body.includes === undefined && message.body.Title==="Communicating!"){
                         $scope.currentCommunicating = message.user;
                     }
-                    else   if(message.body.includes() !== undefined &&  message.body.includes("Discussing:")){
+                    else   if(message.body.includes !== undefined &&  message.body.includes("Discussing:")){
                         $scope.currentCard = message.body.replace("Discussing:", "");
                     }
 
