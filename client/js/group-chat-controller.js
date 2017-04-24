@@ -28,8 +28,10 @@
                 $scope.messages = [];
                 $scope.currentCard = '';
                 $scope.currentCommunicating = '';
+                $scope.roleInterpreter='';
+                $scope.roleCaptionist='';
 
-
+                console.log('User Role:'+AuthService.authenticatedUser().roleID);
                 document.getElementById("overlayScreen").style.width = "100%";
                 document.getElementById("overlayScreen").style.height = "100%";
 
@@ -38,42 +40,57 @@
                         $scope.groupMembers = response.data.users;
                         $scope.groupMembers.sort(compare);
 
-                        $http.get('services/card/get-cards-for-group', {params: {GroupId: $scope.groupID}})
+                        $http.get('services/role/get-all-roles', {params: {GroupId: $scope.groupID}})
                             .then(function (response) {
-                                $scope.groupCards = response.data.cards;
+                                for(var r=0; r<response.data.roles.length;r++)
+                                {
+                                    if (response.data.roles[r].Name === 'Interpreter'){
+                                        $scope.roleInterpreter  = response.data.roles[r].ID;
+                                        console.log('Int:'+$scope.roleInterpreter);
+                                    }
 
-                                $http.get('services/group/get-group-by-id', {params: {GroupId: $scope.groupID}})
+                                    if (response.data.roles[r].Name === 'Captionist'){
+                                        $scope.roleCaptionist  = response.data.roles[r].ID;
+                                        console.log('Cap:'+$scope.roleCaptionist);
+                                    }
+                                }
+
+                                $http.get('services/card/get-cards-for-group', {params: {GroupId: $scope.groupID}})
                                     .then(function (response) {
-                                        $scope.group = response.data.group;
+                                        $scope.groupCards = response.data.cards;
 
-                                        $http.get('services/interjection/get-interjections-for-group', {params: {GroupId: $scope.groupID}})
+                                        $http.get('services/group/get-group-by-id', {params: {GroupId: $scope.groupID}})
                                             .then(function (response) {
+                                                $scope.group = response.data.group;
 
-                                                if (AuthService.authenticatedUser().roleID === '21' || AuthService.authenticatedUser().roleID === '31'){ //role ID's for Captionist and Interpreter
-                                                    for(var i=0; i<response.data.interjections; i++)
-                                                    {
-                                                        if(response.data.interjections[i].IncludeCaptionist === true && AuthService.authenticatedUser().roleID === '21'){
-                                                            $scope.groupInterjections.push(response.data.interjections[i])
+                                                $http.get('services/interjection/get-interjections-for-group', {params: {GroupId: $scope.groupID}})
+                                                    .then(function (response) {
+
+                                                        if (AuthService.authenticatedUser().roleID === $scope.roleInterpreter || AuthService.authenticatedUser().roleID ===  $scope.roleCaptionist) { //role ID's for Captionist and Interpreter
+                                                            for (var i = 0; i < response.data.interjections.length; i++) {
+                                                                if (response.data.interjections[i].IncludeCaptionist === true && AuthService.authenticatedUser().roleID ===  $scope.roleCaptionist) {
+                                                                    $scope.groupInterjections.push(response.data.interjections[i])
+                                                                }
+                                                                if (response.data.interjections[i].IncludeInterpreter === true && AuthService.authenticatedUser().roleID === $scope.roleInterpreter) {
+                                                                    $scope.groupInterjections.push(response.data.interjections[i])
+                                                                }
+                                                            }
                                                         }
-                                                        if(response.data.interjections[i].IncludeInterpreter === true && AuthService.authenticatedUser().roleID === '31'){
-                                                            $scope.groupInterjections.push(response.data.interjections[i])
+                                                        else {
+                                                            $scope.groupInterjections = response.data.interjections;
                                                         }
-                                                    }
-                                                }
-                                                else{
-                                                    $scope.groupInterjections = response.data.interjections;
-                                                }
 
-                                                $scope.communicateInterjection = {
-                                                    Title: "Communicating!",
-                                                    Icon: "fa fa-microphone",
-                                                    BackgroundColor: "#449d44",
-                                                    TextColor: "#ffffff"
-                                                };
-                                                $scope.groupInterjections.splice(0, 0,$scope.communicateInterjection);
+                                                        $scope.communicateInterjection = {
+                                                            Title: "Communicating!",
+                                                            Icon: "fa fa-microphone",
+                                                            BackgroundColor: "#449d44",
+                                                            TextColor: "#ffffff"
+                                                        };
+                                                        $scope.groupInterjections.splice(0, 0, $scope.communicateInterjection);
 
-                                                document.getElementById("overlayScreen").style.width = "0%";
-                                                document.getElementById("overlayScreen").style.height = "0%";
+                                                        document.getElementById("overlayScreen").style.width = "0%";
+                                                        document.getElementById("overlayScreen").style.height = "0%";
+                                                    });
                                             });
                                     });
                             });
