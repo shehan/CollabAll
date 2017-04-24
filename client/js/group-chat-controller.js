@@ -1,10 +1,14 @@
 (function () {
     'use strict';
 
-    angular.module('GroupChatControllerModule', [])
+    angular.module('GroupChatControllerModule', ['720kb.fx'])
 
-        .controller('groupChatController', ['$scope', 'AuthService', '$state', '$http', '$stateParams', '$window',
-            function ($scope, AuthService, $state, $http, $stateParams, $window) {
+        .controller('groupChatController', ['$scope', 'AuthService', '$state', '$http', '$stateParams', '$window','$timeout',
+            function ($scope, AuthService, $state, $http, $stateParams, $window, $timeout) {
+
+                $timeout(function () {
+                    $scope.x = 3;
+                }, 100);
 
                 $scope.title = "CollabAll - Group Chat";
                 $scope.contactAuthor = AuthService.authenticatedUser().FirstName + " " + AuthService.authenticatedUser().LastName;
@@ -226,16 +230,20 @@
                 setInterval(function () {
                     if ($state.current.name == 'inside.group-chat') {
                         if ($scope.deviceOrientation.beta >= 40 && $scope.deviceOrientation.beta <= 66)
-                            pos = "Don't Understand!";
+                            pos = $scope.groupInterjections[1];
+                            //pos = "Don't Understand!";
                         if ($scope.deviceOrientation.beta >= 150 && $scope.deviceOrientation.beta <= 170)
-                            pos = "Slow Down!";
+                            pos = $scope.groupInterjections[2];
+                            //pos = "Slow Down!";
                         if ($scope.deviceOrientation.gamma >= 30 && $scope.deviceOrientation.gamma <= 80)
-                            pos = "Question!";
+                            pos = $scope.groupInterjections[3];
+                            //pos = "Question!";
                         if ($scope.deviceOrientation.gamma >= 115 && $scope.deviceOrientation.gamma <= 150)
-                            pos = "Repeat!";
+                            pos = $scope.groupInterjections[4];
+                            //pos = "Repeat!";
 
-                        if (pos != '') {
-                            if (pos != $scope.prevAction) {
+                        if (pos !== '') {
+                            if (pos !== $scope.prevAction) {
                                 $scope.prevAction = pos;
                                 var action = {
                                     body: pos,
@@ -243,8 +251,8 @@
                                     userAvatar: $scope.contactAuthorAvatar,
                                     groupID: $scope.groupID
                                 };
-                                ;
-                                appendChat(action)
+
+                                appendChat(action);
                                 emitAction(action);
                             }
                         }
@@ -271,6 +279,8 @@
                     if (message.user != $scope.contactAuthor){
                         $window.navigator.vibrate([150,150])
                     }
+
+
                 }
 
 

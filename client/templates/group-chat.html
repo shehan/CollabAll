@@ -28,6 +28,7 @@
                     <small> >></small>
 
                     <span ng-if="message.body.includes() !== undefined &&  message.body.includes('Discussing:')">
+                    <!--<span ngfx-speed="fast" ngfx-infinite ngfx-zoom-in-left="x > 2"  ng-if="message.body.includes() !== undefined &&  message.body.includes('Discussing:')">-->
                         <i  style="opacity: 1;width: 40px;margin: 2px;"
                             class='fa fa-window-maximize fa-lg btn btn-default'
                             aria-hidden='true' disabled></i>
@@ -35,6 +36,7 @@
                     </span>
 
                     <span ng-if="message.body != 'Discussing:'">
+                    <!-- <span ngfx-speed="fast"  ngfx-flip-in-x="x > 2" ng-if="message.body != 'Discussing:'"> -->
                         <i style="opacity: 1;width: 40px;margin: 2px;  background: {{message.body.BackgroundColor}}; color: {{message.body.TextColor}}"
                             class='{{message.body.Icon}} fa-lg btn' aria-hidden='true' disabled></i>
                         {{message.body.Title}}
