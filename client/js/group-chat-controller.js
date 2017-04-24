@@ -49,7 +49,20 @@
                                         $http.get('services/interjection/get-interjections-for-group', {params: {GroupId: $scope.groupID}})
                                             .then(function (response) {
 
-                                                $scope.groupInterjections = response.data.interjections;
+                                                if (AuthService.authenticatedUser().roleID === '21' || AuthService.authenticatedUser().roleID === '31'){ //role ID's for Captionist and Interpreter
+                                                    for(var i=0; i<response.data.interjections; i++)
+                                                    {
+                                                        if(response.data.interjections[i].IncludeCaptionist === true && AuthService.authenticatedUser().roleID === '21'){
+                                                            $scope.groupInterjections.push(response.data.interjections[i])
+                                                        }
+                                                        if(response.data.interjections[i].IncludeInterpreter === true && AuthService.authenticatedUser().roleID === '31'){
+                                                            $scope.groupInterjections.push(response.data.interjections[i])
+                                                        }
+                                                    }
+                                                }
+                                                else{
+                                                    $scope.groupInterjections = response.data.interjections;
+                                                }
 
                                                 $scope.communicateInterjection = {
                                                     Title: "Communicating!",
